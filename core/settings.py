@@ -19,9 +19,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # dev created apps
     'investments',
     'account',
     'pages',
+    
     'withdrawals',
     'django.contrib.admin',
     'django.contrib.auth',
