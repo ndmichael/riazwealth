@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if title %} {{title}} {% else %} Investment {% endif %}</title>
     <link rel="stylesheet" href="{% static 'css/b5css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/core.css' %}">
 
     <!-- Icons CSS -->
     <link
@@ -22,6 +23,92 @@
     />
 </head>
 <body>
+    <!-- Navbar starts here -->
+    <nav
+      class="navbar navbar-expand-xl navbar-light sticky-top shadow-sm"
+      style="background:#004080; color: #66CC66;"
+    >
+      <div class="container">
+        <!-- Navbar Brand -->
+        <a class="navbar-brand" href="/">
+          <img
+            src="{% static 'investments/img/Logo_icon.svg' %}"
+            alt="Wealth Wheel"
+            width="80%"
+            style="margin: auto; padding: 0.2em 1em 0em"
+            class="d-inline-block align-text-top img-fluid"
+          />
+        </a>
+
+        <!-- Navbar Toggler Button -->
+        <button
+          class="navbar-toggler shadow-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </button>
+
+        <!-- Navbar Links -->
+        <div
+          class="collapse navbar-collapse"
+          style="padding: 0em 1em"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+            <li class="nav-item">
+              <a
+                class="nav-link  ms-4"
+                aria-current="page"
+                href="{% url 'index' %}"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link ms-4"
+                href="{% url 'about' %}"
+                >About Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link ms-4"
+                href="{% url 'offers' %}"
+                >Investment Offers</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link ms-4"
+                href="{% url 'partnerships' %}"
+                >Partnership & Loans</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link ms-4"
+                href="{% url 'contact' %}"
+                >Contact Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link ms-4"
+                href="{% url 'faqs' %}"
+                >FAQs</a
+              >
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar ends -->
         {% block content %}
 
         {% endblock content %}
