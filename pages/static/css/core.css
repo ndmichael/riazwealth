@@ -1,0 +1,17 @@
+a {
+    color: #dc3545;
+    text-decoration: none;
+  }
+  
+  body {
+    font-family: "Mulish", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+  }
+
+  .navbar-expand-xl .nav-item a{
+    color: aliceblue;
+    font-weight: 700;
+    font-size: small;
+  }
