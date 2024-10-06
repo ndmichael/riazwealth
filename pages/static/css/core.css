@@ -20,6 +20,8 @@ html, body{
   --primary-color: #004080;
   --primary-color-one: #003366;
   --secondary-color: #66CC66;
+  --secondary-color-400: rgb(102, 204, 102, .4);
+  --secondary-color-200: rgb(102, 204, 102, .2);
 }
   
 body {
@@ -88,4 +90,30 @@ font-size: small;
     font-size: 2.5rem;
     font-weight: 900;
     text-transform: uppercase;
+}
+
+/** whyChooseUs **/
+
+#whyChooseUs{
+    padding: 4rem;
+}
+
+h1,h2,h3,h4{
+    font-weight: 700;
+}
+
+#whyChooseUs .icon{
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--secondary-color-200);
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+    border-radius: 50%;
+}
+
+#whyChooseUs .icon .bi{
+    color: var(--primary-color);
+    font-size: 2rem;
 }
