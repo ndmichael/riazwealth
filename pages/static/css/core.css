@@ -19,8 +19,7 @@ html, body{
 :root{
   --primary-color: #004080;
   --primary-color-one: #003366;
-  --secondary-bg-one: #FAF9F6;
-  --secondary-bg-two: #FFF7D6;
+  --secondary-color: #66CC66;
 }
   
 body {
@@ -28,6 +27,32 @@ body {
     font-optical-sizing: auto;
     font-weight: weight;
     font-style: normal;
+}
+
+.btn-1 {
+    /* padding-left: 2rem;
+    padding-right: 2rem; */
+    padding: 1rem 3rem;
+    font-weight: 700;
+    font-size: 14px;
+    background: var(--secondary-color) !important;
+    color: var(--primary-color-one);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+                 rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, 
+                 rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+}
+
+.btn-outline-1{
+    padding: .8rem 3rem;
+    font-weight: 700;
+    font-size: 14px;
+    border: 2px double var(--secondary-color);
+    background: whitesmoke !important;
+    color: var(--secondary-color);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, 
+                rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, 
+                rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 .navbar-expand-xl{
