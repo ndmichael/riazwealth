@@ -15,3 +15,11 @@ a {
     font-weight: 700;
     font-size: small;
   }
+
+  /** css for the hero page **/
+  #hero-page{
+    background: linear-gradient(rgb(0,0,0,0.4), rgb(0,0,0,0.7)), url("/static/images/hero-background2.jpg");
+    background-position: bottom;
+    background-size: cover;
+    min-height: 90vh;
+  }
