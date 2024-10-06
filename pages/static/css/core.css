@@ -1,14 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Quicksand', sans-serif;
-    /* word-wrap: break-word; */
+    color: black;
 }
+
+
+
 
 html, body{
   font-size-adjust: none;
   font-size: 100%;
+  font-family: "Lato", sans-serif;
 }
 
 :root{
@@ -37,8 +42,25 @@ font-size: small;
 
 /** css for the hero page **/
 #hero-page{
-background: linear-gradient(rgb(0,0,0,0.4), rgb(0,0,0,0.7)), url("/static/images/hero-background2.jpg");
-background-position: bottom;
-background-size: cover;
-min-height: 90vh;
+    background: linear-gradient(rgba(29, 16, 80, 0.5), rgba(60, 16, 164, 0.7)), 
+                url("/static/images/hero-background.jpg");
+    background-position: bottom;
+    background-size: cover;
+    min-height: 90vh;
+}
+
+#hero-page .row{
+    background: rgb(255, 255, 255, 0.5); overflow: hidden;
+    box-shadow: 20px 20px 50px rgb(0, 0, 0, 0.5);
+    border-top: 1px solid rgb(255, 255, 255, 0.5);
+    border-left: 1px solid rgb(255, 255, 255, 0.5);
+    backdrop-filter: blur(7px);
+    border-radius: 15px;
+}
+
+
+#hero-page h1{
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
 }
