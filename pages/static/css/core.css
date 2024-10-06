@@ -1,25 +1,44 @@
-a {
-    color: #dc3545;
-    text-decoration: none;
-  }
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Quicksand', sans-serif;
+    /* word-wrap: break-word; */
+}
+
+html, body{
+  font-size-adjust: none;
+  font-size: 100%;
+}
+
+:root{
+  --primary-color: #004080;
+  --primary-color-one: #003366;
+  --secondary-bg-one: #FAF9F6;
+  --secondary-bg-two: #FFF7D6;
+}
   
-  body {
+body {
     font-family: "Mulish", sans-serif;
     font-optical-sizing: auto;
     font-weight: weight;
     font-style: normal;
-  }
+}
 
-  .navbar-expand-xl .nav-item a{
-    color: aliceblue;
-    font-weight: 700;
-    font-size: small;
-  }
+.navbar-expand-xl{
+    background: linear-gradient(to right, var(--primary-color), var(--primary-color-one));
+}
 
-  /** css for the hero page **/
-  #hero-page{
-    background: linear-gradient(rgb(0,0,0,0.4), rgb(0,0,0,0.7)), url("/static/images/hero-background2.jpg");
-    background-position: bottom;
-    background-size: cover;
-    min-height: 90vh;
-  }
+.navbar-expand-xl .nav-item a{
+color: aliceblue;
+font-weight: 700;
+font-size: small;
+}
+
+/** css for the hero page **/
+#hero-page{
+background: linear-gradient(rgb(0,0,0,0.4), rgb(0,0,0,0.7)), url("/static/images/hero-background2.jpg");
+background-position: bottom;
+background-size: cover;
+min-height: 90vh;
+}
