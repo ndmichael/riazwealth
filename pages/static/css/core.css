@@ -14,6 +14,8 @@ html, body{
   font-size-adjust: none;
   font-size: 100%;
   font-family: "Lato", sans-serif;
+  line-height: 1.7;
+  word-spacing: 2px;
 }
 
 :root{
@@ -22,13 +24,6 @@ html, body{
   --secondary-color: #66CC66;
   --secondary-color-400: rgb(102, 204, 102, .4);
   --secondary-color-200: rgb(102, 204, 102, .2);
-}
-  
-body {
-    font-family: "Mulish", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: weight;
-    font-style: normal;
 }
 
 .btn-1 {
@@ -116,4 +111,39 @@ h1,h2,h3,h4{
 #whyChooseUs .icon .bi{
     color: var(--primary-color);
     font-size: 2rem;
+}
+
+/*
+# Clients
+*/
+.clients {
+    padding-top: 20px;
+  }
+  
+.clients .swiper-slide img {
+    /* opacity: 0.5; */
+    transition: 0.3s;
+    filter: grayscale(100);
+}
+
+.clients .swiper-slide img:hover {
+    filter: none;
+    opacity: 1;
+}
+
+.clients .swiper-pagination {
+    margin-top: 20px;
+    position: relative;
+}
+
+.clients .swiper-pagination .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    opacity: 1;
+    background-color: #ddd;
+}
+
+.clients .swiper-pagination .swiper-pagination-bullet-active {
+background-color: var(--secondary-color);
 }
