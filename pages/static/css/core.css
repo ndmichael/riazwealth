@@ -24,6 +24,7 @@ html, body{
   --secondary-color: #66CC66;
   --secondary-color-400: rgb(102, 204, 102, .4);
   --secondary-color-200: rgb(102, 204, 102, .2);
+  --section-padding: 4rem 10px;
 }
 
 a{
@@ -96,7 +97,7 @@ font-size: small;
 /** whyChooseUs **/
 
 #whyChooseUs{
-    padding: 4rem;
+    padding: var(--section-padding);
 }
 
 h1,h2,h3,h4{
@@ -156,7 +157,7 @@ background-color: var(--secondary-color);
 
 /** Investment plan section **/
 #investmentPlans{
-    padding: 4rem 10px;
+    padding: var(--section-padding);
 }
 
 #investmentPlans header p{
