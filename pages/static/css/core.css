@@ -177,15 +177,25 @@ background-color: var(--secondary-color);
 }
 
 
-#investmentPlans .plans p, #investmentPlans .plans h4{
+#investmentPlans .plans p, #investmentPlans .plans h2{
     color: white;
     font-weight: 700;
     text-shadow: -2px 4px 7px rgb(0,0,0,0.7);
 }
 
-#investmentPlans .plans h2{
+#investmentPlans .plans .pricing{
     color: var(--secondary-color);
     font-weight: 900;
+    text-shadow: -2px 4px 7px rgb(0,0,0,0.7);
+}
+
+#investmentPlans .plans .pricing small{
+    color: var(--secondary-color);
+    font-size: 18px;
+}
+#investmentPlans .plans .pricing sup{
+    color: var(--secondary-color);
+    font-weight: 400;
     text-shadow: -2px 4px 7px rgb(0,0,0,0.7);
 }
 
