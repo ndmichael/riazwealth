@@ -20,10 +20,15 @@ html, body{
 
 :root{
   --primary-color: #004080;
-  --primary-color-one: #003366;
+  --primary-color-one: #003366; /* 0, 51, 102 */
   --secondary-color: #66CC66;
   --secondary-color-400: rgb(102, 204, 102, .4);
   --secondary-color-200: rgb(102, 204, 102, .2);
+}
+
+a{
+    display: block;
+    color: inherit;
 }
 
 .btn-1 {
@@ -146,4 +151,61 @@ h1,h2,h3,h4{
 
 .clients .swiper-pagination .swiper-pagination-bullet-active {
 background-color: var(--secondary-color);
+}
+
+/** Investment plan section **/
+#investmentPlans{
+    padding: 4rem 10px;
+}
+
+#investmentPlans .plans{
+    color: white !important;
+    font-weight: 700;
+    text-decoration: none;
+    padding-top: 3rem !important;
+}
+
+#investmentPlans .plans .plan-details{
+    padding-top: 7rem;
+}
+
+#investmentPlans i{
+    color: #d4ff00;
+    font-size: 18px;
+    font-weight: 900;
+    padding-right: 15px;
+}
+
+
+#investmentPlans .plans p, #investmentPlans .plans h4{
+    color: white;
+    font-weight: 700;
+    text-shadow: -2px 4px 7px rgb(0,0,0,0.7);
+}
+
+#investmentPlans .plans h2{
+    color: var(--secondary-color);
+    font-weight: 900;
+    text-shadow: -2px 4px 7px rgb(0,0,0,0.7);
+}
+
+#investmentPlans #oil-gas{
+    background: linear-gradient(to bottom, rgb(0, 51, 102, .4) 20%, rgb(0, 51, 102, .9)),
+                url("/static/images/oil_gas.jpg");
+    background-size: cover;
+    background-position:top;
+}
+
+#investmentPlans #realestates{
+    background: linear-gradient(to bottom, rgb(0, 51, 102, .4) 20%, rgb(0, 51, 102, .9)),
+                url("/static/images/realestate.jpg");
+    background-size: cover;
+    background-position:top;
+}
+
+#investmentPlans #silver_gold{
+    background: linear-gradient(to bottom, rgb(0, 51, 102, .4) 20%, rgb(0, 51, 102, .9)),
+                url("/static/images/precious_stones.jpg");
+    background-size: cover;
+    background-position:top;
 }
