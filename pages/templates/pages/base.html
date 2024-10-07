@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if title %} {{title}} {% else %} Investment {% endif %}</title>
+    <title>{% if title %} {{title}} {% else %} RiazVest {% endif %}</title>
+
     <link rel="stylesheet" href="{% static 'css/b5css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/core.css' %}">
 
@@ -17,10 +18,13 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
+
+    <!-- Link Swiper's CSS -->
     <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
       rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
+
 </head>
 <body>
     <!-- Navbar starts here -->
@@ -113,7 +117,13 @@
         {% endblock content %}
 
         
-
+<!-- Bootstrap js -->
+<script src="{% static 'js/b5js/bootstrap.bundle.min.js' %}"></script>
+ <!-- Swiper JS -->
+ <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+ <!-- Main customized js -->
+ <script src="{% static 'js/main.js' %}"></script>
+ <!-- Box icon js -->
  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 </body>
 </html>
