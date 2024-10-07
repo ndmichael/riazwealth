@@ -19,7 +19,7 @@ html, body{
 }
 
 :root{
-  --primary-color: #004080;
+  --primary-color: #66A3FF;
   --primary-color-one: #003366; /* 0, 51, 102 */
   --secondary-color: #66CC66;
   --secondary-color-400: rgb(102, 204, 102, .4);
@@ -59,7 +59,7 @@ a{
 }
 
 .navbar-expand-xl{
-    background: linear-gradient(to right, var(--primary-color), var(--primary-color-one));
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-color-one));
 }
 
 .navbar-expand-xl .nav-item a{
