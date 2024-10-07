@@ -226,3 +226,13 @@ background-color: var(--secondary-color);
     background-size: cover;
     background-position:top;
 }
+
+/** === Achievements === **/
+#achievements{
+    padding: var(--section-padding);
+    /* background: linear-gradient(to right,rgba(29, 16, 80, 0.5), rgba(60, 16, 164, 1), rgba(60, 16, 164, .7)); */
+    background: var(--primary-color);
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+}
