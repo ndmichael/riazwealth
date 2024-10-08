@@ -19,7 +19,7 @@ html, body{
 }
 
 :root{
-  --primary-color: #66A3FF;
+  --primary-color: #66A3FF; /* 102, 163, 255 */
   --primary-color-one: #003366; /* 0, 51, 102 */
   --secondary-color: #66CC66;
   --secondary-color-400: rgb(102, 204, 102, .4);
@@ -230,9 +230,31 @@ background-color: var(--secondary-color);
 /** === Achievements === **/
 #achievements{
     padding: var(--section-padding);
-    /* background: linear-gradient(to right,rgba(29, 16, 80, 0.5), rgba(60, 16, 164, 1), rgba(60, 16, 164, .7)); */
-    background: var(--primary-color);
+    background: linear-gradient(to bottom, rgba(102, 163, 255, 0.6), rgba(0,0,0, 0.6), rgba(29, 16, 80, 1)),
+                url("/static/images/bg_investment.jpg");  
+   
+    /* background: linear-gradient(to right,rgba(29, 16, 80, 0.8) 70%, rgba(29, 16, 80, 0.4)), url("/static/images/realestate.jpg"); */
+    background-position: center;
+    background-size: cover;
     min-height: 80vh;
     display: flex;
     align-items: center;
+}
+
+#achievements .achievement, 
+#achievements .achievement p,
+#achievements h1, #achievements p{
+    color: white;
+    text-align: center;
+}
+
+#achievements .achievement h3{
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+#achievements .achievement p{
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--secondary-color);
 }
