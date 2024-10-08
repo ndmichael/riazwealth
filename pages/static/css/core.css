@@ -259,6 +259,20 @@ background-color: var(--secondary-color);
     color: var(--secondary-color);
 }
 
+.carousel-inner{
+    margin-bottom: 4rem;
+}
+
+.carousel-inner .testimony{
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.carousel-inner .testimony p{
+    padding-top: 25px;
+    padding-bottom: 35px;
+    color: rgb(62, 62, 62);
+}
 
 .carousel-control-next .bi, .carousel-control-prev .bi{
     font-size: 3.4rem;
