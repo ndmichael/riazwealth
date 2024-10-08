@@ -271,7 +271,12 @@ background-color: var(--secondary-color);
 .carousel-inner .testimony p{
     padding-top: 25px;
     padding-bottom: 35px;
-    color: rgb(62, 62, 62);
+    color: #6a6d73;
+}
+
+.carousel-inner .testimony .choice-plan{
+    color: var(--secondary-color) !important;
+    font-weight: 700;
 }
 
 .carousel-control-next .bi, .carousel-control-prev .bi{
