@@ -258,3 +258,11 @@ background-color: var(--secondary-color);
     font-weight: 400;
     color: var(--secondary-color);
 }
+
+
+.carousel-control-next .bi, .carousel-control-prev .bi{
+    font-size: 3.4rem;
+    color: var(--secondary-color);
+    
+}
+
