@@ -430,9 +430,10 @@ background-color: var(--secondary-color);
     background: var(--secondary-color);
   }
   
-  #footer .copyright {
+  #footer .copyright, #footer span {
     text-align: center;
     padding-top: 30px;
+    color: #fff;
   }
   
   #footer .credits {
