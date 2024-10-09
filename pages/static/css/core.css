@@ -427,7 +427,7 @@ background-color: var(--secondary-color);
   }
   
   #footer .footer-top .footer-newsletter form input[type="submit"]:hover {
-    background: #dc3545;
+    background: var(--secondary-color);
   }
   
   #footer .copyright {
