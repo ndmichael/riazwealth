@@ -306,6 +306,20 @@ background-color: var(--secondary-color);
   text-shadow: -2px 0 4px rgb(0,0,0,0.7);
 }
 
+.breadcrumbLink{
+  background: #ebe9ff;
+  padding: 15px 0;
+}
+
+.breadcrumbLink .breadcrumb-item{
+  font-weight: 500;
+  font-size: 16px;
+}
+.breadcrumbLink .breadcrumb-item a{
+  color: var(--primary-color-one);
+  font-weight: 700;
+}
+
 
 
 
