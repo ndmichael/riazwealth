@@ -2,6 +2,7 @@
 {% load static %} 
 
 {% block content %}
+<section id="about">
 <section class="breadcrumb-pages">
     <div class="container">
         <section class="row">
@@ -88,5 +89,65 @@
             </article>
         </section>
     </div>
+</section>
+
+<section class="introduction bg-light">
+    <div class="container">
+        <section class="row">
+            <article class="col-12 col-md-6">
+                <img 
+                    src="{% static '/images/corporate-min.jpg' %}" 
+                    alt=""
+                    class="img-fluid"
+                >
+            </article>
+
+            <article class="col-12 col-md-6">
+                <div class="px-md-4">
+                    <div class="border border-success p-4 bg-white">
+                        <h3>Our Mission</h3>
+                        <p>
+                            Our mission is simple: To offer easy-to-use, 
+                            high-performing investment solutions that empower people to achieve financial independence. 
+                            We aim to make investing understandable, accessible, and profitable for everyone.
+                        </p>
+                    </div>
+
+                    <div class="border border-success p-4 my-4 bg-white">
+                        <h3>Our Vision</h3>
+                        <p>
+                            To become the most trusted investment platform globally, enabling investors to confidently 
+                            navigate their financial futures with sustainable, high-yield options.
+                        </p>
+                    </div>
+
+                <a href="" class="btn btn-1">
+                    START YOUR JOURNEY TODAY
+                </a>
+                </div>
+            </article>
+        </section>
+    </div>
+</section>
+
+<section style="padding: 4rem 0;">
+    <div class="container">
+        <section class="row">
+            <article class="col-12 col-md-8 offset-md-2 text-center">
+                <h1>
+                    Building Tomorrow's Wealth, Today
+                </h1>
+                <p class="pt-4 text-muted">
+                    At RiazVest, we believe in creating opportunities for financial success. 
+                    Founded with the mission to provide accessible, transparent, 
+                    and profitable investment options, 
+                    we’ve helped thousands of individuals grow their wealth in sectors like Oil & Gas, Gold, Real Estate, Bonds, and more. Our plat
+                    form is designed for both beginners and seasoned investors 
+                    seeking diverse investment plans with high returns.
+                </p>
+            </article>
+        </section>
+    </div>
+</section>
 </section>
 {% endblock content %}
