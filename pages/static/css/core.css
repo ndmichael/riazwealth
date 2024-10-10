@@ -307,7 +307,8 @@ background-color: var(--secondary-color);
 }
 
 .breadcrumbLink{
-  background: #ebe9ff;
+  /* background: #ebe9ff; */
+  background: #66cc6654;
   padding: 15px 0;
 }
 
@@ -317,6 +318,20 @@ background-color: var(--secondary-color);
 }
 .breadcrumbLink .breadcrumb-item a{
   color: var(--primary-color-one);
+  font-weight: 700;
+}
+
+.abt-achievement{
+  padding: var(--section-padding);
+}
+.abt-achievement .achievement{
+  padding: 15px;
+  background-color: rgb(248, 247, 247);
+}
+
+.abt-achievement .achievement .bi{
+  font-size: 24px;
+  color: var(--secondary-color);
   font-weight: 700;
 }
 
