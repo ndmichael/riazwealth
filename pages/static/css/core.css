@@ -362,8 +362,12 @@ background-color: var(--secondary-color);
 **/
 #faqs .breadcrumbLink{
   /* background: #ebe9ff; */
-  background: rgb(102, 163, 255, 0.4);
+  background: rgb(102, 163, 255, 0.4); 
   padding: 15px 0;
+}
+
+#faq{
+  padding: var(--section-padding);
 }
 
 
