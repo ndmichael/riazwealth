@@ -287,11 +287,11 @@ background-color: var(--secondary-color);
 
 /** 
 
-===  ABOUT US SECTION
+===  BREADCRUMBS 
 
 **/
 
-#about .breadcrumb-pages{
+.breadcrumb-pages{
   padding: 140px 0 80px 0;
   background: linear-gradient(to bottom, rgba(102, 163, 255, 0.6), 
               rgba(08, 08, 08, .3) 30% ,  rgba(29, 16, 80, 1)),
@@ -301,22 +301,29 @@ background-color: var(--secondary-color);
   color: white !important;
 }
 
-#about .breadcrumb-pages h1{
+.breadcrumb-pages h1{
   color: #fff;
   font-size: 3rem;
   text-shadow: -2px 0 4px rgb(0,0,0,0.7);
 }
 
+.breadcrumbLink .breadcrumb-item{
+  font-weight: 500;
+  font-size: 16px;
+}
+
+/** 
+
+===  ABOUT US SECTION
+
+**/
 #about .breadcrumbLink{
   /* background: #ebe9ff; */
   background: #66cc6654;
   padding: 15px 0;
 }
 
-#about .breadcrumbLink .breadcrumb-item{
-  font-weight: 500;
-  font-size: 16px;
-}
+
 
 #about .breadcrumbLink .breadcrumb-item a{
   color: var(--primary-color-one);
@@ -348,6 +355,16 @@ background-color: var(--secondary-color);
   object-fit: cover;
 }
 
+/** 
+
+===  FAQS US SECTION
+
+**/
+#faqs .breadcrumbLink{
+  /* background: #ebe9ff; */
+  background: rgb(102, 163, 255, 0.4);
+  padding: 15px 0;
+}
 
 
 
