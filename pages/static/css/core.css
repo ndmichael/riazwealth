@@ -24,7 +24,7 @@ html, body{
   --secondary-color: #66CC66;
   --secondary-color-400: rgb(102, 204, 102, .4);
   --secondary-color-200: rgb(102, 204, 102, .2);
-  --section-padding: 4rem 10px;
+  --section-padding: 4.5rem 10px;
 }
 
 a{
@@ -64,9 +64,9 @@ a{
 }
 
 .navbar-expand-xl .nav-item a{
-color: aliceblue;
-font-weight: 700;
-font-size: small;
+  color: aliceblue;
+  font-weight: 700;
+  font-size: small;
 }
 
 /** css for the hero page **/
@@ -373,13 +373,46 @@ background-color: var(--secondary-color);
 ===  CONTACT US SECTION
 
 **/
+
 #contact .breadcrumbLink{
   /* background: #ebe9ff; */
-  background: #c8a0a0bc;
+  background: var(--secondary-color-200); 
   padding: 15px 0;
 }
 
+#contact .iconGroup{
+  display: flex;
+  flex-direction: row;
+  margin: 20px 0;
+}
 
+#contact .iconGroup .icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  margin-top: 4px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 5px double var(--primary-color-one);
+}
+
+#contact .iconGroup .icon .bi{
+  color: var(--primary-color-one);
+  font-size: 16px;
+}
+
+#contact .iconGroup .details span{
+  display: block;
+  font-size: 18px;
+  color: #353535;
+}
+
+#contact .iconGroup .details span:nth-child(1){
+  font-weight: 700;
+  text-transform: uppercase;
+}
 
 /* === Footer === */
 #footer {
