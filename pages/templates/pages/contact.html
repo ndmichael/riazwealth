@@ -1,12 +1,13 @@
 {% extends 'pages/base.html' %} 
 {% load static %} 
+{% load crispy_forms_tags %} 
 
 {% block content %}
 <!--=== THE CONTACT PAGE ===-->
 <section id="contact">
 <section class="breadcrumb-pages">
-    <div class="container">
-        <section class="row">
+    <div class="container py-5">
+        <section class="row g-5">
             <article class="col-12 col-lg-8 offset-lg-2 mx-auto text-center">
                 <h1>Get in Touch with Us</h1>
                 <p class="text-white">
@@ -87,7 +88,9 @@
             </article>
             
             <article class="col-12 col-md-7 right">
-                
+                <form action="" method="post">
+                    {% crispy form %}
+                </form>
             </article>
         </section>
     </div>
