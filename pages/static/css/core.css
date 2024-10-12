@@ -384,6 +384,7 @@ background-color: var(--secondary-color);
   display: flex;
   flex-direction: row;
   margin: 20px 0;
+  transition: .3s ease-in-out;
 }
 
 #contact .iconGroup .icon{
@@ -396,6 +397,7 @@ background-color: var(--secondary-color);
   width: 50px;
   border-radius: 50%;
   border: 5px double var(--primary-color-one);
+  transition: .3s;
 }
 
 #contact .iconGroup .icon .bi{
@@ -412,6 +414,16 @@ background-color: var(--secondary-color);
 #contact .iconGroup .details span:nth-child(1){
   font-weight: 700;
   text-transform: uppercase;
+}
+
+#contact .iconGroup:hover .icon{
+  transform: rotate(360deg); 
+  border: 5px double var(--secondary-color);
+}
+
+#contact .iconGroup:hover .icon .bi{
+  color: var(--secondary-color);
+  text-shadow: -2px 0 2px rgb(0,0,0,.7);
 }
 
 #contact .socialMedia{
