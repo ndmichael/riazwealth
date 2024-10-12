@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .forms import ContactForm
 
 # Create your views here.
 
@@ -34,7 +35,9 @@ def partnerships(request):
     return render(request, 'pages/partnerships.html', context)
 
 def contact(request):
+    form = ContactForm
     context = {
-        'title': 'Contact Us'
+        'title': 'Contact Us',
+        'form': form,
     }
     return render(request, 'pages/contact.html', context)
