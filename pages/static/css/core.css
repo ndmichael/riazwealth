@@ -430,12 +430,24 @@ background-color: var(--secondary-color);
   width: 45px;
   border-radius: 10px;
   background: var(--secondary-color);
+  transition: 0.3s;
+  border: 1px solid #ddd;
 }
 
 #contact .socialMedia a .bi{
   color: black;
   font-size: 22px;
 }
+
+.socialMedia a:hover {
+  transform: scale(1.15, 1.15);
+  background: var(--primary-color) !important;
+}
+
+.socialMedia a:hover > .bi{
+  color: #fff !important;
+}
+
 
 /* === Footer === */
 #footer {
