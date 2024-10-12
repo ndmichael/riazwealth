@@ -414,6 +414,29 @@ background-color: var(--secondary-color);
   text-transform: uppercase;
 }
 
+#contact .socialMedia{
+  display: flex;
+  padding: 25px 0;
+
+}
+
+#contact .socialMedia a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  margin-top: 4px;
+  height: 45px;
+  width: 45px;
+  border-radius: 10px;
+  background: var(--secondary-color);
+}
+
+#contact .socialMedia a .bi{
+  color: black;
+  font-size: 22px;
+}
+
 /* === Footer === */
 #footer {
     background: black;
