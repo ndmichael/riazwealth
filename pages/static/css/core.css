@@ -120,7 +120,7 @@ h1,h2,h3,h4{
 }
 
 #whyChooseUs .icon .bi{
-    color: var(--primary-color);
+    color: var(--secondary-color);
     font-size: 2rem;
 }
 
