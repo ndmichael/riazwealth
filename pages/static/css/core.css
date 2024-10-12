@@ -27,6 +27,10 @@ html, body{
   --section-padding: 4.5rem 10px;
 }
 
+.form-floating label {
+  left: 10px;
+}
+
 a{
     display: block;
     color: inherit;
@@ -423,7 +427,7 @@ background-color: var(--secondary-color);
 
 #contact .iconGroup:hover .icon .bi{
   color: var(--secondary-color);
-  text-shadow: -2px 0 2px rgb(0,0,0,.7);
+  text-shadow: -2px 0 2px var(--primary-color-one);
 }
 
 #contact .socialMedia{
@@ -440,7 +444,7 @@ background-color: var(--secondary-color);
   margin-top: 4px;
   height: 45px;
   width: 45px;
-  border-radius: 10px;
+  border-radius: 5px;
   background: var(--secondary-color);
   transition: 0.3s;
   border: 1px solid #ddd;
