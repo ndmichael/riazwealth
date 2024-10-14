@@ -34,6 +34,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "crispy_forms",
     "crispy_bootstrap5",
+    'allauth',
+    'allauth.account',
+    "allauth.socialaccount",
+    'allauth.socialaccount.providers.linkedin',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +63,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # `allauth` 
+                'django.template.context_processors.request',
             ],
         },
     },
