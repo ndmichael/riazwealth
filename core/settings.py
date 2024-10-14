@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     # dev created apps
     'investments',
     'users',
+    'admin_portal',
     'pages',
     'accounts',
     
@@ -38,7 +39,7 @@ INSTALLED_APPS = [
     'allauth.account',
     "allauth.socialaccount",
     'allauth.socialaccount.providers.google',
-    # 'allauth.socialaccount.providers.linkedin',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,19 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "accounts.CustomUser"
+
+# Setups for allauth
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "none"
+# ACCOUNT_RATE_LIMITS = 7
+ACCOUNT_AUTHENTICATION_METHOD = "username"
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "index"
+
+# 1 day
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
+
+# or any other page
+LOGIN_REDIRECT_URL = 'currentprofile'
+ACCOUNT_LOGOUT_REDIRECT_URL = "account_login"
+# ACCOUNT_SIGNUP_REDIRECT_URL = "account_login"
