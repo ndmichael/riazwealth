@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load static %}{% load google_translate %}{% load crispy_forms_tags %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ADMIN LOGIN</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'ibanking/css/b5css/bootstrap.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'ibanking/css/mdb/mdb.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'ibanking/css/banking.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'clients/css/admin.css' %}" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+        <link rel="icon" type="image/x-icon" href="{% static 'ibanking/images/apple-icon.png' %}">
+
+        <style>
+            #admin-login{
+                width: 100%;
+                height: 100vh;
+                /* background: linear-gradient(rgba(), rgba()); */
+                background: #dee2e6;
+            }
+        </style>
+    </head>
+<body>
+    <section id="admin-login" class="py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-5 mx-auto text-center py-2">
+                    <div class="">
+                        <a class="navbar-brand d-block" href="/">
+                            <img src="{% static 'ibanking/images/logo1.png' %}" alt="" class="img-fluid" style="height:120px;">
+                        </a>
+                    </div>
+                    <div class="alert alert-warning w-100">
+                        <strong class="pe-3 text-danger">
+                            !
+                        </strong>
+                        This page is for Admin login only.
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <article class="col-12 col-md-5 mx-auto p-3 p-sm-5 bg-white rounded-7 shadow-sm">
+                    <h3 class=" text-center pb-3">Boiworldwide Admin Login.</h3>
+                        <form action="" method="POST">
+                            {% csrf_token %} 
+                            {{form | crispy}}    
+                            
+                            <div class="pt-4">
+                                <button class="btn btn-lg btn-primary col-12" type="submit">LOGIN</button>
+                            </div>
+                        </form>
+                </article>
+            </div>
+        </div>
+    </section>
+    
+
+        
+    </div>
+    
+</body>
+</html>
