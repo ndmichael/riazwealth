@@ -6,27 +6,10 @@
 
 {% block content %}
   <!-- Section: Log In -->
-  <section class="p-0">
-    <!-- Immediate div below serves as Jumbotron -->
-    <div class="px-4 px-md-5 bg-black d-flex justify-content-center align-items-center vh-100">
-      <div class="container">
+      <section class="container">
         <div class="row gx-lg-5">
-          <div class="col-lg-6 my-auto text-center text-lg-start d-none d-lg-block">
-            <h1 class="display-3 fw-bold ls-tight">
-              Discover unique <br />
-              <span class="text-danger">investments</span>
-            </h1>
-            <p style="color: hsl(217, 10%, 50.8%)">
-              Dive into a realm of unparalleled investments prospects,
-              meticulously curated to propel your financial journey towards
-              unprecedented success. Discover the power of strategic investments
-              and seize opportunities that pave the way for lasting prosperity.
-            </p>
-          </div>
-
-          <div class="col-lg-6 mb-5">
-            <div class="card border-0 rounded-2 bg-dark">
-              <div class="card-body p-5">
+          <article class="col-lg-8 mx-auto mb-5">
+            <div class="border-0 rounded-2">
                 <form class="login" method="POST" action="{% url 'account_login' %}">
                   <div class="d-lg-none">
                     <h1 class="h2 fw-bold text-center text-white">{% trans "Login Into Account" %}</h1>
@@ -51,16 +34,9 @@
                     </div>
                   </div>
                 </form>
-              </div>
             </div>
-          </div>
+          </article>
         </div>
-        <div class="pt-lg-5 text-center" style="color: hsl(217, 10%, 50.8%)">&copy; {% trans "Copyright" %}
-          <strong><span>Wealth Wheel Capital Investment.</span></strong><br />
-          {% trans "All Rights Reserved" %}
-        </div>
-      </div>
-    </div>
   </section>
   <!-- Section: Log In -->
 {% endblock content %}
