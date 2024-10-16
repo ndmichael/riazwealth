@@ -7,10 +7,9 @@
 {% block content %}
   <!-- Section: Log In -->
       <section class="container">
-        <div class="row gx-5 py-5">
+        <div class="row">
           <article class="col-lg-8 mx-auto">
-            <div class="border-0 rounded-2">
-                <form class="login" method="POST" action="{% url 'account_login' %}">
+                <form class="login p-2 p-md-5 bg-dark" method="POST" action="{% url 'account_login' %}">
                   <div>
                     <h1 class="h2 fw-bold text-center">{% trans "Welcome Back" %}</h1>
                     <p class="text-center text-muted">{% trans "Login again to start building your dollars portfolio." %}</p>
@@ -34,7 +33,6 @@
                     </div>
                   </div>
                 </form>
-            </div>
           </article>
         </div>
   </section>
