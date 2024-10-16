@@ -4,14 +4,14 @@
     <div class="row">
         <div class="col-12 col-md-6 mx-auto text-center py-5">
             <div style="height: 55vh" class="d-flex flex-column justify-content-center">
-                <h1 class="text-danger">{% trans "Sign Out" %}</h1>
+                <h1>{% trans "Sign Out" %}</h1>
 
                 <p>{% trans 'Are you sure you want to sign out?' %}</p>
 
                 <form method="post" action="{% url 'account_logout' %}">
                     {% csrf_token %} {% if redirect_field_value %}
                     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
-                    <button type="submit" class="btn btn-dark">
+                    <button type="submit" class="btn btn-danger btn-lg">
             {% trans 'Sign Out' %}
           </button>
                 </form>
