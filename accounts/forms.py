@@ -20,6 +20,8 @@ class MyCustomSignupForm(SignupForm):
 
         # super().__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.helper.disable_csrf = True
+        self.helper.form_tag = False
         self.helper.layout = Layout(
             Row(
                 FloatingField("first_name", wrapper_class='col-md-6', css_class="row-fluid"),
@@ -35,7 +37,5 @@ class MyCustomSignupForm(SignupForm):
             ),
             Row(
                 Field("terms_and_condition", wrapper_class='col-md-12', css_class="form-check-input"),
-            ),
-            Submit('submit', 'Create Account', css_class="col-12 btn-lg btn-1 fw-bold")
-                      
+            )                      
         )
