@@ -9,13 +9,20 @@
 {% block content %}
 <section class="container">
   <div class="row">
-    <article class="col-12 col-md-10 offset-md-1 d-flex flex-column justify-content-center align-items-center">
+    <article class="col-12 col-md-10 mx-auto">
       <form 
-          class="signup p-2 p-md-5 bg-primary" 
+          class="signup p-2 p-md-5 bg-light" 
           id="signup_form" method="post" 
           enctype="multipart/form-data" 
           action="{% url 'account_signup' %}"
         >
+          <header class="pb-4">
+            <h1 class="h3">Create Your  Account Today</h1>
+            <p class="text-muted">
+              Start building your future
+              and fullfill your dreams today
+            </p>
+          </header>
           {% csrf_token %}
           {% crispy form %}
           {% if redirect_field_value %}
