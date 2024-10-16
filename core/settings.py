@@ -133,6 +133,12 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "accounts.CustomUser"
 
+# overriden forms
+ACCOUNT_FORMS = {
+    "signup": "accounts.forms.MyCustomSignupForm"
+}
+
+
 # Setups for allauth
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_EMAIL_REQUIRED = True
