@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.validators import ASCIIUsernameValidator
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
+from django.core.mail import send_mail
 
 
 
@@ -71,3 +72,14 @@ class CustomUser(AbstractUser):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="profiles")
+    bitcoin_wallet = models.CharField(max_length=150)
+    ethereum_wallet = models.CharField(max_length=150)
+    usdt_wallet = models.CharField(max_length=150)
+    referral_code = models.CharField(max_length=10, unique=True, blank=True)
+
+    def __str__(self) -> str:
+        return f"user.username"
