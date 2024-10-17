@@ -1,48 +1,19 @@
-
-Type 'manage.py help <subcommand>' for help on a specific subcommand.
-
-Available subcommands:
-
-[account]
-    account_unsetmultipleprimaryemails
-
-[auth]
-    changepassword
-    createsuperuser
-
-[contenttypes]
-    remove_stale_contenttypes
-
-[django]
-    check
-    compilemessages
-    createcachetable
-    dbshell
-    diffsettings
-    dumpdata
-    flush
-    inspectdb
-    loaddata
-    makemessages
-    makemigrations
-    migrate
-    optimizemigration
-    sendtestemail
-    shell
-    showmigrations
-    sqlflush
-    sqlmigrate
-    sqlsequencereset
-    squashmigrations
-    startapp
-    startproject
-    test
-    testserver
-
-[sessions]
-    clearsessions
-
-[staticfiles]
-    collectstatic
-    findstatic
-    runserver
+asgiref==3.8.1
+certifi==2024.8.30
+cffi==1.17.1
+charset-normalizer==3.4.0
+crispy-bootstrap5==2024.10
+cryptography==43.0.1
+Django==5.1.1
+django-allauth==65.0.2
+django-crispy-forms==2.3
+idna==3.10
+oauthlib==3.2.2
+pillow==11.0.0
+pycparser==2.22
+PyJWT==2.9.0
+requests==2.32.3
+requests-oauthlib==2.0.0
+sqlparse==0.5.1
+tzdata==2024.2
+urllib3==2.2.3
