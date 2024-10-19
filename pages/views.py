@@ -22,11 +22,11 @@ def faqs(request):
     }
     return render(request, 'pages/faqs.html', context)
 
-def offers(request):
+def plans(request):
     context = {
         'title': 'Investment Offers'
     }
-    return render(request, 'pages/offers.html', context)
+    return render(request, 'pages/plans.html', context)
 
 def partnerships(request):
     context = {
