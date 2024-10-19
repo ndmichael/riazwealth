@@ -28,6 +28,48 @@
         </ol>
         </div>
     </nav>
+
+    <section class="plan">
+        <div class="container">
+            <article class="col-12">
+                {% for plan in plans %}
+                <div
+                    class="row gy-4 pricing-item mb-5"
+                    data-aos="fade-up"
+                    data-aos-delay="100"
+                >
+                    <div class="col-lg-3 d-flex ">
+                        <img 
+                            src="{{plan.image.url}}" 
+                            alt="" 
+                            class="img-fluid"
+                            style="object-fit: cover;"
+                        >
+                    </div>
+                    <div class="col-lg-3 d-flex flex-column justify-content-center align-items-center">
+                        <h3 class="h4 text-success fw-bolder">{{plan.name}}</h3>
+                        <span class="text-secondary">Starts at </span>
+                        <h4><sup>$</sup>{{plan.min_amount}}<span> / plan</span></h4>
+                    </div>
+                    <div class="col-lg-3 d-flex align-items-center justify-content-center">
+                        <ul>
+                            <li><i class="bi bi-check-all"></i> Max Amount: ${{plan.max_amount}}</li>
+                            <li><i class="bi bi-check-all"></i> Profit: {{plan.daily_profit_rate}}% Daily</li>
+                            <li><i class="bi bi-check-all"></i> Duration: Weekly </li>
+                            <li><i class="bi bi-check-all"></i> Referral Bonus: 10%</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 d-flex align-items-center justify-content-center">
+                        <div class="text-center">
+                        <a href="" class="btn btn-1">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- End Pricing Item -->
+            </article>
+        </div>
+    </section>
 </section>
     <!--=== END OF THE BREADCRUMB SECTION ===-->
 
