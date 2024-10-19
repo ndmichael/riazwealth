@@ -374,6 +374,22 @@ background-color: var(--secondary-color);
 
 /** 
 
+===  PLANS US SECTION
+
+**/
+#plans .breadcrumbLink{
+  /* background: #ebe9ff; */
+  background: rgba(128, 102, 255, 0.4); 
+  padding: 15px 0;
+}
+
+#plan{
+  padding: var(--section-padding);
+}
+
+
+/** 
+
 ===  CONTACT US SECTION
 
 **/
