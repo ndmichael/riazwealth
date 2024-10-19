@@ -383,9 +383,50 @@ background-color: var(--secondary-color);
   padding: 15px 0;
 }
 
-#plan{
+.plan{
   padding: var(--section-padding);
+  background: #fcfcfc;
 }
+
+.plan .pricing-item{
+  padding: 60px 40px;
+  box-shadow: 0 3px 20px -2px rgba(108, 117, 125, 0.15);
+  background: #fff;
+  height: 100%;
+  border-top: 4px solid #fff;
+  border-radius: 5px;
+}
+
+.pricing-item h4{
+  font-size: 40px;
+}
+
+.pricing-item h4 span{
+  color: rgba(108, 117, 125, 0.8);
+  font-size: 16px;
+}
+
+  .pricing-item ul {
+    padding: 20px 0;
+    list-style-type: none;
+    color: #6c757d !important;
+    text-align: left;
+    line-height: 20px;
+  }
+  
+  .pricing-item ul li {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    color: #6c757d !important;
+    font-weight: 700;
+  }
+
+  .pricing-item ul i {
+    color: var(--secondary-color);
+    font-size: 24px;
+    padding-right: 3px;
+  }
 
 
 /** 
