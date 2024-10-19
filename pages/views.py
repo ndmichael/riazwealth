@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .forms import ContactForm
+from investments.models import InvestmentPlan
 
 # Create your views here.
 
@@ -23,8 +24,10 @@ def faqs(request):
     return render(request, 'pages/faqs.html', context)
 
 def plans(request):
+    plans = InvestmentPlan.objects.all().order_by('-min_amount')
     context = {
-        'title': 'Investment Offers'
+        'title': 'Investment Offers',
+        'plans': plans,
     }
     return render(request, 'pages/plans.html', context)
 
