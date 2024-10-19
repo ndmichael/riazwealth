@@ -17,93 +17,6 @@ class InvestmentPlan(models.Model):
         return self.name
 
 
-# Create instances for each investment plan
-investment_plans = [
-    InvestmentPlan(
-        name='Stocks', 
-        description="""
-        Invest in a diversified portfolio of top-performing stocks across various industries.
-        Our stock investment plan aims to deliver a steady growth of 36% monthly.
-        Ideal for investors looking for moderate risk with the potential 
-        for significant returns through equity markets.
-        """,
-        min_amount=100,   
-        max_amount=5000000, 
-        daily_profit_rate=1.2
-    ),
-    InvestmentPlan(
-        name='Trade Bonds', 
-        description="""
-        Secure your wealth with trade bonds that offer a fixed return of 45% monthly profit. 
-        This plan is designed for investors seeking stability and predictable income streams from bond markets. 
-        Low risk and reliable performance make it an attractive option.
-        """,
-        min_amount=200, 
-        max_amount=5000000, 
-        daily_profit_rate=1.5
-    ),
-    InvestmentPlan(
-        name='Real Estate', 
-        description="""
-        Capitalize on the growth of the real estate market by investing in residential and commercial properties. 
-        With a 60% in a month, this plan offers a stable income and long-term appreciation. 
-        Ideal for investors seeking low risk and asset-backed security.
-        """,
-        min_amount=1000, 
-        max_amount=5000000, 
-        daily_profit_rate=2.0
-    ),
-    InvestmentPlan(
-        name='Gold and Silver', 
-        description="""
-        Invest in precious metals like gold and silver to preserve wealth and hedge against inflation. 
-        This plan offers a consistent monthly returns of 30%. 
-        Ideal for conservative investors focused on safety and wealth preservation.
-        """,
-        min_amount=500, 
-        max_amount=5000000, 
-        daily_profit_rate=1.0
-    ),
-    InvestmentPlan(
-        name='Bitcoin and Cryptocurrencies', 
-        description="""
-        Tap into the high-growth potential of the cryptocurrency market with this aggressive investment plan. 
-        With up to 70% profit monthly, 
-        this plan is perfect for investors willing to accept higher risk in exchange for potentially high returns.
-        """,
-        min_amount=100, 
-        max_amount=5000000, 
-        daily_profit_rate=2.5
-    ),
-    InvestmentPlan(
-        name='Oil and Gas', 
-        description="""
-        Profit from the booming energy sector by investing in oil and gas. 
-        Offering up to 54% profit monthly, this plan provides a balance of risk and reward, 
-        ideal for investors 
-        looking to capitalize on energy market trends and stable returns.
-        """,
-        min_amount=500, 
-        max_amount=5000000, 
-        daily_profit_rate=1.8
-    ),
-    InvestmentPlan(
-        name='AI and Web3', 
-        description="""
-        Invest in the future of technology by participating in artificial intelligence (AI) and Web3 projects. 
-        This high-growth plan offers a 66% monthly profits, ideal for tech-savvy investors seeking exposure to 
-        disruptive technologies and cutting-edge innovations.
-        """,
-        min_amount=1000, 
-        max_amount=5000000, 
-        daily_profit_rate=2.2
-    ),
-]
-
-# Save the instances in bulk
-InvestmentPlan.objects.bulk_create(investment_plans)
-
-
 class UserInvestment(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user_investments')
     investment_plan = models.ForeignKey(InvestmentPlan, on_delete=models.CASCADE, related_name='investments')
@@ -140,3 +53,92 @@ class UserInvestment(models.Model):
     def accrue_profit(self):
         pass
 
+
+
+
+
+
+# investment_plans = [
+#     InvestmentPlan(
+#         name='Stocks', 
+#         description="""
+#         Invest in a diversified portfolio of top-performing stocks across various industries.
+#         Our stock investment plan aims to deliver a steady growth of 36% monthly.
+#         Ideal for investors looking for moderate risk with the potential 
+#         for significant returns through equity markets.
+#         """,
+#         min_amount=100,   
+#         max_amount=5000000, 
+#         daily_profit_rate=1.2
+#     ),
+#     InvestmentPlan(
+#         name='Trade Bonds', 
+#         description="""
+#         Secure your wealth with trade bonds that offer a fixed return of 45% monthly profit. 
+#         This plan is designed for investors seeking stability and predictable income streams from bond markets. 
+#         Low risk and reliable performance make it an attractive option.
+#         """,
+#         min_amount=200, 
+#         max_amount=5000000, 
+#         daily_profit_rate=1.5
+#     ),
+#     InvestmentPlan(
+#         name='Real Estate', 
+#         description="""
+#         Capitalize on the growth of the real estate market by investing in residential and commercial properties. 
+#         With a 60% in a month, this plan offers a stable income and long-term appreciation. 
+#         Ideal for investors seeking low risk and asset-backed security.
+#         """,
+#         min_amount=1000, 
+#         max_amount=5000000, 
+#         daily_profit_rate=2.0
+#     ),
+#     InvestmentPlan(
+#         name='Gold and Silver', 
+#         description="""
+#         Invest in precious metals like gold and silver to preserve wealth and hedge against inflation. 
+#         This plan offers a consistent monthly returns of 30%. 
+#         Ideal for conservative investors focused on safety and wealth preservation.
+#         """,
+#         min_amount=500, 
+#         max_amount=5000000, 
+#         daily_profit_rate=1.0
+#     ),
+#     InvestmentPlan(
+#         name='Bitcoin and Cryptocurrencies', 
+#         description="""
+#         Tap into the high-growth potential of the cryptocurrency market with this aggressive investment plan. 
+#         With up to 70% profit monthly, 
+#         this plan is perfect for investors willing to accept higher risk in exchange for potentially high returns.
+#         """,
+#         min_amount=100, 
+#         max_amount=5000000, 
+#         daily_profit_rate=2.5
+#     ),
+#     InvestmentPlan(
+#         name='Oil and Gas', 
+#         description="""
+#         Profit from the booming energy sector by investing in oil and gas. 
+#         Offering up to 54% profit monthly, this plan provides a balance of risk and reward, 
+#         ideal for investors 
+#         looking to capitalize on energy market trends and stable returns.
+#         """,
+#         min_amount=500, 
+#         max_amount=5000000, 
+#         daily_profit_rate=1.8
+#     ),
+#     InvestmentPlan(
+#         name='AI and Web3', 
+#         description="""
+#         Invest in the future of technology by participating in artificial intelligence (AI) and Web3 projects. 
+#         This high-growth plan offers a 66% monthly profits, ideal for tech-savvy investors seeking exposure to 
+#         disruptive technologies and cutting-edge innovations.
+#         """,
+#         min_amount=1000, 
+#         max_amount=5000000, 
+#         daily_profit_rate=2.2
+#     ),
+# ]
+
+# # Save the instances in bulk
+# InvestmentPlan.objects.bulk_create(investment_plans)
