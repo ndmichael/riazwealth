@@ -242,5 +242,35 @@
  <script src="{% static 'js/main.js' %}"></script>
  <!-- Box icon js -->
  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+ <script>
+  const el = document.getElementById("id_payment_type");
+  const usdt = document.getElementById("usdt");
+  const btc = document.getElementById("btc");
+  const ethereum = document.getElementById("ethereum");
+  console.log("usdt: ", usdt)
+  console.log("ubtc: ", btc)
+
+  el.addEventListener("change", function handleChange(event) {
+    const result = event.target.value;
+    if (result === "usdt") {
+      usdt.style.display = "block";
+      btc.style.display = "none";
+      ethereum.style.display = "none";
+    } else if (result === "bitcoin") {
+      usdt.style.display = "none";
+      btc.style.display = "block";
+      ethereum.style.display = "none";
+    } else if (result === "ethereum") {
+      usdt.style.display = "none";
+      btc.style.display = "none";
+      ethereum.style.display = "block";
+    } else {
+      usdt.style.display = "none";
+      btc.style.display = "none";
+      ethereum.style.display = "none";
+    }
+  });
+</script>
 </body>
 </html>
