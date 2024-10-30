@@ -7,7 +7,9 @@
     ** Route from user profile or any package subscription page
     ** Redirect client from this page back to profile
 -->
-    <section class="py-4" style="background: linear-gradient(to right, #4000a63b 50%, #cfddff 50%);">
+    <section 
+        class="py-4" 
+        style="background: linear-gradient(to  right,rgb(102, 204, 102, .4) 10%, rgba(255, 255, 255));">
         <div class="container">
             <section class="row g-5">
                 <article class="col-12 col-md-6 offset-md-1">
@@ -17,10 +19,12 @@
                             <!-- Make payment form--> 
                             <div class="tab">
                                 <div class="p-4 mb-4">
-                                    <header class="display-6 text-danger text-center fw-bold">Make Payment</header>
+                                    <header class="display-6 text-center fw-bold">
+                                        Make Payment
+                                    </header>
                                 </div>
                                 {% csrf_token %}
-                                {{ paymentForm|crispy }}
+                                {{ p_form|crispy }}
                             </div>
                             
                             <!-- Confirm payment form -->
@@ -66,10 +70,10 @@
                                     
                                 </div>
                                 {% csrf_token %}
-                                {{ confirmForm|crispy }}
+                                {{ cp_Form|crispy }}
                             </div>
 
-                            <input type="submit" value="CONFIRM PAYMENT" class="btn btn-danger btn-lg col-12">
+                            <input type="submit" value="CONFIRM PAYMENT" class="btn btn-1 btn-lg col-12">
                         </form>
                     </div>
                 </article>
