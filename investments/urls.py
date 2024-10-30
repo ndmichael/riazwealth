@@ -7,5 +7,5 @@ from .views import (
 
 
 urlpatterns = [
-    path('investments/payment/<str:package>', buy_investment, name="buy_investment")
+    path('investments/payment/<str:plan>', buy_investment, name="buy_investment")
 ]
