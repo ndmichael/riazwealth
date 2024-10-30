@@ -38,8 +38,10 @@ class UserInvestment(models.Model):
         """
         if self.amount_invested >= 10000:
             self.withdrawal_interval_days = 3
-        else:
+        elif self.amount_invested >= 500:
             self.withdrawal_interval_days = 7
+        else:
+            self.withdrawal_interval_days = 14
 
         self.save()
 
