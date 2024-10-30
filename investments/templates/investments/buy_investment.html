@@ -8,14 +8,14 @@
     ** Redirect client from this page back to profile
 -->
     <section 
-        class="py-4" 
+        class="py-5" 
         style="background: linear-gradient(to  right,rgb(102, 204, 102, .4) 10%, rgba(255, 255, 255));">
         <div class="container">
             <section class="row g-5">
                 <article class="col-12 col-md-6 offset-md-1">
                     <div class="bg-white shadow-sm p-5 rounded-4">
                         <!-- Forms-->
-                        <form action="" method="post" enctype=multipart/form-data id="payment_form">
+                        <form action="" method="post" enctype="multipart/form-data" id="payment_form">
                             <!-- Make payment form--> 
                             <div class="tab">
                                 <div class="p-4 mb-4">
@@ -30,9 +30,13 @@
                             <!-- Confirm payment form -->
                             <div class="tab">
                                 <div class="py-3 text-center">
-                                    <div id="div_btc">
-                                        
-                                        <span id="btc" class="btc payment" onclick="copyWallet('btc')">
+                                    <div id="div_btc">                                       
+                                        <span 
+                                            id="btc" 
+                                            class="btc payment" 
+                                            onclick="copyWallet('btc')"
+                                            style="display: none;"
+                                        >
                                             <p class="text-success fw-bold">click on the box to copy</p>
                                             <p class="payment">bc1qd3ngysntw9fjzq672ctp4srsncfgnpnlfwt8at</p>
                                         </span>
@@ -43,7 +47,12 @@
                                         />
                                     </div>
                                     <div>
-                                        <span id="usdt" class="usdt payment" onclick="copyWallet('usdt')">
+                                        <span 
+                                            id="usdt" 
+                                            class="usdt payment" 
+                                            onclick="copyWallet('usdt')"
+                                            style="display: none;"
+                                        >
                                             <p class="text-success fw-bold">click  on the box to copy</p>
                                             <p class="payment">TEtrjNAbVo8aEXhS44Z74pEnk2LUdXqSp7</p>
                                         </span>
@@ -55,7 +64,12 @@
                                     </div>
                                     
                                     <div>
-                                        <span id="ethereum" class="ethereum payment" onclick="copyWallet('ethereum')">
+                                        <span 
+                                            id="ethereum" 
+                                            class="ethereum payment" 
+                                            onclick="copyWallet('ethereum')"
+                                            style="display: none;"
+                                        >
                                             <p class="text-success fw-bold">click on the box to copy</p>
                                             <p class="payment">
                                                 0xCE51FC6a109E3EfbF55C147A707932713Bf0e5E8
@@ -70,7 +84,7 @@
                                     
                                 </div>
                                 {% csrf_token %}
-                                {{ cp_Form|crispy }}
+                                {{ cp_form|crispy }}
                             </div>
 
                             <input type="submit" value="CONFIRM PAYMENT" class="btn btn-1 btn-lg col-12">
@@ -85,29 +99,30 @@
                             <p>
                                 <span class="fw-bold text-danger">Note:</span>   
                                 <span class="text-muted">
-                                    It is important for you to make deposit and confirm your deposit.
-                                    Sending proof of payment is not compulsory but its required for 
-                                    quick validation.
+                                    Send Payment proof required for quick validation.
                                 </span>
                             </p>
                         </div>
                         <span>
                             <h5 class="text-muted">Package Name</h5>
-                            <h4 id="package_name">{{package.package_name}}</h4>
+                            <h4 id="plan_name" style="color: #003366;">{{plan.name}}</h4>
+                            <p>
+                                {{plan.description|truncatewords:25}}
+                            </p>
                         </span>
                         <span class="d-flex justify-content-between py-4">
                             <span>
                                 <h5 class="text-muted">Min</h5>
-                                <h4 class="fw-bold">${{package.min_amount}}</h4>
+                                <h4 class="fw-bold">${{plan.min_amount}}</h4>
                             </span>
                             <span class="text-primary"> - to - </span>
                             <span>
                                 <h5 class="text-muted">Max</h5>
-                                <h4 class="fw-bold">${{package.max_amount}}</h4>
+                                <h4 class="fw-bold">${{plan.max_amount}}</h4>
                             </span>
                         </span>
                         <span>
-                            Estimated profit: <span class="fw-bold">{{package.profit}}</span>
+                            Estimated profit: <span class="fw-bold">{{plan.daily_profit_rate}}% / daily</span>
                         </span>
                         
                     <!-- </div> -->
