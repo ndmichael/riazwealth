@@ -25,6 +25,9 @@
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
 
+    <!-- swiss alert box custom -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <style>
       em.is-invalid {
         color: #dc3545;
@@ -253,6 +256,44 @@
  <script src="{% static 'js/jquery.validate.min.js' %}"></script>
  <script src="{% static 'js/deposit_validation.js' %}"></script>
 
+ <!-- Scripts to handle copying payment addresses -->
+ <script>
+    function copyWallet(id) {
+      const btc_wallet = document.getElementById("btc_wallet");
+      const usdt_wallet = document.getElementById("usdt_wallet");
+      if (id === "btc") {
+        btc_wallet.select();
+        navigator.clipboard.writeText(btc_wallet.value);
+        swal({
+          title: "COPEID!",
+          text: btc_wallet.value,
+          icon: "success",
+          button: "OK",
+        });
+      } else if (id === "usdt") {
+        usdt_wallet.select();
+        navigator.clipboard.writeText(usdt_wallet.value);
+        swal({
+          title: "COPEID!",
+          text: usdt_wallet.value,
+          icon: "success",
+          button: "OK!",
+        });
+      } else if (id === "ethereum") {
+        ethereum_wallet.select();
+        navigator.clipboard.writeText(ethereum_wallet.value);
+        swal({
+          title: "COPEID!",
+          text: ethereum_wallet.value,
+          icon: "success",
+          button: "OK!",
+        });
+        // alert("Copied the text: " + ethereum_wallet.value);
+      }
+    }
+  </script>
+
+ <!-- Css to handle hide and show of wallet addresses -->
  <script>
   const el = document.getElementById("id_payment_type");
   const usdt = document.getElementById("usdt");
