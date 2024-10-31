@@ -82,4 +82,4 @@ class Profile(models.Model):
     referral_code = models.CharField(max_length=10, unique=True, blank=True)
 
     def __str__(self) -> str:
-        return f"user.username"
+        return f"{self.user.username}"
