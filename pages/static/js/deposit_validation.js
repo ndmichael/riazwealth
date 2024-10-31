@@ -3,31 +3,25 @@ function checkPackage(name){
     name = name.toLowerCase()
     var object = [];
     if (name == "stocks"){
-        object = [200, 499]
+        object = [100, 5000000]
     }
-    else if (name == "basic"){
-        object = [500, 4999]
+    else if (name == "trade bonds"){
+        object = [200, 5000000]
     }
-    else if (name == "standard"){
-        object = [5000, 9999]
+    else if (name == "real estate"){
+        object = [1000, 5000000]
     }
-    else if (name == "starter"){
-        object = [10000, 49999]
+    else if (name == "gold and silver"){
+        object = [500, 5000000]
     }
-    else if (name == "intermediate"){
-        object = [50000, 99999]
+    else if (name == "bitcoin and cryptocurrencies"){
+        object = [100, 5000000]
     }
-    else if (name == "premium"){
-        object = [100000, 499999]
+    else if (name == "oil and gas"){
+        object = [500, 5000000]
     }
-    else if (name == "advance"){
-        object = [500000, 999999]
-    }
-    else if (name == "ambassador 1"){
-        object = [1000000, 4999999]
-    }
-    else if (name == "ambassador 2"){
-        object = [5000000, 500000000]
+    else if (name == "ai and web3"){
+        object = [1000, 5000000]
     }
     return object
 
@@ -35,9 +29,9 @@ function checkPackage(name){
 
 
 $(document).ready(function(){
-    const package_name = $("#package_name").text()
-    var package_range = checkPackage(package_name)
-    console.log(package_range)
+    const plan_name = $("#plan_name").text()
+    var package_range = checkPackage(plan_name)
+    console.log("package range ", package_range)
     
     $("#payment_form").validate({
         errorClass: "is-invalid",
