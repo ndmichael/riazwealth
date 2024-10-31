@@ -1,0 +1,12 @@
+#buy_investment{
+    background: linear-gradient(to  right,rgb(102, 204, 102, .4) 10%, rgba(255, 255, 255));
+    padding: var(--section-padding);
+}
+
+#buy_investment .payment{
+    background: var(--secondary-color-400);
+    color: #000 !important;
+    font-weight: 900;
+    padding: 10px;
+    cursor: pointer !important;
+}
