@@ -3,7 +3,8 @@ from django import forms
 from crispy_forms.layout import Layout, Submit, Row, Field
 from crispy_forms.helper import FormHelper
 from crispy_bootstrap5.bootstrap5 import FloatingField
-from .models import CustomUser
+from .models import  Profile
+from referrals.models import Referral
 
 
 class MyCustomSignupForm(SignupForm):
@@ -44,19 +45,25 @@ class MyCustomSignupForm(SignupForm):
     
     def clean_referral_code(self):
         referral_code = self.cleaned_data.get("referral_code")
-        if referral_code and not CustomUser.objects.filter(username=referral_code.upper()).exists():
+        print(f"referral code: {referral_code}")
+        if referral_code and not Profile.objects.filter(referral_code=referral_code.upper()).exists():
             raise forms.ValidationError("Invalid referral code.")
         return referral_code
     
-    # def save(self, request):
-    #     # Call the parent save to create the user
-    #     user = super().save(request)
+    def save(self, request):
+        # Call the parent save to create the user
+        user = super().save(request)
 
-    #     # If there's a referral code, create a referral record
-    #     referral_code = self.cleaned_data.get("referral_code")
-    #     if referral_code:
-    #         referrer = CustomUser.objects.get(username=referral_code)
-    #         Referral.objects.create(referred_by=referrer, referred_to=user)
-
-    #     return user
+        # If there's a referral code, create a referral record
+        referral_code = self.cleaned_data.get("referral_code").upper()
+        print(f"referral code from save: {referral_code}")
+        if referral_code:
+            try:
+                referrer = Profile.objects.get(referral_code=referral_code)
+                # referral = user.
+                Referral.objects.create(referred_by=referrer.user, referred_to=user)
+            except:
+                raise forms.ValidationError("There is an issue creating referrals.")
+            else:
+                return user
     
