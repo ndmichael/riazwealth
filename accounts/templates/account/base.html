@@ -78,5 +78,20 @@
  <script src="{% static 'js/main.js' %}"></script>
  <!-- Box icon js -->
  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+ <!-- referral scripts -->
+ <script>
+    const referralInput = document.getElementById("id_referral_code")
+    // Check if 'referral' parameter exists in URL
+    const urlParams = new URLSearchParams(window.location.search);
+      const referralCode = urlParams.get('referral');
+      
+      // Auto-fill the referral code input if it exists
+      if (referralCode) {
+        referralInput.value = referralCode;
+        referralInput.readOnly = true;
+      }
+    
+  </script>
 </body>
 </html>
