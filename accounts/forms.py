@@ -10,11 +10,10 @@ class MyCustomSignupForm(SignupForm):
     first_name = forms.CharField(max_length=30, label='First Name')
     last_name = forms.CharField(max_length=30, label='Last name')
     terms_and_condition = forms.BooleanField(required=True)
-
+    referral_code = forms.CharField(max_length=30, required=False)
 
     def __init__(self, *args, **kwargs):
-        super(MyCustomSignupForm, self).__init__(*args, **kwargs)
-
+        super().__init__( *args, **kwargs)
         self.fields['password1'].help_text = ""
         # self.fields['upliner'].disabled = True
 
@@ -36,6 +35,9 @@ class MyCustomSignupForm(SignupForm):
                 FloatingField("password2", wrapper_class='col-md-6', css_class="row-fluid"),
             ),
             Row(
-                Field("terms_and_condition", wrapper_class='col-md-12', css_class="form-check-input"),
+                FloatingField("referral_code", wrapper_class='col-12', css_class="row-fluid"),
+            ),
+            Row(
+                Field("terms_and_condition", wrapper_class='col-md-6', css_class="form-check-input"),
             )                      
         )
