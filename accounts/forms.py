@@ -5,6 +5,7 @@ from crispy_forms.helper import FormHelper
 from crispy_bootstrap5.bootstrap5 import FloatingField
 from .models import  Profile
 from referrals.models import Referral
+from django.core.exceptions import ValidationError
 
 
 class MyCustomSignupForm(SignupForm):
@@ -51,19 +52,22 @@ class MyCustomSignupForm(SignupForm):
         return referral_code
     
     def save(self, request):
-        # Call the parent save to create the user
-        user = super().save(request)
-
         # If there's a referral code, create a referral record
         referral_code = self.cleaned_data.get("referral_code").upper()
-        print(f"referral code from save: {referral_code}")
+        # Call the parent save to create the user
+        user = super().save(request)     
+
         if referral_code:
             try:
                 referrer = Profile.objects.get(referral_code=referral_code)
-                # referral = user.
                 Referral.objects.create(referred_by=referrer.user, referred_to=user)
-            except:
-                raise forms.ValidationError("There is an issue creating referrals.")
-            else:
-                return user
+
+            except Exception as e:
+                self.add_error(None, f"An error occurred while creating the referral: {e}")
+                # Optional: Roll back user creation if referral creation is crucial
+                user.delete() 
+                # return None
+                raise ValidationError(f"An error occurred while creating the referral: {e}") 
+         
+        return user
     
