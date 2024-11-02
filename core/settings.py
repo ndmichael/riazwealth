@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-&ccg7b2_d^g54)tk636cx(dz(y4&xawz$(t)+141b%k$y95=ow
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -154,10 +154,14 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_AUTHENTICATION_METHOD = "username"
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "index"
 
-# 1 day
-ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
+
+ACCOUNT_RATE_LIMITS = {
+    # 'section_name': ('num_requests', 'time_period'),
+    'login_failed': '5/600s',  # 5 attempts per 600 seconds (10 minutes)
+}
 
 # or any other page
 LOGIN_REDIRECT_URL = 'user_dashboard'
 ACCOUNT_LOGOUT_REDIRECT_URL = "account_login"
+# ACCOUNT_LOGIN_ON_SIGNUP = False
 # ACCOUNT_SIGNUP_REDIRECT_URL = "account_login"
