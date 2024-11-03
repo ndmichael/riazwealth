@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if title %} {{title}} {% else %} RiazVest {% endif %}</title>
+    <link rel="stylesheet" href="{% static 'css/b5css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/core.css' %}">
+    <link rel="stylesheet" href="{% static 'investments/css/investment.css' %}">
+
+    <!-- Icons CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Link Swiper's CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <!-- swiss alert box custom -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <style>
+      em.is-invalid {
+        color: #dc3545;
+        /* font-weight: bold; */
+      }
+    </style>
+
+</head>
+<body>
+    
+    <div class="container-fluid">
+        <div class="row">
+          <!-- Sidebar -->
+          <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+            <div class="position-sticky">
+              {% block sidebar %}
+              <ul class="nav flex-column nav-pills" id="sidebarTabs" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="tab-home" data-bs-toggle="pill" href="#content-dashboard" role="tab" aria-controls="content-home" aria-selected="true">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="tab-profile" data-bs-toggle="pill" href="#content-profile" role="tab" aria-controls="content-profile" aria-selected="false">Profile</a>
+                </li>
+              </ul>
+              {% endblock %}
+            </div>
+          </nav>
+    
+          <!-- Main Content -->
+          <div class="col-md-9 ms-sm-auto col-lg-10 bg-warning">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <div class="container-fluid">
+                <a class="navbar-brand" href="#">Dashboard</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Link 1</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Link 2</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+    
+            <!-- Main Content Area -->
+            <div class="tab-content " id="sidebarTabsContent">
+              {% block content %}
+              {% endblock %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    
+     
+        
+<!-- Bootstrap js -->
+<script src="{% static 'js/b5js/bootstrap.bundle.min.js' %}"></script>
+ <!-- Swiper JS -->
+ <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+ <!-- Main customized js -->
+ <script src="{% static 'js/main.js' %}"></script>
+ <!-- Box icon js -->
+ <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+ <script src="{% static 'js/jquery.min.js' %}"></script>
+ <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+ <script src="{% static 'js/deposit_validation.js' %}"></script>
+
+ <!-- Scripts to handle copying payment addresses -->
+ <script>
+    function copyWallet(id) {
+      const btc_wallet = document.getElementById("btc_wallet");
+      const usdt_wallet = document.getElementById("usdt_wallet");
+      if (id === "btc") {
+        btc_wallet.select();
+        navigator.clipboard.writeText(btc_wallet.value);
+        swal({
+          title: "COPEID!",
+          text: btc_wallet.value,
+          icon: "success",
+          button: "OK",
+        });
+      } else if (id === "usdt") {
+        usdt_wallet.select();
+        navigator.clipboard.writeText(usdt_wallet.value);
+        swal({
+          title: "COPEID!",
+          text: usdt_wallet.value,
+          icon: "success",
+          button: "OK!",
+        });
+      } else if (id === "ethereum") {
+        ethereum_wallet.select();
+        navigator.clipboard.writeText(ethereum_wallet.value);
+        swal({
+          title: "COPEID!",
+          text: ethereum_wallet.value,
+          icon: "success",
+          button: "OK!",
+        });
+        // alert("Copied the text: " + ethereum_wallet.value);
+      }
+    }
+  </script>
+
+ <!-- Css to handle hide and show of wallet addresses -->
+ <script>
+  const el = document.getElementById("id_payment_type");
+  const usdt = document.getElementById("usdt");
+  const btc = document.getElementById("btc");
+  const ethereum = document.getElementById("ethereum");
+  console.log("usdt: ", usdt)
+  console.log("ubtc: ", btc)
+
+  el.addEventListener("change", function handleChange(event) {
+    const result = event.target.value;
+    if (result === "usdt") {
+      usdt.style.display = "block";
+      btc.style.display = "none";
+      ethereum.style.display = "none";
+    } else if (result === "bitcoin") {
+      usdt.style.display = "none";
+      btc.style.display = "block";
+      ethereum.style.display = "none";
+    } else if (result === "ethereum") {
+      usdt.style.display = "none";
+      btc.style.display = "none";
+      ethereum.style.display = "block";
+    } else {
+      usdt.style.display = "none";
+      btc.style.display = "none";
+      ethereum.style.display = "none";
+    }
+  });
+</script>
+</body>
+</html>
