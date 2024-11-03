@@ -1,0 +1,8 @@
+
+
+.sidebar{
+    background: #228B22;
+    height: 100vh !important;
+    z-index: 100;
+    overflow: hidden;
+}

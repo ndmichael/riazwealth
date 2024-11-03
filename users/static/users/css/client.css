@@ -8,13 +8,22 @@
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link{
-    /* background: var(--secondary-color); */
-    background: #32CD32;
+    background: var(--secondary-color);
+    /* background: #32CD32; */
     font-weight: bolder;
 }
 
 .nav-pills .nav-link{
-    color: #32CD32;
-    /* font-weight: bolder; */
-    color: var(--secondary-color);
+    font-weight: bolder;
+    /* color: var(--secondary-color); */
+    color: #dddddd;
+}
+
+.nav-pills .nav-link.active .bi{
+    color: #FFF;
+}
+.nav-pills .nav-link .bi{
+    color: #F0F0F0;
+    font-weight: bolder;
+    font-size: 1.2em;
 }
