@@ -11,12 +11,14 @@
     background: var(--secondary-color);
     /* background: #32CD32; */
     font-weight: bolder;
+    transition: .4s;
 }
 
 .nav-pills .nav-link{
     font-weight: bolder;
     /* color: var(--secondary-color); */
     color: #dddddd;
+    transition: .4s;
 }
 
 .nav-pills .nav-link.active .bi{
