@@ -24,7 +24,7 @@ html, body{
   --secondary-color: #66CC66;
   --secondary-color-400: rgb(102, 204, 102, .4);
   --secondary-color-200: rgb(102, 204, 102, .2);
-  --section-padding: 4.5rem 10px;
+  --section-padding: 5.5rem 10px;
 }
 
 .form-floating label {
