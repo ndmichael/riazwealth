@@ -1,0 +1,20 @@
+
+
+.sidebar{
+    background: #228B22;
+    height: 100vh !important;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+    /* background: var(--secondary-color); */
+    background: #32CD32;
+    font-weight: bolder;
+}
+
+.nav-pills .nav-link{
+    color: #32CD32;
+    /* font-weight: bolder; */
+    color: var(--secondary-color);
+}
