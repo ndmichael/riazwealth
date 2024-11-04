@@ -22,6 +22,10 @@
     transition: .4s;
 }
 
+.nav-pills .nav-link.active:hover{
+    color: #F8F8F8;
+}
+
 .nav-pills .nav-link:hover{
     color: var(--secondary-color);
 }
