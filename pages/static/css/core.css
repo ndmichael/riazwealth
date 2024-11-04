@@ -21,9 +21,10 @@ html, body{
 :root{
   --primary-color: #66A3FF; /* 102, 163, 255 */
   --primary-color-one: #003366; /* 0, 51, 102 */
-  --secondary-color: #66CC66;
-  --secondary-color-400: rgb(102, 204, 102, .4);
-  --secondary-color-200: rgb(102, 204, 102, .2);
+  /* --secondary-color: #66CC66; */
+  --secondary-color: rgb(50, 205, 50); /* forest green */
+  --secondary-color-400: rgb(50, 205, 50, .4);
+  --secondary-color-200: rgb(50, 205, 50, .2);
   --section-padding: 5.5rem 10px;
 }
 
