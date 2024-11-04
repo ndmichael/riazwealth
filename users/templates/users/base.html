@@ -36,9 +36,18 @@
         <div class="row">
           <!-- Sidebar -->
           <nav class="col-md-3 col-lg-2 d-md-block sidebar">
-            <div class="position-sticky">
+            <div class="position-fixed">
+                <!-- Navbar Brand -->
+                <a class="navbar-brand text-center" href="/">
+                    <img
+                    src="{% static 'images/logo.PNG' %}"
+                    alt="Riaz Wealth"    
+                    style="margin: auto; height: 100px; width: 100%; object-fit: cover;"
+                    class="d-inline-block align-center img-fluid"
+                    />
+                </a>
               {% block sidebar %}
-              <ul class="nav flex-column nav-pills" id="sidebarTabs" role="tablist">
+              <ul class="nav flex-column nav-pills mt-4" id="sidebarTabs" role="tablist">
                 <li class="nav-item">
                     <a 
                         class="nav-link active" 
