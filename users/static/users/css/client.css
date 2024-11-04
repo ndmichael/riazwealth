@@ -3,9 +3,11 @@
 .sidebar{
     /* background: #2F4F4F; */
     background: #003366;
-    height: 100vh !important;
+    min-height: 100vh !important;
     z-index: 100;
-    overflow: hidden;
+    position: sticky;
+    top: 0;
+    overflow: auto;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link{
@@ -39,7 +41,25 @@
     font-size: 1.2em;
 }
 
+/**
+**  CONTENT AREA 
+**/
 #sidebarTabsContent{
     background: linear-gradient(180deg, #FAFAFA, #F5F5F5); 
-    min-height: 100%;
+    background-repeat: repeat; /* Ensures the pattern repeats */
+    background-blend-mode: overlay; /* Blends the gradient and pattern */
+    min-height: 100vh;
+    overflow: auto;
 }
+
+#content-dashboard .summary{
+    background-color: #FFF;
+    padding: 10px 10px;
+    border: 1px solid var(--secondary-color);
+}
+
+#content-dashboard .summary .bi{
+    color: #32CD32;
+    font-size: 1.7rem;
+}
+
