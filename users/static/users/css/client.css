@@ -1,15 +1,16 @@
 
 
 .sidebar{
-    background: #228B22;
+    /* background: #2F4F4F; */
+    background: #003366;
     height: 100vh !important;
     z-index: 100;
     overflow: hidden;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link{
-    background: var(--secondary-color);
-    /* background: #32CD32; */
+    background: #32CD32;
+    /* background: #228B22; */
     font-weight: bolder;
     transition: .4s;
 }
@@ -17,8 +18,12 @@
 .nav-pills .nav-link{
     font-weight: bolder;
     /* color: var(--secondary-color); */
-    color: #dddddd;
+    color: #D9D9D9;
     transition: .4s;
+}
+
+.nav-pills .nav-link:hover{
+    color: var(--secondary-color);
 }
 
 .nav-pills .nav-link.active .bi{
@@ -28,4 +33,9 @@
     color: #F0F0F0;
     font-weight: bolder;
     font-size: 1.2em;
+}
+
+#sidebarTabsContent{
+    background: linear-gradient(180deg, #FAFAFA, #F5F5F5); 
+    min-height: 100%;
 }
