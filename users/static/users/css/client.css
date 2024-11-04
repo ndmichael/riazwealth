@@ -2,6 +2,9 @@
     box-sizing: border-box;
 }
 
+/**
+**  Client Sidebar CSS
+**/
 .sidebar{
     /* background: #2F4F4F; */
     background: #003366;
@@ -65,6 +68,9 @@
     font-size: 1.7rem;
 }
 
+/**
+**  Active investment CSS
+**/
 .table tr td{
     background: transparent !important;
 }
