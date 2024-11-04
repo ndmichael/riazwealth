@@ -1,4 +1,6 @@
-
+*{
+    box-sizing: border-box;
+}
 
 .sidebar{
     /* background: #2F4F4F; */
@@ -63,7 +65,7 @@
     font-size: 1.7rem;
 }
 
-.table{
+.table tr td{
     background: transparent !important;
 }
 
