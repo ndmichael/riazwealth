@@ -16,6 +16,12 @@ class WithdrawalRequest(models.Model):
         ('approved', 'Approved'),
         ('rejected', 'Rejected'),
     ]
+    PAYMENT_OPTIONS = [
+        ('ethereum', 'Ethereum'),
+        ('bitcoin', 'Bitcoin'),
+        ('usdt', 'USDT'),
+    ]
+    payment = models.CharField(_("payment options"), max_length=10, choices=PAYMENT_OPTIONS)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     
     # Timestamp for when the request was created
