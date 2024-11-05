@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'pages',
     'accounts',
     'referrals',
+    'withdrawals',
     
     'withdrawals',
     'django.contrib.admin',
