@@ -1,6 +1,19 @@
 {% load static %}
 <section>
     <div class="container">
-        <h1>Withdrawals  Tabs</h1>
+        <section class="row">
+            <div class="col-12 col-md-6">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                </form>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div>
+                    
+                </div>
+            </div>
+        </section>
     </div>
 </section>
