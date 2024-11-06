@@ -1,17 +1,67 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <section>
     <div class="container">
-        <section class="row">
+        <section class="row g-4">
             <div class="col-12 col-md-6">
-                <form method="post">
+                <legend class="text-center pb-4">
+                    <h3>Request Withdrawals</h3>
+                </legend>
+                <form method="post" class="p-5 border bg-white">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    {% crispy form %}
                 </form>
             </div>
 
             <div class="col-12 col-md-6">
-                <div>
-                    
+                <div class="p-5">
+                    <h3 class="mb-4">Balance Information</h3>
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <td>
+                                Available balance
+                            </td>
+                            <td class="fw-bolder text-end">
+                                <p>$123,000.00</p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Withdrawable balance
+                            </td>
+                            <td class="fw-bolder text-end">
+                                <p>$23,000.00</p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Ethereum
+                            </td>
+                            <td class="fw-bolder text-end">
+                                <p>K53BU87JGEV6D8E</p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Bitcoin
+                            </td>
+                            <td class="fw-bolder text-end">
+                                <p>TDHIBFGD6B3ND16</p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                USDT
+                            </td>
+                            <td class="fw-bolder text-end">
+                                <p>TDHIBFGD6B3ND16</p>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </section>
