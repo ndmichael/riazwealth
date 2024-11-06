@@ -7,14 +7,14 @@
                 <legend class="text-center pb-4">
                     <h3>Request Withdrawals</h3>
                 </legend>
-                <form method="post" class="p-5 border bg-white">
+                <form method="post" class="p-5 border bg-light">
                     {% csrf_token %}
                     {% crispy form %}
                 </form>
             </div>
 
             <div class="col-12 col-md-6">
-                <div class="p-5">
+                <div class="p-3 bg-white">
                     <table class="table table-striped table-hover">
                         <tr>
                             <td>
@@ -36,33 +36,72 @@
 
                         <tr>
                             <td>
-                                Ethereum
+                                Ethereum Address
                             </td>
                             <td class="fw-bolder text-end">
-                                <p>K53BU87JGEV6D8E</p>
+                                <p>K53BU87JGEV6D8EK53BU87JGEV6D8E</p>
                             </td>
                         </tr>
 
                         <tr>
                             <td>
-                                Bitcoin
+                                Bitcoin Address
                             </td>
                             <td class="fw-bolder text-end">
-                                <p>TDHIBFGD6B3ND16</p>
+                                <p>TDHIBFGD6B3ND16K53BU87JGEV6D8E</p>
                             </td>
                         </tr>
 
                         <tr>
                             <td>
-                                USDT
+                                USDT Address
                             </td>
                             <td class="fw-bolder text-end">
-                                <p>TDHIBFGD6B3ND16</p>
+                                <p>TDHIBFGD6B3ND16K53BU87JGEV6D8E</p>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
         </section>
+
+        <!-- === Withdrawals Histories === -->
+         <section class="row pt-5">
+            <div class="col-12">
+                <table class="table mt-4 table-hover">
+                    <thead class="bg-light">
+                        <tr>
+                            <th scope="col">WITHDRAWAL'S CODE</th>
+                            <th scope="col">OPTIONS</th>
+                            <th scope="col">PAYMENT METHOD</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody
+                        class="
+                        animate__animated
+                        animate__fadeInUp
+                        animate_slow
+                        "
+                    >
+                        {%for withdrawal in withdrawals %}
+                        <tr>  
+                            <td>
+                               <span class="fw-bold">{{withdrawal.id | upper}}</span>
+                            </td>
+                            <td>
+                                {{withdrawal.payment_option}}
+                            </td>
+                            <td>
+                                {{withdrawal.payment_status}}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <p class="alert alert-info fw-bolder">No withdrawal Recorded.</p>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+         </section>
     </div>
 </section>
