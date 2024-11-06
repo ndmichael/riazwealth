@@ -21,7 +21,7 @@ class WithdrawalRequest(models.Model):
         ('bitcoin', 'Bitcoin'),
         ('usdt', 'USDT'),
     ]
-    payment = models.CharField(_("payment options"), max_length=10, choices=PAYMENT_OPTIONS, default="usdt")
+    payment_option = models.CharField(_("payment options"), max_length=10, choices=PAYMENT_OPTIONS, default="usdt")
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     
     # Timestamp for when the request was created
