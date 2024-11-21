@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from investments.models import InvestmentPlan, UserInvestment
 from withdrawals.models import WithdrawalRequest
 from withdrawals.forms  import WithdrawalRequestForm
+from django.db.models import Sum, Q
 
 # Create your views here.
 
@@ -13,7 +14,7 @@ def client_dashboard(request):
     plans = InvestmentPlan.objects.all()
     user_investments = UserInvestment.objects.filter(user=user)
 
-    withdrawals_amount = withdrawals.count()
+    withdrawals_amount = withdrawals.aggregate(total=Sum('amount', default=0.00, filter=Q(status="approved")))['total']
     total_investments = user_investments.count()
     total_plans = plans.count()
 
