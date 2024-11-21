@@ -5,6 +5,8 @@ from withdrawals.models import WithdrawalRequest
 from withdrawals.forms  import WithdrawalRequestForm
 from django.db.models import Sum, Q
 
+from utils.total_investments_profit import get_total_profits
+
 # Create your views here.
 
 @login_required
@@ -17,6 +19,7 @@ def client_dashboard(request):
     withdrawals_amount = withdrawals.aggregate(total=Sum('amount', default=0.00, filter=Q(status="approved")))['total']
     total_investments = user_investments.count()
     total_plans = plans.count()
+    total_profits = get_total_profits(user)
 
 
     form = WithdrawalRequestForm()
@@ -29,7 +32,8 @@ def client_dashboard(request):
         "user_investments": user_investments,
         "withdrawals_amount": withdrawals_amount,
         "total_investments": total_investments,
-        "total_plans": total_plans
+        "total_plans": total_plans,
+        "total_profits": total_profits
     }
     return render(request, "users/client_dashboard.html", context)
 
