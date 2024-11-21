@@ -6,7 +6,7 @@ from referrals.models import Referral
 from withdrawals.forms  import WithdrawalRequestForm
 from django.db.models import Sum, Q
 
-from utils.total_investments_profit import get_total_profits
+from utils.total_investments_profit import get_total_profits, get_total_referral_bonus
 
 # Create your views here.
 
@@ -17,12 +17,14 @@ def client_dashboard(request):
     plans = InvestmentPlan.objects.all()
     user_investments = UserInvestment.objects.filter(user=user)
     referrals = Referral.objects.filter(referred_by=user)
+    
 
     withdrawals_amount = withdrawals.aggregate(total=Sum('amount', default=0.00, filter=Q(status="approved")))['total']
     total_investments = user_investments.count()
     total_plans = plans.count()
     total_referrals = referrals.count()
     total_profits = get_total_profits(user)
+    total_bonuses = get_total_referral_bonus(user)
 
 
     form = WithdrawalRequestForm()
@@ -36,8 +38,9 @@ def client_dashboard(request):
         "withdrawals_amount": withdrawals_amount,
         "total_investments": total_investments,
         "total_plans": total_plans,
-        "total-referrals": total_referrals,
-        "total_profits": total_profits
+        "total_referrals": total_referrals,
+        "total_profits": total_profits,
+        "total_bonuses": total_bonuses,
     }
     return render(request, "users/client_dashboard.html", context)
 
