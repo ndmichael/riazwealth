@@ -8,11 +8,13 @@ from withdrawals.forms  import WithdrawalRequestForm
 
 @login_required
 def client_dashboard(request):
+    user = request.user
     withdrawals = WithdrawalRequest.objects.all()
     plans = InvestmentPlan.objects.all()
     form = WithdrawalRequestForm()
     context ={
         "title": "client dashboard",
+        "user": user,
         "plans": plans,
         "form": form,
         "withdrawals" : withdrawals
