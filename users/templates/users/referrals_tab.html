@@ -1,7 +1,16 @@
 {% load static %}
 <section id="referral">
     <div class="container">
-        <article class="row">
+        <article class="row gy-4">
+            <div class="col-12 col-lg-10 mx-auto text-center">
+                <header>
+                    <h5 class="pb-4">Don't miss out - Invite friends and family today.</h5>
+                    <a href="#" class="btn btn-lg btn-success">Copy your link</a>
+                </header>
+            </div>
+        </article>
+
+        <article class="row py-5">
             <div class="col-12 col-md-4">
                 <div class="d-flex summary">
                     <i class="bi bi-upc-scan"></i>
@@ -34,6 +43,30 @@
                         </p>
                     </div>
                 </div>
+            </div>
+        </article>
+
+        <article class="row gy-4 py-4">
+            <div class="col-12 col-lg-10 mx-auto text-center">
+                {% for referral in referrals %}   
+                <div class="table-responsive">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Investment Amount</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                {% empty %}
+                    <div>
+                        <p class="alert alert-info">No Referrals, Start Referring.</p>
+
+                    </div>
+                {% endfor %}
             </div>
         </article>
     </div>
