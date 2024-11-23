@@ -16,15 +16,20 @@ def client_dashboard(request):
     withdrawals = WithdrawalRequest.objects.filter(user=user)
     plans = InvestmentPlan.objects.all()
     user_investments = UserInvestment.objects.filter(user=user)
-    referrals = Referral.objects.filter(referred_by=user)
+    
     
 
     withdrawals_amount = withdrawals.aggregate(total=Sum('amount', default=0.00, filter=Q(status="approved")))['total']
     total_investments = user_investments.count()
     total_plans = plans.count()
-    total_referrals = referrals.count()
+    
     total_profits = get_total_profits(user)
     total_bonuses = get_total_referral_bonus(user)
+
+    # Time for referrals
+    referrals = Referral.objects.filter(referred_by=user)
+    total_referrals = referrals.count()
+
 
 
     form = WithdrawalRequestForm()
@@ -32,6 +37,7 @@ def client_dashboard(request):
         "title": "client dashboard",
         "user": user,
         "plans": plans,
+        "referrals": referrals,
         "form": form,
         "withdrawals" : withdrawals,
         "user_investments": user_investments,
@@ -43,6 +49,8 @@ def client_dashboard(request):
         "total_bonuses": total_bonuses,
     }
     return render(request, "users/client_dashboard.html", context)
+
+
 
 @login_required
 def user_dashboard(request):
