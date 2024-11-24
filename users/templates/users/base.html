@@ -20,6 +20,11 @@
       rel="stylesheet"
     />
 
+    <!-- Alertify CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.min.css"/>
+
     <!-- swiss alert box custom -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -178,9 +183,19 @@
                 </div>
               </div>
             </nav>
+
+            <!-- Alertify JavaScript -->
+            <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
     
             <!-- Main Content Area -->
             <div class="tab-content p-5" id="sidebarTabsContent">
+                {% for message in messages %}
+                  <script>
+                          alertify.set('notifier','position', 'top-right');
+                          alertify.{{message.tags}}('{{message}}');
+                  </script>    
+              {% endfor %}
+
               {% block content %}
               {% endblock %}
             </div>
@@ -190,7 +205,7 @@
 
     
      
-        
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>    
 <!-- Bootstrap js -->
 <script src="{% static 'js/b5js/bootstrap.bundle.min.js' %}"></script>
  <!-- Swiper JS -->
