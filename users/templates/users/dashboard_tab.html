@@ -97,9 +97,18 @@
                                     Referral Links
                                 </td>
                                 <td class="text-end">
-                                    <a href="" class="btn btn-success">
-                                        copy Referral link
-                                    </a>
+                                    <button
+                                        class="btn btn-lg btn-success copy"
+                                        id="copyref"
+                                        onclick="copyRef()"
+                                    >
+                                        <i class="bi bi-clipboard-check-fill pe-3 text-light"></i>Copy Link
+                                    </button>
+                                    <input 
+                                        id="reflink"
+                                        type="hidden" 
+                                        value="{{ request.scheme }}://{{ request.get_host }}/accounts/signup/?referral={{ user.profiles.referral_code }}"
+                                    />
                                 </td>
                             </tr>
                         </table>
