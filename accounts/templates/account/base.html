@@ -26,6 +26,11 @@
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
 
+    <!-- Alertify CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.min.css"/>
+
     <style>
       .aside{
         width: 450px;
@@ -57,7 +62,20 @@
     </div>
   </section>
 
+  <!-- Alertify JavaScript -->
+  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+
   <section class="content-wrapper">
+    <!-- 
+        ==== Pop up alert message ===
+    -->
+    {% for message in messages %}
+        <script>
+                alertify.set('notifier','position', 'top-right');
+                alertify.{{message.tags}}('{{message}}');
+        </script>
+        
+    {% endfor %}
     {% block content %}
 
     {% endblock content %}
