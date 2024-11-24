@@ -218,72 +218,26 @@
  <script src="{% static 'js/jquery.validate.min.js' %}"></script>
  <script src="{% static 'js/deposit_validation.js' %}"></script>
 
- <!-- Scripts to handle copying payment addresses -->
+ 
  <script>
-    function copyWallet(id) {
-      const btc_wallet = document.getElementById("btc_wallet");
-      const usdt_wallet = document.getElementById("usdt_wallet");
-      if (id === "btc") {
-        btc_wallet.select();
-        navigator.clipboard.writeText(btc_wallet.value);
-        swal({
+  function copyRef() {
+      /** javascript code for click copy **/
+      var copyText = document.getElementById("reflink");
+
+      // Select the text field
+      copyText.select();
+
+      // Copy the text inside the text field
+      navigator.clipboard.writeText(copyText.value);
+      
+      // Alert the copied text
+      swal({
           title: "COPEID!",
-          text: btc_wallet.value,
-          icon: "success",
-          button: "OK",
-        });
-      } else if (id === "usdt") {
-        usdt_wallet.select();
-        navigator.clipboard.writeText(usdt_wallet.value);
-        swal({
-          title: "COPEID!",
-          text: usdt_wallet.value,
+          text: "Referrals link",
           icon: "success",
           button: "OK!",
-        });
-      } else if (id === "ethereum") {
-        ethereum_wallet.select();
-        navigator.clipboard.writeText(ethereum_wallet.value);
-        swal({
-          title: "COPEID!",
-          text: ethereum_wallet.value,
-          icon: "success",
-          button: "OK!",
-        });
-        // alert("Copied the text: " + ethereum_wallet.value);
-      }
-    }
-  </script>
-
- <!-- Css to handle hide and show of wallet addresses -->
- <script>
-  const el = document.getElementById("id_payment_type");
-  const usdt = document.getElementById("usdt");
-  const btc = document.getElementById("btc");
-  const ethereum = document.getElementById("ethereum");
-  console.log("usdt: ", usdt)
-  console.log("ubtc: ", btc)
-
-  el.addEventListener("change", function handleChange(event) {
-    const result = event.target.value;
-    if (result === "usdt") {
-      usdt.style.display = "block";
-      btc.style.display = "none";
-      ethereum.style.display = "none";
-    } else if (result === "bitcoin") {
-      usdt.style.display = "none";
-      btc.style.display = "block";
-      ethereum.style.display = "none";
-    } else if (result === "ethereum") {
-      usdt.style.display = "none";
-      btc.style.display = "none";
-      ethereum.style.display = "block";
-    } else {
-      usdt.style.display = "none";
-      btc.style.display = "none";
-      ethereum.style.display = "none";
-    }
-  });
+      });
+  }
 </script>
 </body>
 </html>
