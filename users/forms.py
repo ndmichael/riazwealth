@@ -20,8 +20,8 @@ class UserForm(forms.ModelForm):
         self.helper.form_tag = False
         self.helper.layout = Layout(
             Row(
-                FloatingField("username", wrapper_class='col-md-6'),
-                FloatingField("email", wrapper_class='col-md-6'),
+                FloatingField("username", wrapper_class='col-md-6', readonly=True),
+                FloatingField("email", wrapper_class='col-md-6', readonly=True),
                 FloatingField("first_name", wrapper_class='col-md-6'),
                 FloatingField("last_name", wrapper_class='col-md-6'),
             ),
