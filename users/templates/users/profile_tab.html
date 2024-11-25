@@ -10,6 +10,7 @@
                         <h3>PROFILE INFO</h3>
                     </header>
                     <form action="" method="post" class="p-5">
+                        {% csrf_token %}
                         {% crispy user_form %}
                         {% crispy profile_form %}
 
