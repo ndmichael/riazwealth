@@ -4,7 +4,7 @@
     <div class="container">
         <h1>Profile Tabs</h1>
 
-        {{ user_form|crispy }}
-        {{ profile_form|crispy }}
+        {% crispy user_form %}
+        {% crispy profile_form %}
     </div>
 </section>
