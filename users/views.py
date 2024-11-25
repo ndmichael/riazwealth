@@ -8,7 +8,7 @@ from django.db.models import Sum, Q
 
 from utils.total_investments_profit import get_total_profits, get_total_referral_bonus
 
-from utils.process_form import handle_user_form
+from utils.process_form import handle_user_profile_form
 
 # Create your views here.
 
@@ -36,7 +36,7 @@ def client_dashboard(request):
 
     form = WithdrawalRequestForm()
 
-    user_form = handle_user_form(request)
+    user_form, profile_form = handle_user_profile_form(request)
 
 
     context ={
@@ -46,6 +46,7 @@ def client_dashboard(request):
         "referrals": referrals,
         "form": form,
         "user_form": user_form,
+        "profile_form": profile_form,
         "withdrawals" : withdrawals,
         "user_investments": user_investments,
         "withdrawals_amount": withdrawals_amount,
