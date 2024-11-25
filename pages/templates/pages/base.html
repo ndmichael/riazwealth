@@ -121,8 +121,12 @@
           <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
             {% if request.is_authenticated and request.user.is_staff %}
               
-            {% elif request.is_authenticated %}
-
+            {% elif request.user.is_authenticated %}
+              <li class="nav-item">
+                <a class="btn btn-success" href="{% url 'clientdashboard' %}" target="_blank">
+                  Welcome, {{user.username }}
+                </a>
+              </li>
             {% else %}
             <a 
               class="btn btn-outline-light py-3 m-2" 
