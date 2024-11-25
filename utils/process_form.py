@@ -17,6 +17,6 @@ def handle_user_profile_form(request):
             # Save the form
             user_form.save()
             profile_form.save()
-            messages.success(request, "Your withdrawal request was submitted successfully!")
+            messages.success(request, "Your profile has been updated successfully!")
 
     return user_form, profile_form
