@@ -2,9 +2,26 @@
 {% load crispy_forms_tags %}
 <section>
     <div class="container">
-        <h1>Profile Tabs</h1>
 
-        {% crispy user_form %}
-        {% crispy profile_form %}
+        <div class="row">
+            <article class="col-12 col-lg-10 mx-auto">
+                <div class="bg-white rounded-4 shadow-sm">
+                    <header class="p-3 border-bottom text-center">
+                        <h3>PROFILE INFO</h3>
+                    </header>
+                    <form action="" method="post" class="p-5">
+                        {% crispy user_form %}
+                        {% crispy profile_form %}
+
+                        <div>
+                            <button class="btn-1 btn" type="submit">
+                                UPDATE PROFILE
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </article>
+        </div>
+        
     </div>
 </section>
