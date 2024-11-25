@@ -5,7 +5,21 @@
             <div class="col-12 col-lg-10 mx-auto text-center">
                 <header>
                     <h5 class="pb-4">Don't miss out - Invite friends and family today.</h5>
-                    <a href="#" class="btn btn-lg btn-success">Copy your link</a>
+                    <div>
+                        <button
+                            class="btn-1 copy"
+                            id="copyref"
+                            onclick="copyRef()"
+                        >
+                            <i class="bi bi-clipboard-check-fill pe-3 text-light"></i>
+                            Copy your link
+                        </button>
+                        <input 
+                            id="reflink"
+                            type="hidden" 
+                            value="{{ request.scheme }}://{{ request.get_host }}/accounts/signup/?referral={{ user.profiles.referral_code }}"
+                        />
+                    </div>
                 </header>
             </div>
         </article>
