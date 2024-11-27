@@ -38,14 +38,14 @@
 </head>
 <body>
     
-    <div class="d-flex">
+    <div>
+      <!-- sidebar -->
       <div 
         class="sidebar d-md-flex flex-column vh-100" 
         id="responsiveSidebar"
       >
         <div class="sidebar-header d-md-none">
-          <h5 id="sidebarLabel">Menu</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <i class="bi bi-x-lg" onclick="toggleSidebar()"></i>
         </div>
 
         <div class="sidebar-body">
@@ -158,7 +158,7 @@
           </ul>
           {% endblock %}
         </div>
-      </div>
+      </div> <!-- end of sidebar -->
     
       <!-- Main Content -->
       <div class="main-content flex-grow-1">
@@ -225,11 +225,6 @@
  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
  <!-- Main customized js -->
  <script src="{% static 'js/main.js' %}"></script>
- <!-- Box icon js -->
- <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
- <!-- <script src="{% static 'js/jquery.min.js' %}"></script>
- <script src="{% static 'js/jquery.validate.min.js' %}"></script>
- <script src="{% static 'js/deposit_validation.js' %}"></script> -->
 
  <!-- Include Custom JS -->
 <script>
