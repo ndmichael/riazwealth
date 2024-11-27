@@ -109,14 +109,23 @@
 }
 
 /*** side closer ***/
+.toggler{
+    text-align: center;
+    background: #003366 !important;
+}
+
+.toggler .bi{
+    color: #fff !important;
+    font-size: 24px;
+}
+
 .sidebar-header{
-    padding: 10px;
     text-align: center;
 }
 
 .sidebar-header .bi{
-    color: #fff !important;
-    font-size: 24px;
+    font-size: 28px;
+    color: white !important;
 }
 
 .sidebar-body {

@@ -167,7 +167,7 @@
           <div class="container-fluid">
             <!-- Sidebar Off-Canvas -->
             <button 
-              class="btn btn-primary" 
+              class="btn toggler" 
               type="button" 
               onclick="toggleSidebar()"
             >
@@ -236,7 +236,7 @@
   // Close sidebar if click occurs outside the sidebar
   document.addEventListener('click', function(event) {
       const sidebar = document.getElementById('responsiveSidebar');
-      const toggleButton = document.querySelector('.btn.btn-primary');
+      const toggleButton = document.querySelector('.toggler');
       
       // Close sidebar if click is outside the sidebar and toggle button
       if (!sidebar.contains(event.target) && !toggleButton.contains(event.target)) {
