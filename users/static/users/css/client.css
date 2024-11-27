@@ -5,15 +5,15 @@
 /**
 **  Client Sidebar CSS
 **/
-.sidebar{
-    /* background: #2F4F4F; */
+/* .sidebar{
+    background: #2F4F4F;
     background: #003366;
     min-height: 100vh !important;
     z-index: 100;
     position: sticky;
     top: 0;
     overflow: auto;
-}
+} */
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link{
     background: #32CD32;
@@ -87,3 +87,46 @@
     font-size: 1.7rem;
 }
 
+/* Sidebar Styles */
+.sidebar {
+    background: #003366;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%); /* Hidden by default on small screens */
+    transition: transform 0.3s ease-in-out;
+    z-index: 1040; /* Ensure it’s above other elements */
+}
+
+.sidebar.show {
+    transform: translateX(0); /* Slide into view */
+}
+
+/*** side closer ***/
+.sidebar-header{
+    padding: 10px;
+    text-align: center;
+}
+
+.sidebar-header .bi{
+    color: #fff !important;
+    font-size: 24px;
+}
+
+.sidebar-body {
+    padding: 10px;
+}
+
+  
+@media (min-width: 768px) {
+    .main-content {
+        padding-left: 250px;  /* Adjust to the width of your sidebar*/
+        width: 100%;
+    }
+
+    .sidebar {
+        transform: none; /* Always visible */
+        position: fixed;
+    }
+}
