@@ -21,7 +21,7 @@
                                 Available balance
                             </td>
                             <td class="fw-bolder text-end">
-                                <p>$123,000.00</p>
+                                <p>{{total_profits}}</p>
                             </td>
                         </tr>
 
@@ -30,7 +30,7 @@
                                 Withdrawable balance
                             </td>
                             <td class="fw-bolder text-end">
-                                <p>$23,000.00</p>
+                                <p>{{total_profits}}</p>
                             </td>
                         </tr>
 
@@ -39,7 +39,7 @@
                                 Ethereum Address
                             </td>
                             <td class="fw-bolder text-end">
-                                K53BU87JGEV6D8EK53BU87JGEV6D8E
+                                {{user.profiles.ethereum_wallet}}
                             </td>
                         </tr>
 
@@ -48,7 +48,7 @@
                                 Bitcoin Address
                             </td>
                             <td class="fw-bolder text-end">
-                                DHIBFGD6B3ND16K53BU87JGEV6D8E
+                                {{user.profiles.bitcoin_wallet}}
                             </td>
                         </tr>
 
@@ -57,7 +57,7 @@
                                 USDT Address
                             </td>
                             <td class="fw-bolder text-end">
-                                TDHIBFGD6B3ND16K53BU87JGEV6D8E
+                                {{user.profiles.usdt_wallet}}
                             </td>
                         </tr>
                     </table>
