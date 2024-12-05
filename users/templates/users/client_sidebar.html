@@ -1,0 +1,122 @@
+{% load static %}
+
+<!-- sidebar -->
+<div 
+    class="sidebar d-md-flex flex-column vh-100" 
+    id="responsiveSidebar"
+>
+<div class="sidebar-header d-md-none">
+  <i class="bi bi-x-lg" onclick="toggleSidebar()"></i>
+</div>
+
+<div class="sidebar-body">
+  <!-- Navbar Brand -->
+  <a class="navbar-brand text-center" href="/">
+      <img
+      src="{% static 'images/logo.PNG' %}"
+        alt="Riaz Wealth"    
+        style="margin: auto; height: 100px; width: 150px; object-fit: cover;"
+        class="d-inline-block align-center img-fluid"
+      />
+  </a>
+  {% block sidebar %}
+  <ul class="nav flex-column nav-pills mt-4" id="sidebarTabs" role="tablist">
+    <li class="nav-item">
+      <a 
+          class="nav-link active" 
+          id="tab-home" 
+          data-bs-toggle="pill" 
+          href="#content-dashboard" 
+          role="tab" 
+          aria-controls="content-home" 
+          aria-selected="true"
+      >
+          <i class=" bi bi-house-door-fill" style="font-size: 1.2em;"></i>
+          Dashboard
+      </a>
+    </li>
+    <li class="nav-item">
+      <a 
+          class="nav-link" 
+          id="tab-investments" 
+          data-bs-toggle="pill" 
+          href="#content-investment" 
+          role="tab" 
+          aria-controls="content-investments" 
+          aria-selected="false"
+      >
+          <i class=" bi bi-graph-up-arrow"></i>
+          Investments
+      </a>
+    </li>
+    <li class="nav-item">
+      <a 
+          class="nav-link" 
+          id="tab-withdrawals" 
+          data-bs-toggle="pill" 
+          href="#content-withdrawals" 
+          role="tab" 
+          aria-controls="content-withdrawals" 
+          aria-selected="false"
+      >
+          <i class=" bi bi-briefcase-fill" style="font-size: 1.2em;"></i>
+          Withdrawals
+      </a>
+    </li>
+    <li class="nav-item">
+      <a 
+          class="nav-link" 
+          id="tab-referrals" 
+          data-bs-toggle="pill" 
+          href="#content-referrals" 
+          role="tab" 
+          aria-controls="content-referrals" 
+          aria-selected="false"
+      >
+          <i class="bi bi-people-fill"></i>
+          Referrals
+      </a>
+    </li>
+    <li class="nav-item">
+      <a 
+          class="nav-link" 
+          id="tab-profile" 
+          data-bs-toggle="pill" 
+          href="#content-profile" 
+          role="tab" 
+          aria-controls="content-profile" 
+          aria-selected="false"
+      >
+          <i class="bi bi-person-circle"></i>
+          Profile & Settings
+      </a>
+    </li>
+    <li class="nav-item">
+      <a 
+          class="nav-link" 
+          id="tab-faq" 
+          data-bs-toggle="pill" 
+          href="#content-faq" 
+          role="tab" 
+          aria-controls="content-faq" 
+          aria-selected="false"
+      >
+          <i class="bi bi-question-circle-fill"></i>
+          FAQ
+      </a>
+    </li>
+    <li class="nav-item">
+      <a 
+          class="nav-link" 
+          id="tab-profile" 
+          href="{% url 'account_logout' %}" 
+          aria-controls="content-profile" 
+          aria-selected="false"
+      >
+          Logout
+      </a>
+    </li>
+  </ul>
+  {% endblock %}
+</div>
+</div> <!-- end of sidebar -->
