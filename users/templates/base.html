@@ -1,0 +1,157 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if title %} {{title}} {% else %} RiazVest {% endif %}</title>
+    <link rel="stylesheet" href="{% static 'css/b5css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/core.css' %}">
+    <link rel="stylesheet" href="{% static 'users/css/client.css' %}">
+
+    <!-- Icons CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Alertify CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.min.css"/>
+
+    <!-- swiss alert box custom -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <style>
+      em.is-invalid {
+        color: #dc3545;
+        /* font-weight: bold; */
+      }
+    </style>
+
+</head>
+<body>
+    
+    <div>
+      <!--- ==== sidebar logic ===-->
+    {% if request.user.is_staff %}
+        <!-- Include staff sidebar -->
+        <h3>Admin dashboard</h3>
+    {% else %}
+        <!-- Include staff sidebar -->
+        {% include "users/client_sidebar.html" %}
+    {% endif %}
+    
+      <!-- Main Content -->
+      <div class="main-content flex-grow-1">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg" style="background: #F5F5F5">
+          <div class="container-fluid">
+            <!-- Sidebar Off-Canvas -->
+            <button 
+              class="btn toggler d-md-none" 
+              type="button" 
+              onclick="toggleSidebar()"
+            >
+              <span class="bi bi-list text-white" style="font-size: 20px;"></span>
+            </button>
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+              <span class="navbar-toggler-icon"></span>
+            </button> -->
+            <!-- <div class="collapse navbar-collapse" id="navbarContent"> -->
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <div class="dropdown">
+                      <a class="btn btn-outline-success dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Welcome, {{user.username }}
+                      </a>
+                    
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li>
+                          <a class="dropdown-item text-danger" href="{% url 'account_logout' %}">Logout</a>
+                        </li>
+                      </ul>
+                    </div>
+                </li>
+              </ul>
+            <!-- </div> -->
+          </div>
+        </nav>
+
+        <!-- Alertify JavaScript -->
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+
+        <!-- Main Content Area -->
+        <div class="tab-content p-2 p-lg-5" id="sidebarTabsContent">
+            {% for message in messages %}
+              <script>
+                      alertify.set('notifier','position', 'top-right');
+                      alertify.{{message.tags}}('{{message}}');
+              </script>    
+          {% endfor %}
+
+          {% block content %}
+          {% endblock %}
+        </div>
+      </div> <!-- end of content -->
+  </div>
+
+
+    
+     
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>    
+<!-- Bootstrap js -->
+<script src="{% static 'js/b5js/bootstrap.bundle.min.js' %}"></script>
+ <!-- Swiper JS -->
+ <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+ <!-- Main customized js -->
+ <script src="{% static 'js/main.js' %}"></script>
+
+ <!-- Include Custom JS -->
+<script>
+  function toggleSidebar() {
+      const sidebar = document.getElementById('responsiveSidebar');
+      sidebar.classList.toggle('show'); // Toggle sidebar visibility
+  }
+
+  // Close sidebar if click occurs outside the sidebar
+  document.addEventListener('click', function(event) {
+      const sidebar = document.getElementById('responsiveSidebar');
+      const toggleButton = document.querySelector('.toggler');
+      
+      // Close sidebar if click is outside the sidebar and toggle button
+      if (!sidebar.contains(event.target) && !toggleButton.contains(event.target)) {
+          sidebar.classList.remove('show');
+      }
+  });
+</script>
+
+ <script>
+  function copyRef() {
+      /** javascript code for click copy **/
+      var copyText = document.getElementById("reflink");
+
+      // Select the text field
+      copyText.select();
+
+      // Copy the text inside the text field
+      navigator.clipboard.writeText(copyText.value);
+      
+      // Alert the copied text
+      swal({
+          title: "COPEID!",
+          text: "Referrals link",
+          icon: "success",
+          button: "OK!",
+      });
+  }
+</script>
+</body>
+</html>
