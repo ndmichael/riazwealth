@@ -42,7 +42,7 @@
       <!--- ==== sidebar logic ===-->
     {% if request.user.is_staff %}
         <!-- Include staff sidebar -->
-        <h3>Admin dashboard</h3>
+        {% include "admin_portal/admin_sidebar.html" %}
     {% else %}
         <!-- Include staff sidebar -->
         {% include "users/client_sidebar.html" %}
