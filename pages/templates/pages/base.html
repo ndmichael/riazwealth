@@ -113,14 +113,20 @@
               <a
                 class="nav-link ms-4"
                 href="{% url 'faqs' %}"
-                >FAQs</a
+                >
+                  FAQs
+                </a
               >
             </li>
           </ul>  
 
           <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
             {% if request.is_authenticated and request.user.is_staff %}
-              
+            <li class="nav-item">
+              <a class="btn btn-success" href="{% url 'admindashboard' %}" target="_blank">
+                Welcome, {{user.username }}
+              </a>
+            </li>
             {% elif request.user.is_authenticated %}
               <li class="nav-item">
                 <a class="btn btn-success" href="{% url 'clientdashboard' %}" target="_blank">
