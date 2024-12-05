@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>ADMIN DASHBOARD</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+<section class="container">
+    <h3>ADMIN DASHBOARD</h3>
+<h4>{{request.user.is_authenticated}} and {{request.user.is_staff}}</h4>
+<p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos vitae asperiores a, 
+    magni suscipit assumenda minus exercitationem nihil commodi explicabo repudiandae? 
+    Cupiditate id dolore possimus, 
+    facilis quibusdam perferendis sequi quo!
+</p>
+</section>
