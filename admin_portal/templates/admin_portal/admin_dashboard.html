@@ -1,11 +1,21 @@
 {% extends 'base.html' %}
-<section class="container">
-    <h3>ADMIN DASHBOARD</h3>
-<h4>{{request.user.is_authenticated}} and {{request.user.is_staff}}</h4>
-<p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos vitae asperiores a, 
-    magni suscipit assumenda minus exercitationem nihil commodi explicabo repudiandae? 
-    Cupiditate id dolore possimus, 
-    facilis quibusdam perferendis sequi quo!
-</p>
-</section>
+{% block content %}
+<div class="tab-pane fade show active" id="content-admin-dashboard" role="tabpanel" aria-labelledby="tab-home">
+    {% include 'admin_portal/dashboard_admin_tab.html' %}
+</div>
+<div class="tab-pane fade" id="content-admin-investment" role="tabpanel" aria-labelledby="tab-investment">
+    {% include 'admin_portal/investments_admin_tab.html' %}
+</div>
+
+<div class="tab-pane fade" id="content-admin-withdrawals" role="tabpanel" aria-labelledby="tab-withdrawals">
+    {% include 'admin_portal/withdrawals_admin_tab.html' %}
+</div>
+
+<div class="tab-pane fade" id="content-admin-referrals" role="tabpanel" aria-labelledby="tab-referrals">
+    {% include 'admin_portal/referrals_admin_tab.html' %}
+</div>
+
+<div class="tab-pane fade" id="content-admin-plan" role="tabpanel" aria-labelledby="tab-profile">
+    {% include 'admin_portal/plan_admin_tab.html' %}
+</div>
+{% endblock content %}
