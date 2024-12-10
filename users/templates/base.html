@@ -8,7 +8,13 @@
     <title>{% if title %} {{title}} {% else %} RiazVest {% endif %}</title>
     <link rel="stylesheet" href="{% static 'css/b5css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/core.css' %}">
+  
+
+    {% if title == "Admin Portal" %}
+    <link rel="stylesheet" href="{% static 'admin_portal/css/admin_portal.css' %}">
+    {% elif title == "client dashboard" %}
     <link rel="stylesheet" href="{% static 'users/css/client.css' %}">
+    {% endif %}
 
     <!-- Icons CSS -->
     <link
