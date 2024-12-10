@@ -1,0 +1,146 @@
+*{
+    box-sizing: border-box;
+}
+
+/**
+**  Client Sidebar CSS
+**/
+/* .sidebar{
+    background: #2F4F4F;
+    background: #003366;
+    min-height: 100vh !important;
+    z-index: 100;
+    position: sticky;
+    top: 0;
+    overflow: auto;
+} */
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+    background: #32CD32;
+    /* background: #228B22; */
+    font-weight: bolder;
+    transition: .4s;
+}
+
+.nav-pills .nav-link{
+    font-weight: bolder;
+    /* color: var(--secondary-color); */
+    color: #D9D9D9;
+    transition: .4s;
+}
+
+.nav-pills .nav-link.active:hover{
+    color: #F8F8F8;
+}
+
+.nav-pills .nav-link:hover{
+    color: var(--secondary-color);
+}
+
+.nav-pills .nav-link.active .bi{
+    color: #FFF;
+}
+.nav-pills .nav-link .bi{
+    color: #F0F0F0;
+    font-weight: bolder;
+    font-size: 1.2em;
+}
+
+/**
+**  CONTENT AREA 
+**/
+#sidebarTabsContent{
+    background: linear-gradient(180deg, #FAFAFA, #F5F5F5); 
+    background-repeat: repeat; /* Ensures the pattern repeats */
+    background-blend-mode: overlay; /* Blends the gradient and pattern */
+    min-height: 100vh;
+    overflow: auto;
+}
+
+#content-dashboard .summary{
+    background-color: #FFF;
+    padding: 10px 10px;
+    border: 1px solid var(--secondary-color);
+}
+
+#content-dashboard .summary .bi{
+    color: #32CD32;
+    font-size: 1.7rem;
+}
+
+/**
+**  Active investment CSS
+**/
+.table tr td{
+    background: transparent !important;
+}
+
+
+#referral .summary{
+    background-color: #FFF;
+    padding: 10px 10px;
+    border: 1px solid var(--secondary-color);
+}
+
+#referral .bi{
+    color: #32CD32;
+    font-size: 1.7rem;
+}
+
+.main-content {
+    padding-left: 250px;  /* Adjust to the width of your sidebar*/
+    width: 100%;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background: #003366;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: none; /* Always visible */
+    transition: transform 0.3s ease-in-out;
+    z-index: 1040; /* Ensure it’s above other elements */
+}
+
+.sidebar.show {
+    transform: translateX(0); /* Slide into view */
+}
+
+/*** side closer ***/
+.toggler{
+    text-align: center;
+    background: #003366 !important;
+}
+
+.toggler .bi{
+    color: #fff !important;
+    font-size: 24px;
+}
+
+.sidebar-header{
+    text-align: center;
+}
+
+.sidebar-header .bi{
+    font-size: 28px;
+    color: white !important;
+}
+
+.sidebar-body {
+    padding: 0 15px;
+}
+
+  
+@media (max-width: 768px) {
+    .main-content {
+        padding-left: 0;  /* Adjust to the width of your sidebar*/
+        width: 100%;
+    }
+
+    .sidebar {
+        transform: translateX(-100%); /* Hidden by default on small screens */
+        width: 80vw;
+    }
+}
