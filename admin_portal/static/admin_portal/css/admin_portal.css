@@ -16,7 +16,7 @@
 } */
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link{
-    background: #003366;
+    background: var(--primary-color-one);
     font-weight: bolder;
     transition: .4s;
 }
@@ -24,7 +24,7 @@
 .nav-pills .nav-link{
     font-weight: bolder;
     /* color: var(--secondary-color); */
-    color: #F0F0F0;
+    color: #353535;
     transition: .4s;
 }
 
@@ -40,7 +40,7 @@
     color: #FFF;
 }
 .nav-pills .nav-link .bi{
-    color: #F0F0F0;
+    color: var(--primary-color-one);
     font-weight: bolder;
     font-size: 1.2em;
 }
@@ -56,14 +56,14 @@
     overflow: auto;
 }
 
-#content-dashboard .summary{
+#content-admin-dashboard .summary{
     background-color: #FFF;
     padding: 10px 10px;
-    border: 1px solid var(--secondary-color);
+    border: 1px solid var(--primary-color);
 }
 
-#content-dashboard .summary .bi{
-    /* color: #32CD32; */
+#content-admin-dashboard .summary .bi{
+    color: var(--primary-color);
     font-size: 1.7rem;
 }
 
@@ -111,7 +111,7 @@
 /*** side closer ***/
 .toggler{
     text-align: center;
-    background: #003366 !important;
+    background: var(--primary-color) !important;
 }
 
 .toggler .bi{
