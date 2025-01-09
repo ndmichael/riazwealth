@@ -56,13 +56,13 @@
     overflow: auto;
 }
 
-#content-admin-dashboard .summary{
+ .summary{
     background-color: #FFF;
     padding: 10px 10px;
     border: 1px solid var(--primary-color);
 }
 
-#content-admin-dashboard .summary .bi{
+ .summary .bi{
     color: var(--primary-color);
     font-size: 1.7rem;
 }
