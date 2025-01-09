@@ -121,7 +121,7 @@
           </ul>  
 
           <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
-            {% if request.is_authenticated and request.user.is_staff %}
+            {% if request.user.is_authenticated and request.user.is_staff %}
             <li class="nav-item">
               <a class="btn btn-success" href="{% url 'admindashboard' %}" target="_blank">
                 Welcome, {{user.username }}
