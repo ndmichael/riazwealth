@@ -19,8 +19,6 @@ def client_dashboard(request):
     plans = InvestmentPlan.objects.all()
     user_investments = UserInvestment.objects.filter(user=user)
     
-    
-
     withdrawals_amount = withdrawals.aggregate(total=Sum('amount', default=0.00, filter=Q(status="approved")))['total']
     total_investments = user_investments.count()
     total_plans = plans.count()
