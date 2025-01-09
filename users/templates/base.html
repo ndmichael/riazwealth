@@ -74,9 +74,15 @@
               <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <div class="dropdown">
+                      {% if request.user.is_staff %}
+                      <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Welcome, {{user.username }}
+                      </a>
+                      {% else %}
                       <a class="btn btn-outline-success dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Welcome, {{user.username }}
                       </a>
+                      {% endif %}
                     
                       <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Profile</a></li>
