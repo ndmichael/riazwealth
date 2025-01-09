@@ -8,6 +8,10 @@
     {% include 'admin_portal/investments_admin_tab.html' %}
 </div>
 
+<div class="tab-pane fade" id="content-admin-plans" role="tabpanel" aria-labelledby="tab-investment">
+    {% include 'admin_portal/plans_admin_tab.html' %}
+</div>
+
 <div class="tab-pane fade" id="content-admin-withdrawals" role="tabpanel" aria-labelledby="tab-withdrawals">
     {% include 'admin_portal/withdrawals_admin_tab.html' %}
 </div>
@@ -17,6 +21,6 @@
 </div>
 
 <div class="tab-pane fade" id="content-admin-plan" role="tabpanel" aria-labelledby="tab-profile">
-    {% include 'admin_portal/plan_admin_tab.html' %}
+    {% include 'admin_portal/plans_admin_tab.html' %}
 </div>
 {% endblock content %}
