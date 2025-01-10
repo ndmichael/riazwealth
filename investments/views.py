@@ -1,24 +1,33 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import InvestmentPlan
 from .forms import MakePaymentForm, ConfirmPaymentForm
+from django.contrib import messages
+from utils.process_form import handle_investment_creation
 
 
 
 def buy_investment(request, plan: str):
-    plan = InvestmentPlan.objects.get(name=plan)
-    if request.method == "POST":
-        paymentForm = MakePaymentForm(request.POST)
-        confirmForm = ConfirmPaymentForm(request.POST)
-        if paymentForm.is_valid() and confirmForm.is_valid():
-            pass
+    # Get the investment plan by name
+    try:
+        investment_plan = InvestmentPlan.objects.get(name=plan)
+    except InvestmentPlan.DoesNotExist:
+        messages.error(request, "The specified investment plan does not exist.")
+        return redirect('create_investment')
+    
+    if request.method == 'POST':
+        result = handle_investment_creation(request, investment_plan)
+        if not isinstance(result, tuple):
+            # If the result is not a tuple, it's a redirect
+            return result
+        make_payment_form, confirm_payment_form = result
     else:
-        paymentForm = MakePaymentForm()
-        confirmForm = ConfirmPaymentForm()
+        make_payment_form = MakePaymentForm()
+        confirm_payment_form = ConfirmPaymentForm()
 
     context = {
         "title": "Buy investment",
-        "plan": plan,
-        "cp_form": confirmForm,
-        "p_form" : paymentForm
+        "investment_plan": plan,
+        "cp_form": confirm_payment_form,
+        "p_form" :  make_payment_form
     }
     return render(request, "investments/buy_investment.html", context)
