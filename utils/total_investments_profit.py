@@ -1,7 +1,7 @@
 from investments.models import UserInvestment
 from referrals.models import Referral
 
-def get_total_profits(user):
+def get_user_total_profits(user):
     investments = UserInvestment.objects.filter(user=user)
     total_profits = sum([investment.total_profit for investment in investments])
     return total_profits
