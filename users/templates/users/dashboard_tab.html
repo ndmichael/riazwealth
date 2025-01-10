@@ -2,7 +2,7 @@
     <section>
         <div class="container">
             <section class="row gy-4">
-                <di class="col-12 col-sm-6 col-lg-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <a class="d-flex summary shadow-sm">
                         <i class="bi bi-graph-up-arrow"></i>
                         <div class="ps-4">
@@ -10,7 +10,7 @@
                             <p><b>{{total_investments}}</b></p>
                         </div>
                     </a>
-                </di>
+                </div>
                 <div class="col-12 col-sm-6 col-lg-4">
                     <a href="" class="d-flex summary shadow-sm">
                         <i class="bi bi-briefcase"></i>
@@ -62,86 +62,47 @@
             </section>
 
             <section class="row pt-5 g-5">
-                <div class="col-12 col-lg-5">
-                    <div class="p-4 bg-white rounded-2 shadow-lg">
-                        <table class="table">
-                            <tr>
-                                <td>
-                                    Full Name
-                                </td>
-                                <td class="text-end">
-                                    <b>{{user.first_name}} {{user.last_name}}</b>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    Next Accrual Date
-                                </td>
-                                <td class="text-end">
-                                    <b>05/16/2025</b>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    Next Profit
-                                </td>
-                                <td class="text-end">
-                                    <b><sup>$</sup>120</b>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    Referral Links
-                                </td>
-                                <td class="text-end">
-                                    <button
-                                        class="btn btn-lg btn-success copy"
-                                        id="copyref"
-                                        onclick="copyRef()"
-                                    >
-                                        <i class="bi bi-clipboard-check-fill pe-3 text-light"></i>Copy Link
-                                    </button>
-                                    <input 
-                                        id="reflink"
-                                        type="hidden" 
-                                        value="{{ request.scheme }}://{{ request.get_host }}/accounts/signup/?referral={{ user.profiles.referral_code }}"
-                                    />
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-7">
+                <div class="col-12 col-lg-10">
                     <div>
                         <h3>Active Investment</h3>
 
+                        {% for investment in user_investments %}
                         <div
                             data-aos="fade-up"
                             data-aos-delay="100"
-                            class="row m-1 border p-4 bg-light"
+                            class="row my-3 border p-4 bg-light"
                         >
-                        {% for user_investment in user_investments %}
-                            <div class="col-12 col-md-5 col-lg-6">
+                            <div class="col-12 col-md-5">
                                 <img 
-                                    src="{% static '/images/oil_gas.jpg' %}" 
+                                    src="{{investment.investment_plan.image.url}}" 
                                     alt="" 
                                     class="img-fluid rounded-5"
                                     style="object-fit: cover; height: 100%; width: 100%;"
                                 >
                             </div>
                             
-                            <div class="col-12 col-lg-6 p-3">
+                            <div class="col-12 col-lg-7 p-3">
                                 <table class="table table-borderless" style="background: transparent !important;">
                                     <tr>
                                         <td>
                                             Investment name:
                                         </td>
                                         <td class="text-end">
-                                            <span class="fw-bolder text-success">Real Estate</span>
+                                            <span class="fw-bolder text-success">{{investment.investment_plan}}</span>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            Status:
+                                        </td>
+                                        <td class="text-end">
+                                            {% if investment.status %}
+                                                <span class="fw-bolder text-success">{{ investment.status }}</span>
+                                            {% else %}
+                                                <span class="fw-bolder text-danger">Pending</span>
+                                            {% endif %}
+
                                         </td>
                                     </tr>
 
@@ -150,16 +111,7 @@
                                             Invested Amount:
                                         </td>
                                         <td class="text-end">
-                                            <b><sup>$</sup>100,000</b>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            Total Profit:
-                                        </td>
-                                        <td class="text-end">
-                                            <b><sup>$</sup>10,000</b>
+                                            <b><sup>$</sup>{{investment.amount}}</b>
                                         </td>
                                     </tr>
 
@@ -168,7 +120,7 @@
                                             Daily Profit:
                                         </td>
                                         <td class="text-end">
-                                            <b><sup>$</sup>100</b>
+                                            <b><sup>$</sup>{{investment.daily_profits}}</b>
                                         </td>
                                     </tr>
 
@@ -177,7 +129,7 @@
                                             Next Accrual:
                                         </td>
                                         <td class="text-end">
-                                            <b>05/05/2025</b>
+                                            <b>{{investment.next_accrual_date}}</b>
                                         </td>
                                     </tr>
                                 </table>
@@ -186,11 +138,31 @@
                         {% empty %}
                             <div>
                                 <p class="alert alert-info">No Investments yet</p>
-
                             </div>
                         {% endfor %}
                     </div>
                 </div>
-            </section>
+            </section> <!-- End of all payments row -->
         </div>
     </section>
+
+    <!-- 
+            <tr>
+                <td>
+                    Referral Links
+                </td>
+                <td class="text-end">
+                    <button
+                        class="btn btn-lg btn-success copy"
+                        id="copyref"
+                        onclick="copyRef()"
+                    >
+                        <i class="bi bi-clipboard-check-fill pe-3 text-light"></i>Copy Link
+                    </button>
+                    <input 
+                        id="reflink"
+                        type="hidden" 
+                        value="{{ request.scheme }}://{{ request.get_host }}/accounts/signup/?referral={{ user.profiles.referral_code }}"
+                    />
+                </td>
+            </tr> -->
