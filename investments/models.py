@@ -2,6 +2,7 @@ from django.db import models
 from accounts.models import CustomUser
 from datetime import timedelta
 from django.utils import timezone
+from uuid import uuid4
 
 
 class InvestmentPlan(models.Model):
@@ -30,6 +31,12 @@ class UserInvestment(models.Model):
     next_accrual_date = models.DateField()
     withdrawal_interval_days = models.PositiveIntegerField(default=7) 
     investment_date = models.DateTimeField(default=timezone.now)
+    ref_code = models.CharField(
+        null=False, 
+        blank=False, 
+        max_length=15, 
+        unique=True, 
+    )
     
 
     def set_withdrawal_interval(self):
@@ -54,6 +61,18 @@ class UserInvestment(models.Model):
 
     def accrue_profit(self):
         pass
+
+    def generate_unique_ref_code(self):
+        while True:
+            ref = uuid4().hex[-11:].upper()  # Generate a new reference
+            return ref
+
+    def save(self, *args, **kwargs):
+        if not self.ref_code:  # Ensure reference is generated only if it's not set
+            self.ref_code = self.generate_unique_reference()
+        super().save(*args, **kwargs)  # Call the parent save method
+
+    
 
 
 
