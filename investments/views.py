@@ -26,7 +26,7 @@ def buy_investment(request, plan: str):
 
     context = {
         "title": "Buy investment",
-        "investment_plan": plan,
+        "plan": investment_plan,
         "cp_form": confirm_payment_form,
         "p_form" :  make_payment_form
     }
