@@ -45,15 +45,18 @@ class UserInvestment(models.Model):
         max_length=15, 
         unique=True, 
     )
+
+    def __str__(self):
+        return f"{self.investment_plan}, Amount: {self.amount} Status: {self.status} {self.user.get_full_name()}"
     
 
     def set_withdrawal_interval(self):
         """
         Set the withdrawal interval based on the amount invested.
         """
-        if self.amount_invested >= 10000:
+        if self.amount >= 10000:
             self.withdrawal_interval_days = 3
-        elif self.amount_invested >= 500:
+        elif self.amount >= 500:
             self.withdrawal_interval_days = 7
         else:
             self.withdrawal_interval_days = 14
