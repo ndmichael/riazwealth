@@ -6,7 +6,7 @@ from referrals.models import Referral
 from withdrawals.forms  import WithdrawalRequestForm
 from django.db.models import Sum, Q
 
-from utils.total_investments_profit import get_total_profits, get_total_referral_bonus
+from utils.total_investments_profit import get_user_total_profits, get_total_referral_bonus
 
 from utils.process_form import handle_user_profile_form
 
@@ -23,7 +23,7 @@ def client_dashboard(request):
     total_investments = user_investments.count()
     total_plans = plans.count()
     
-    total_profits = get_total_profits(user)
+    total_profits = get_user_total_profits(user)
     total_bonuses = get_total_referral_bonus(user)
 
     # Time for referrals
