@@ -5,6 +5,13 @@ from django.utils import timezone
 from uuid import uuid4
 
 
+
+payment_method = (
+    ('bitcoin', 'BITCOIN'),
+    ('ethereum', 'ETHEREUM'),
+    ('usdt', 'USDT')
+)
+
 class InvestmentPlan(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
@@ -25,13 +32,14 @@ class UserInvestment(models.Model):
     daily_profit = models.DecimalField(max_digits=10, decimal_places=2)
     total_profit = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     profit_accumulated = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    payment_type = models.CharField(default='bitcoin', choices=payment_method, max_length=50)
     payment_proof = models.ImageField(upload_to='payment_proofs/', null=True, blank=True)
     payment_verified = models.BooleanField(default=False) 
     status = models.BooleanField(default=False) 
     next_accrual_date = models.DateField()
     withdrawal_interval_days = models.PositiveIntegerField(default=7) 
     investment_date = models.DateTimeField(default=timezone.now)
-    ref_code = models.CharField(
+    ref_token = models.CharField(
         null=False, 
         blank=False, 
         max_length=15, 
@@ -114,7 +122,7 @@ class UserInvestment(models.Model):
 
         if self.payment_verified and not self.next_accrual_date:
             self.next_accrual_date = timezone.now().date() + timedelta(days=1)
-            
+
         super().save(*args, **kwargs)  # Call the parent save method
 
     
