@@ -36,7 +36,7 @@ class UserInvestment(models.Model):
     payment_proof = models.ImageField(upload_to='payment_proofs/', null=True, blank=True)
     payment_verified = models.BooleanField(default=False) 
     status = models.BooleanField(default=False) 
-    next_accrual_date = models.DateField()
+    next_accrual_date = models.DateField(blank=True, null=True)
     withdrawal_interval_days = models.PositiveIntegerField(default=7) 
     investment_date = models.DateTimeField(default=timezone.now)
     ref_token = models.CharField(
@@ -111,14 +111,14 @@ class UserInvestment(models.Model):
             self.calculate_daily_profit()
 
 
-    def generate_unique_ref_code(self):
+    def generate_unique_ref_token(self):
         while True:
-            ref = uuid4().hex[-10:].upper()  # Generate a new reference
-            return ref
+            token = uuid4().hex[-10:].upper()  # Generate a new reference
+            return token
 
     def save(self, *args, **kwargs):
-        if not self.ref_code:  # Ensure reference is generated only if it's not set
-            self.ref_code = self.generate_unique_reference()
+        if not self.ref_token:  # Ensure reference is generated only if it's not set
+            self.ref_token = self.generate_unique_ref_token()
 
         if self.payment_verified and not self.next_accrual_date:
             self.next_accrual_date = timezone.now().date() + timedelta(days=1)
