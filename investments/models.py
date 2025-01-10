@@ -53,23 +53,68 @@ class UserInvestment(models.Model):
         self.save()
 
     def calculate_next_withdrawal_date(self):
-        pass
+        """
+        Calculate the next withdrawal date based on the investment start date and withdrawal interval.
+        """
+        if not self.payment_verified and not self.status:
+            return None  # Withdrawal only allowed if payment is verified
+        return self.investment_date + timedelta(days=self.withdrawal_interval_days)
+
 
     def calculate_daily_profit(self):
-        # Logic to calculate daily profit and add to total_profit
-        pass
+        """
+        Calculate daily profit based on the investment plan, invested amount, and bonus tiers.
+        """
+        if self.status and self.payment_verified:
+            # Base rate from the investment plan
+            base_rate = self.investment_plan.daily_profit_rate / 100  # Convert to decimal
+
+            # Determine bonus rate based on the invested amount
+            if self.amount > 10000:
+                bonus_rate = 0.01  # +1.0%
+            elif self.amount > 5000:
+                bonus_rate = 0.005  # +0.5%
+            else:
+                bonus_rate = 0.0  # No bonus
+
+            # Calculate the total daily rate
+            total_rate = base_rate + bonus_rate
+
+            # Calculate daily profit
+            daily_profit = self.amount * total_rate
+
+            # Update accumulated and total profits
+            self.profit_accumulated += daily_profit
+            self.total_profit += daily_profit
+
+            # Set the next accrual date
+            self.next_accrual_date = timezone.now().date() + timedelta(days=1)
+
+            # Save changes
+            self.save()
+
 
     def accrue_profit(self):
-        pass
+        """
+        Accrue daily profit if today matches the next accrual date.
+        """
+        today = timezone.now().date()
+        if self.status and self.payment_verified and today >= self.next_accrual_date:
+            self.calculate_daily_profit()
+
 
     def generate_unique_ref_code(self):
         while True:
-            ref = uuid4().hex[-11:].upper()  # Generate a new reference
+            ref = uuid4().hex[-10:].upper()  # Generate a new reference
             return ref
 
     def save(self, *args, **kwargs):
         if not self.ref_code:  # Ensure reference is generated only if it's not set
             self.ref_code = self.generate_unique_reference()
+
+        if self.payment_verified and not self.next_accrual_date:
+            self.next_accrual_date = timezone.now().date() + timedelta(days=1)
+            
         super().save(*args, **kwargs)  # Call the parent save method
 
     
