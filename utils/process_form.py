@@ -52,7 +52,7 @@ def handle_investment_creation(request, investment_plan):
                 investment.set_withdrawal_interval()  # Set withdrawal interval based on amount
                 investment.save()
                 messages.success(request, "Your investment has been created successfully! Awaiting approval.")
-                return redirect('investment_summary')  # Redirect to a summary or dashboard page
+                return redirect('clientdashboard')  # Redirect to a summary or dashboard page
             else:
                 messages.error(request, "You must confirm the payment to proceed.")
         else:
