@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %} 
 <section>
     <div class="container">
         <section class="row gy-5 py-4">
@@ -41,15 +42,29 @@
 
         <section class="row gy-5 py-4">
             <article class="col-12 mx-auto">
-                <div>
-                    <table 
+                <div
                     class="
-                        table
-                        animate__animated
-                        animate__fadeInUp
-                        animate_slow
-                    ">
-                    <thead>
+                        bg-white 
+                        rounded-2 
+                        shadow
+                        table-responsive
+                        p-5
+                    "
+                >
+                    <form action="" method="get" novalidate="nonvalidate">
+                        <input type="hidden" name="active_tab" id="active_tab" value="content-admin-investment">
+                        {% crispy filterForm %}
+                    </form>
+                    <table 
+                        class="
+                            table
+                            mt-4 table-hover
+                            animate__animated
+                            animate__fadeInUp
+                            animate_slow
+                        "
+                    >
+                    <thead class="bg-primary">
                         <tr>
                             <!-- <th scope="col">S.NO</th> -->
                             <th scope="col">Investment Name</th>
@@ -95,36 +110,27 @@
                                {% endif %}
                             </td>
                             <td class="d-flex flex-row">
-                                <a href="#" data-bs-toggle="modal" 
-                                    data-bs-target="#studentDetailsModal{{investment.id}}" 
-                                    class="btn btn-info btn-lg mb-2 mx-2" 
-                                    data-toggle="tooltip" 
-                                    data-placement="bottom" 
-                                    title="Studebt Details"
-                                >
-                                    <i class="bi bi-info-circle text-dark"></i>
-                                </a>
-                                
-                                <a 
-                                    href="" 
-                                    class="btn btn-warning btn-sm mx-2 mb-2" 
-                                    data-toggle="tooltip" 
-                                    data-placement="bottom" 
-                                    title="Edit Student Info"
-                                >
-                                    <i class="bi bi-pencil-square text-dark"></i>
-                                </a>
-
-                                <a 
-                                    href="#" 
-                                    class="btn btn-dark btn-sm mx-2 mb-2" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#DeactivateStudentModal{{investment.id}}" 
-                                    data-toggle="tooltip" 
-                                    data-placement="bottom" 
-                                    title="Deactivate Student">
-                                    <i class="bi bi-x-circle"></i>
-                                </a>
+                                <div class="dropdown">
+                                    <button 
+                                        class="btn btn-outline-primary dropdown-toggle" 
+                                        type="button" id="dropdownMenuButton" 
+                                        data-bs-toggle="dropdown" 
+                                        aria-haspopup="true" 
+                                        aria-expanded="false"
+                                    >
+                                        <i class="bi bi-three-dots"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <a class="dropdown-item py-3" href="#">
+                                        ACTIVATE INVESTMENT
+                                        <i class="bi bi-check-all text-success"></i>
+                                    </a>
+                                      <a class="dropdown-item py-3" href="#">
+                                        MORE DETAILS 
+                                        <i class="bi bi-chevron-double-right text-primary"></i>
+                                    </a>
+                                    </div>
+                                  </div>
                             </td>
                         </tr>
                         {% empty %}
