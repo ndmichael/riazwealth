@@ -14,17 +14,19 @@ def admin_dashboard(request):
     total_pending = pending_investments.count()
     plans = InvestmentPlan.objects.all()
 
-    active_tab = 'content-admin-investment'  # Default tab
+    # active_tab = 'content-admin-investment'  # Default tab
+    active_tab = request.GET.get('active_tab', 'content-admin-investment')
     filterForm =  InvestmentFilterForm(request.GET or None)
+
     if filterForm.is_valid():
         # Use cleaned data from the form
         ref_token = filterForm.cleaned_data.get('ref_token')
         status = filterForm.cleaned_data.get('status')
-        print(f"ref token = {ref_token}")
-        print(f"status = {status}")
-        
-        active_tab = request.GET.get('active_tab', 'content-admin-investment')
-        investments = filter_investments(ref_token, status)
+
+        # Check if at least one field has a value
+        if ref_token or status:
+            # Filter investments based on form input
+            investments = filter_investments(ref_token, status)
         
 
     context = {
