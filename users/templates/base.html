@@ -164,5 +164,21 @@
       });
   }
 </script>
+
+<script>
+  // JavaScript to set the active tab based on the active_tab value
+  document.addEventListener('DOMContentLoaded', function() {
+      var activeTab = "{{ active_tab }}";
+      if (activeTab) {
+          // Logic to activate the tab, e.g., using Bootstrap
+          var tabElement = document.querySelector(`a[href="#${activeTab}"]`);
+          if (tabElement) {
+              new bootstrap.Tab(tabElement).show();
+          }
+      }
+  });
+</script>
+
+
 </body>
 </html>
