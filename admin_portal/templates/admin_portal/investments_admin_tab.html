@@ -9,21 +9,31 @@
 
         <section class="row gy-5">
             <div class="col-6 col-md-4">
-                <div class="shadow-sm summary px-4 py-5 text-center">
+                <div class="shadow-sm summary  text-center">
                     <i class="bi bi-briefcase-fill me-2"></i>
-                    <b>48</b>
-                    <div class="pt-3"> 
-                        <h5>Total Active Investments</h5>
+                    <div class="pt-2"> 
+                        <h4>{{total_investments}}</h4>
+                         <p>All Investments</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-6 col-md-4">
-                <div class="shadow-sm summary px-4 py-5 text-center">
-                    <i class="bi bi-briefcase me-2"></i>
-                    <b>48</b>
-                    <div class="pt-3"> 
-                        <h5>Pending Investments</h5>
+                <div class="shadow-sm summary  text-center">
+                    <i class="bi bi-briefcase-fill me-2 text-success"></i>
+                    <div class="pt-2"> 
+                        <h4>{{total_active}}</h4>
+                         <p>Active Investments</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4">
+                <div class="shadow-sm summary  text-center">
+                    <i class="bi bi-briefcase-fill me-2 text-warning"></i>
+                    <div class="pt-2"> 
+                        <h4>{{total_pending}}</h4>
+                         <p>PendingInvestments</p>
                     </div>
                 </div>
             </div>
