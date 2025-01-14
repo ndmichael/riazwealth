@@ -212,5 +212,32 @@
     });
     </script>
 
+    <!-- === Scripts to Load Investment Modal Contents -->
+    <script>
+      function loadInvestmentContent(pk) {
+          $.ajax({
+              url: `modal-content/${pk}/`,
+              type: 'GET',
+              success: function(data) {
+                // Fill modal content with AJAX data
+                $('#modal-ref').text(data.ref_token);
+                $('#modal-investment-name').text(data.name);
+                $('#modal-amount').html('<span class="text-end fw-bolder">' + data.amount + '</span><br/><span class="text-muted">' + data.payment_type + '</span>');
+                $('#modal-user').text(data.user);
+                $('#modal-status').text(data.payment_verified);
+                $('#modal-daily-profit').html('$' + data.daily_profit + '<br/><span class="text-muted">' + data.accrual_date + '</span>');
+                $('#modal-date').text(data.date);
+
+                // Show the modal
+                $('#investmentDetailsModal').modal('show');
+              },
+              error: function(error) {
+                  alert('An error occurred while loading content.');
+              }
+          });
+      }
+  </script>
+  
+
 </body>
 </html>
