@@ -132,9 +132,6 @@ class UserInvestment(models.Model):
 
 
 
-
-
-
 # investment_plans = [
 #     InvestmentPlan(
 #         name='Stocks', 
@@ -146,7 +143,8 @@ class UserInvestment(models.Model):
 #         """,
 #         min_amount=100,   
 #         max_amount=5000000, 
-#         daily_profit_rate=1.2
+#         daily_profit_rate=1.0,
+#         image="investment_plan_img/stocks.jpg",
 #     ),
 #     InvestmentPlan(
 #         name='Trade Bonds', 
@@ -157,7 +155,8 @@ class UserInvestment(models.Model):
 #         """,
 #         min_amount=200, 
 #         max_amount=5000000, 
-#         daily_profit_rate=1.5
+#         daily_profit_rate=1.2,
+#         image="investment_plan_img/bonds.jpg",
 #     ),
 #     InvestmentPlan(
 #         name='Real Estate', 
@@ -168,7 +167,8 @@ class UserInvestment(models.Model):
 #         """,
 #         min_amount=1000, 
 #         max_amount=5000000, 
-#         daily_profit_rate=2.0
+#         daily_profit_rate=2.0,
+#         image="investment_plan_img/realestate.jpg",
 #     ),
 #     InvestmentPlan(
 #         name='Gold and Silver', 
@@ -179,7 +179,8 @@ class UserInvestment(models.Model):
 #         """,
 #         min_amount=500, 
 #         max_amount=5000000, 
-#         daily_profit_rate=1.0
+#         daily_profit_rate=1.5,
+#         image="investment_plan_img/precious_stones.jpg",
 #     ),
 #     InvestmentPlan(
 #         name='Bitcoin and Cryptocurrencies', 
@@ -190,7 +191,8 @@ class UserInvestment(models.Model):
 #         """,
 #         min_amount=100, 
 #         max_amount=5000000, 
-#         daily_profit_rate=2.5
+#         daily_profit_rate=1.0,
+#         image="investment_plan_img/bitcoin.jpg",
 #     ),
 #     InvestmentPlan(
 #         name='Oil and Gas', 
@@ -202,7 +204,8 @@ class UserInvestment(models.Model):
 #         """,
 #         min_amount=500, 
 #         max_amount=5000000, 
-#         daily_profit_rate=1.8
+#         daily_profit_rate=1.5,
+#         image="investment_plan_img/oil_gas.jpg",
 #     ),
 #     InvestmentPlan(
 #         name='AI and Web3', 
@@ -213,7 +216,8 @@ class UserInvestment(models.Model):
 #         """,
 #         min_amount=1000, 
 #         max_amount=5000000, 
-#         daily_profit_rate=2.2
+#         daily_profit_rate=2.0,
+#         image="investment_plan_img/ai_web3.jpg",
 #     ),
 # ]
 
