@@ -165,7 +165,7 @@
   }
 </script>
 
-<script>
+<!-- <script>
   // JavaScript to set the active tab based on the active_tab value
   document.addEventListener('DOMContentLoaded', function() {
       var activeTab = "{{ active_tab }}";
@@ -177,8 +177,40 @@
           }
       }
   });
-</script>
+</script> -->
 
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      function activateTab(tabId) {
+          var tabElement = document.querySelector(`a[href="#${tabId}"]`);
+          if (tabElement) {
+              new bootstrap.Tab(tabElement).show();
+          }
+      }
+
+      // Priority 1: URL parameter (for form submissions)
+      const urlParams = new URLSearchParams(window.location.search);
+      const activeTabFromUrl = urlParams.get('active_tab');
+      
+      // Priority 2: Local storage (for remembering between pages)
+      const activeTabFromStorage = localStorage.getItem('activeTab');
+
+      // Priority 3: Default tab 
+      const defaultTab = 'content-admin-dashboard';
+
+      // Determine the tab to activate based on priority
+      var activeTab = activeTabFromUrl || activeTabFromStorage || defaultTab; 
+      activateTab(activeTab); 
+
+        var tabElements = document.querySelectorAll('a[data-bs-toggle="tab"]');
+        tabElements.forEach(function(element) {
+            element.addEventListener('shown.bs.tab', function(event) {
+                localStorage.setItem('activeTab', this.getAttribute('href').substring(1)); 
+            });
+        });
+    });
+    </script>
 
 </body>
 </html>
