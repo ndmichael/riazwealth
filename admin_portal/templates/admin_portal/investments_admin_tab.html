@@ -58,7 +58,7 @@
                     <table 
                         class="
                             table
-                            mt-4 table-hover
+                            mt-4
                             animate__animated
                             animate__fadeInUp
                             animate_slow
@@ -80,7 +80,6 @@
                         {% for investment in investments %}
 
                         <!-- Modal For Activate Investment -->
-                        
                         <div class="modal fade" id="investmentStatusModal{{investment.id}}" tabindex="-1" aria-labelledby="investmentStatusLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <form action="" method="POST">
@@ -113,6 +112,69 @@
                             </div>
                         </div>
 
+                        <!-- == Modal to display students details == -->
+                        <div class="modal fade" id="investmentDetailsModal{{investment.id}}" tabindex="-2" aria-labelledby="investmentDetailsLabel1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form action="" method="POST">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                <b>Ref -Code : {{investment.ref_token}}</b>
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="p-4">
+                                                <div class="d-flex justify-content-between">
+                                                   <p>Investment Name:</p>
+                                                   <p class="fw-bold text-end">{{investment.investment_plan.name}}</p>
+                                                </div>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <p>Amount:</p>
+                                                    <p class="fw-bold text-end">
+                                                        <span class="text-end fw-bolder">{{investment.amount}}</span> <br/>
+                                                        <span class="text-muted">{{investment.payment_type}}</span>
+                                                    </p>
+                                                 </div>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <p>By:</p>
+                                                    <p class="fw-bold text-end">
+                                                        <span class="fw-bolder text-end">{{investment.user.username}}</span>
+                                                    </p>
+                                                 </div>
+
+                                                 <div class="d-flex justify-content-between">
+                                                    <p>Status:</p>
+                                                    <p class="fw-bold text-end">
+                                                        {{investment.payment_verified}}
+                                                    </p>
+                                                 </div>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <p>Investment Profit Details:</p>
+                                                    <p class="fw-bold text-end">
+                                                        {{investment.daily_profit}} <br />
+                                                        <span class="text-muted">{{investment.next_accrual_date}}</span>
+                                                    </p>
+                                                 </div>
+
+                                                 <div class="d-flex justify-content-between">
+                                                    <p>Investment Date:</p>
+                                                    <p class="fw-bold">
+                                                        {{investment.investment_date}}
+                                                    </p>
+                                                 </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
                         <tr>
                             <!-- <td>   
                                 {{forloop.counter}}
@@ -126,7 +188,7 @@
                                 ${{investment.amount}}
                             </td>
                             <td>
-                                <span>${{investment.calculate_daily_profit}}</span> 
+                                <span>${{investment.daily_profit}}</span> 
                             </td>
                             <td>
                                 {{investment.next_accrual_date}}
@@ -160,13 +222,20 @@
                                         href="#"
                                         data-bs-toggle="modal" 
                                         data-bs-target="#investmentStatusModal{{investment.id}}" 
+                                        aria-haspopup="true" 
+                                        aria-expanded="false"
                                     >
                                         <b>
                                             <i class="bi bi-check-all text-success"></i>
                                             Activate Investment
                                         </b>
                                     </a>
-                                    <a class="dropdown-item py-2" href="#">
+                                    <a 
+                                        class="dropdown-item py-2" 
+                                        href="#"
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#investmentDetailsModal{{investment.id}}" 
+                                    >
                                         <b>
                                             <i class="bi bi-chevron-double-right text-primary"></i>
                                             More Details 
