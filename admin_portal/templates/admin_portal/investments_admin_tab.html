@@ -3,44 +3,6 @@
 <section>
     <div class="container">
         <section class="row gy-5 py-4">
-            <div class="col-12">
-                <h3>Admin / Investments</h3>
-            </div>
-        </section>
-
-        <section class="row gy-5">
-            <div class="col-6 col-md-4">
-                <div class="shadow-sm summary  text-center">
-                    <i class="bi bi-briefcase-fill me-2"></i>
-                    <div class="pt-2"> 
-                        <h4>{{total_investments}}</h4>
-                         <p>All Investments</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-md-4">
-                <div class="shadow-sm summary  text-center">
-                    <i class="bi bi-briefcase-fill me-2 text-success"></i>
-                    <div class="pt-2"> 
-                        <h4>{{total_active}}</h4>
-                         <p>Active Investments</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-md-4">
-                <div class="shadow-sm summary  text-center">
-                    <i class="bi bi-briefcase-fill me-2 text-warning"></i>
-                    <div class="pt-2"> 
-                        <h4>{{total_pending}}</h4>
-                         <p>PendingInvestments</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="row gy-5 py-4">
             <article class="col-12 mx-auto">
                 <div
                     class="
@@ -97,8 +59,9 @@
                                                 {% else %}
                                                 <p class="alert alert-danger fw-bolder">Do you want to deactivate student - {{student.user.username}}</p>
                                                 {% endif %}
+            
                                                 {% csrf_token %}
-                                                <input type="hidden" value="{{student.user.username}}" name="username">
+                                                {{ toggle_form | crispy }}
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -112,68 +75,7 @@
                             </div>
                         </div>
 
-                        <!-- == Modal to display students details == -->
-                        <div class="modal fade" id="investmentDetailsModal{{investment.id}}" tabindex="-2" aria-labelledby="investmentDetailsLabel1" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <form action="" method="POST">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">
-                                                <b>Ref -Code : {{investment.ref_token}}</b>
-                                            </h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="p-4">
-                                                <div class="d-flex justify-content-between">
-                                                   <p>Investment Name:</p>
-                                                   <p class="fw-bold text-end">{{investment.investment_plan.name}}</p>
-                                                </div>
-
-                                                <div class="d-flex justify-content-between">
-                                                    <p>Amount:</p>
-                                                    <p class="fw-bold text-end">
-                                                        <span class="text-end fw-bolder">{{investment.amount}}</span> <br/>
-                                                        <span class="text-muted">{{investment.payment_type}}</span>
-                                                    </p>
-                                                 </div>
-
-                                                <div class="d-flex justify-content-between">
-                                                    <p>By:</p>
-                                                    <p class="fw-bold text-end">
-                                                        <span class="fw-bolder text-end">{{investment.user.username}}</span>
-                                                    </p>
-                                                 </div>
-
-                                                 <div class="d-flex justify-content-between">
-                                                    <p>Status:</p>
-                                                    <p class="fw-bold text-end">
-                                                        {{investment.payment_verified}}
-                                                    </p>
-                                                 </div>
-
-                                                <div class="d-flex justify-content-between">
-                                                    <p>Investment Profit Details:</p>
-                                                    <p class="fw-bold text-end">
-                                                        {{investment.daily_profit}} <br />
-                                                        <span class="text-muted">{{investment.next_accrual_date}}</span>
-                                                    </p>
-                                                 </div>
-
-                                                 <div class="d-flex justify-content-between">
-                                                    <p>Investment Date:</p>
-                                                    <p class="fw-bold">
-                                                        {{investment.investment_date}}
-                                                    </p>
-                                                 </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                        
 
                         <tr>
                             <!-- <td>   
@@ -200,9 +102,9 @@
 
                             <td>
                                {% if investment.status %}
-                                <span class="fw-bolder text-success">Active</span> 
+                                <span class="fw-bolder badge bg-success" title="Investment is currently active.">Active</span> 
                                {% else %}
-                                <span class="fw-bolder text-danger">Not Active</span> 
+                                <span class="fw-bolder badge bg-danger" title="Investment is pending or deactivated.">Not Active</span> 
                                {% endif %}
                             </td>
                             <td class="d-flex flex-row">
@@ -233,8 +135,9 @@
                                     <a 
                                         class="dropdown-item py-2" 
                                         href="#"
+                                        onclick="loadInvestmentContent('{{investment.pk}}')"
                                         data-bs-toggle="modal" 
-                                        data-bs-target="#investmentDetailsModal{{investment.id}}" 
+                                        data-bs-target="#investmentStatusModal" 
                                     >
                                         <b>
                                             <i class="bi bi-chevron-double-right text-primary"></i>
@@ -263,3 +166,105 @@
         </section>
     </div>
 </section>
+
+
+
+
+ <!-- == Modal TO DISPLAY INVESTMENTS DETAILS == -->
+ <div class="modal fade" id="investmentDetailsModal" tabindex="-2" aria-labelledby="investmentDetailsLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <b>Ref - Code : <span id="title-ref">{{investment.ref_token}}</span></b>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <table class="table">
+                        <tr>
+                            <td><p>Investment Name</p></td>
+                            <td><p class="fw-bold text-end" id="modal-investment-name"></p></td>
+                        </tr>
+                        <tr>
+                            <td><p>Amount</p></td>
+                            <td>
+                                <p class="fw-bold text-end" id="modal-amount">
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><p>By</p></td>
+                            <td>
+                                <p class="fw-bold text-end" id="modal-user"></p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><p> Paid?</p></td>
+                            <td>
+                                <p class="fw-bold text-end" id="modal-status"></p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><p> Daily Profit</p></td>
+                            <td>
+                                <p class="fw-bold text-end" id="modal-daily-profit"></p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><p>Date</p></td>
+                            <td>
+                                <p class="fw-bold text-end" id="modal-date"></p>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+    <section class="row gy-5 py-4">
+        <div class="col-12">
+            <h3>Admin / Investments</h3>
+        </div>
+    </section>
+
+    <section class="row gy-5">
+        <div class="col-6 col-md-4">
+            <div class="shadow-sm summary  text-center">
+                <i class="bi bi-briefcase-fill me-2"></i>
+                <div class="pt-2"> 
+                    <h4>{{total_investments}}</h4>
+                     <p>All Investments</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4">
+            <div class="shadow-sm summary  text-center">
+                <i class="bi bi-briefcase-fill me-2 text-success"></i>
+                <div class="pt-2"> 
+                    <h4>{{total_active}}</h4>
+                     <p>Active Investments</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4">
+            <div class="shadow-sm summary  text-center">
+                <i class="bi bi-briefcase-fill me-2 text-warning"></i>
+                <div class="pt-2"> 
+                    <h4>{{total_pending}}</h4>
+                     <p>PendingInvestments</p>
+                </div>
+            </div>
+        </div>
+    </section>
