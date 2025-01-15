@@ -5,6 +5,13 @@ from crispy_forms.layout import Submit, Layout, Div, Row
 from crispy_bootstrap5.bootstrap5 import FloatingField
 
 
+class  InvestmentStatusForm(forms.Form):
+    """Update Investment Form"""
+    action = forms.ChoiceField(
+        choices=[('activate', 'Activate'), ('deactivate', 'Deactivate')],
+        widget=forms.RadioSelect(attrs={'class': 'form-check-input'})
+    )
+
 class InvestmentFilterForm(forms.Form):
     """Form to filter complaint records."""
     STATUS  =( 
