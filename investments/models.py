@@ -92,11 +92,11 @@ class UserInvestment(models.Model):
             total_rate = base_rate + bonus_rate
 
             # Calculate daily profit
-            daily_profit = self.amount * total_rate
+            self.daily_profit = self.amount * total_rate
 
             # Update accumulated and total profits
-            self.profit_accumulated += daily_profit
-            self.total_profit += daily_profit
+            self.profit_accumulated += self.daily_profit
+            self.total_profit += self.daily_profit
 
             # Set the next accrual date
             self.next_accrual_date = timezone.now().date() + timedelta(days=1)
