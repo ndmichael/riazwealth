@@ -3,6 +3,44 @@
 <section>
     <div class="container">
         <section class="row gy-5 py-4">
+            <div class="col-12">
+                <h3>Admin / Investments</h3>
+            </div>
+        </section>
+    
+        <section class="row gy-5">
+            <div class="col-6 col-md-4">
+                <div class="shadow-sm summary  text-center">
+                    <i class="bi bi-briefcase-fill me-2"></i>
+                    <div class="pt-2"> 
+                        <h4>{{total_investments}}</h4>
+                         <p>All Investments</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-6 col-md-4">
+                <div class="shadow-sm summary  text-center">
+                    <i class="bi bi-briefcase-fill me-2 text-success"></i>
+                    <div class="pt-2"> 
+                        <h4>{{total_active}}</h4>
+                         <p>Active Investments</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-6 col-md-4">
+                <div class="shadow-sm summary  text-center">
+                    <i class="bi bi-briefcase-fill me-2 text-warning"></i>
+                    <div class="pt-2"> 
+                        <h4>{{total_pending}}</h4>
+                         <p>PendingInvestments</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="row gy-5 py-4">
             <article class="col-12 mx-auto">
                 <div
                     class="
@@ -177,7 +215,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        <b>Ref - Code : <span id="title-ref">{{investment.ref_token}}</span></b>
+                        <b>Ref - Code : <span id="modal-ref"></span></b>
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -231,40 +269,4 @@
         </form>
     </div>
 </div>
-    <section class="row gy-5 py-4">
-        <div class="col-12">
-            <h3>Admin / Investments</h3>
-        </div>
-    </section>
-
-    <section class="row gy-5">
-        <div class="col-6 col-md-4">
-            <div class="shadow-sm summary  text-center">
-                <i class="bi bi-briefcase-fill me-2"></i>
-                <div class="pt-2"> 
-                    <h4>{{total_investments}}</h4>
-                     <p>All Investments</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-4">
-            <div class="shadow-sm summary  text-center">
-                <i class="bi bi-briefcase-fill me-2 text-success"></i>
-                <div class="pt-2"> 
-                    <h4>{{total_active}}</h4>
-                     <p>Active Investments</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-4">
-            <div class="shadow-sm summary  text-center">
-                <i class="bi bi-briefcase-fill me-2 text-warning"></i>
-                <div class="pt-2"> 
-                    <h4>{{total_pending}}</h4>
-                     <p>PendingInvestments</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    
