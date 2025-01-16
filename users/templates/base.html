@@ -267,7 +267,6 @@
 
   // AJAX call for toggling investment status
 function toggleInvestmentStatus(investmentId, action, confirmButton) {
-  alert(investmentId + " " + action + " " + confirmButton);
   confirmButton.disabled = true;
   document.getElementById("loader-screen").style.display = "block";
   // Send AJAX request to toggle investment status
@@ -279,8 +278,13 @@ function toggleInvestmentStatus(investmentId, action, confirmButton) {
         csrfmiddlewaretoken: "{{ csrf_token }}"
     },
     success: function(response) {
-        alert("Investment status updated successfully!");
-        location.reload(); // Reload to reflect status change
+        swal({
+          title: "SUCCESSFULLY UPDATED",
+          text: `${response.message}`,
+          icon: "success",
+          button: "OK!",
+      });
+      location.reload(); // Reload to reflect status change
     },
     error: function(error) {
         alert("An error occurred while updating the investment status.");
