@@ -249,7 +249,7 @@
     function showInvestmentModal(investmentId, status, investmentName) {
       const modalTitle = document.getElementById("exampleModalLabel");
       const modalBody = document.querySelector("#investmentStatusModal .modal-body p");
-      const confirmButton = document.querySelector("#investmentStatusModal .btn-outline-success");
+      const confirmButton = document.querySelector("#statusUpdateButton");
 
       status =  status == "True" ? "Deactivate" : "Activate"
   
@@ -260,32 +260,37 @@
       // Update confirm button text and action
       confirmButton.textContent = `${status}`;
       confirmButton.onclick = function() {
-          toggleInvestmentStatus(investmentId, status.toLowerCase());
+          toggleInvestmentStatus(investmentId, status.toLowerCase(), confirmButton);
       };
-
-      // Handle form submission via AJAX
-    toggleForm.onsubmit = function (e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      fetch(this.action, {
-          method: 'POST',
-          body: formData,
-      })
-      .then(response => response.json())
-      .then(data => {
-          if (data.success) {
-              location.reload(); // Reload to update status
-          } else {
-              modalMessage.textContent = data.error || 'An error occurred. Please try again.';
-              modalMessage.classList.add('text-danger');
-          }
-      })
-      .catch(error => {
-          modalMessage.textContent = 'An error occurred. Please try again.';
-          modalMessage.classList.add('text-danger');
-      });
-  };
   }
+
+
+  // AJAX call for toggling investment status
+function toggleInvestmentStatus(investmentId, action, confirmButton) {
+  alert(investmentId + " " + action + " " + confirmButton);
+  confirmButton.disabled = true;
+  document.getElementById("loader-screen").style.display = "block";
+  // Send AJAX request to toggle investment status
+  $.ajax({
+    url: `investments/${investmentId}/toggle-status/`,
+    type: "POST",
+    data: {
+        action: action,
+        csrfmiddlewaretoken: "{{ csrf_token }}"
+    },
+    success: function(response) {
+        alert("Investment status updated successfully!");
+        location.reload(); // Reload to reflect status change
+    },
+    error: function(error) {
+        alert("An error occurred while updating the investment status.");
+        confirmButton.disabled = false;
+        document.getElementById("loader-screen").style.display = "none";
+    }
+  });
+
+}
+
   </script>
 
 </body>
