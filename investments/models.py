@@ -3,6 +3,7 @@ from accounts.models import CustomUser
 from datetime import timedelta
 from django.utils import timezone
 from uuid import uuid4
+from decimal import Decimal
 
 
 
@@ -71,7 +72,6 @@ class UserInvestment(models.Model):
             return None  # Withdrawal only allowed if payment is verified
         return self.investment_date + timedelta(days=self.withdrawal_interval_days)
 
-
     def calculate_daily_profit(self):
         """
         Calculate daily profit based on the investment plan, invested amount, and bonus tiers.
@@ -89,7 +89,7 @@ class UserInvestment(models.Model):
                 bonus_rate = 0.0  # No bonus
 
             # Calculate the total daily rate
-            total_rate = base_rate + bonus_rate
+            total_rate = base_rate + Decimal(bonus_rate)
 
             # Calculate daily profit
             self.daily_profit = self.amount * total_rate
