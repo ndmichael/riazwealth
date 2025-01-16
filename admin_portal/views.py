@@ -10,7 +10,8 @@ from utils.toggle_investment_status import toggle_investment_status
 
 def admin_dashboard(request):
 
-    investments = UserInvestment.objects.all()
+    investments = UserInvestment.objects.all().order_by("-investment_date")
+    plans = InvestmentPlan.objects.all()     
 
     # Aggregate counts in a single query
     investment_counts = UserInvestment.objects.aggregate(
@@ -18,23 +19,6 @@ def admin_dashboard(request):
         total_active=Count('id', filter=Q(status=True)),
         total_pending=Count('id', filter=Q(status=False))
     )
-    plans = InvestmentPlan.objects.all()
-
-    if request.method == 'POST':
-        toggle_form = InvestmentStatusForm(request.POST)
-        if toggle_form.is_valid():
-            investment_id = toggle_form.cleaned_data['investment_id']
-            action = toggle_form.cleaned_data['action']
-            
-            print(f"action: {action},  id: {investment_id}")
-
-            # Call the utility function
-            message = toggle_investment_status(investment_id, action)
-            messages.info(request, message)
-            return redirect('admindashboard')  # Redirect to avoid form resubmission
-    else:
-        toggle_form = InvestmentStatusForm()
-        
 
     # active_tab = 'content-admin-investment'  # Default tab
     active_tab = request.GET.get('active_tab', 'content-admin-investment')
@@ -66,7 +50,6 @@ def admin_dashboard(request):
         # forms
         "filterForm": filterForm,
         "active_tab": active_tab,
-        "toggle_form": toggle_form
     }
     return render(request, "admin_portal/admin_dashboard.html", context)
 
@@ -97,7 +80,13 @@ def toggle_investment_status(request, investment_id):
         action = request.POST.get("action")
         try:
             investment = UserInvestment.objects.get(id=investment_id)
-            investment.status = True if action == 'activate' else False
+            if action == 'activate':
+                investment.status = True
+                investment.payment_verified = True
+                investment.calculate_daily_profit()
+            else: 
+                investment.status = False
+                investment.payment_verified = False
             investment.save()
             return JsonResponse({'status': 'success', 'message': 'Investment status updated.'})
         except UserInvestment.DoesNotExist:
