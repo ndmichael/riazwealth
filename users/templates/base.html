@@ -212,9 +212,14 @@
     });
     </script>
 
-    <!-- === Scripts to Load Investment Modal Contents -->
+    <!-- === Scripts to Load Investment Modal Contents === -->
     <script>
       function loadInvestmentContent(pk) {
+        // Show the modal immediately with the loader visible
+        $('#investmentDetailsModal').modal('show');
+        $('#modal-loader').show();
+        $('#modal-content').hide(); // Hide the actual content while loading
+
           $.ajax({
               url: `modal-content/${pk}/`,
               type: 'GET',
@@ -228,8 +233,9 @@
                 $('#modal-daily-profit').html('$' + data.daily_profit + '<br/><span class="text-muted">' + data.accrual_date + '</span>');
                 $('#modal-date').text(data.date);
 
-                // Show the modal
-                $('#investmentDetailsModal').modal('show');
+                // Hide loader and show content
+                $('#modal-loader').hide();
+                $('#modal-content').show();
               },
               error: function(error) {
                   alert('An error occurred while loading content.');
@@ -237,7 +243,50 @@
           });
       }
   </script>
+
+
+  <script>
+    function showInvestmentModal(investmentId, status, investmentName) {
+      const modalTitle = document.getElementById("exampleModalLabel");
+      const modalBody = document.querySelector("#investmentStatusModal .modal-body p");
+      const confirmButton = document.querySelector("#investmentStatusModal .btn-outline-success");
+
+      status =  status == "True" ? "Deactivate" : "Activate"
   
+      // Update modal title and body
+      modalTitle.textContent = `${status} Investment`;
+      modalBody.textContent = `Do you want to ${status.toLowerCase()} investment - ${investmentName}?`;
+  
+      // Update confirm button text and action
+      confirmButton.textContent = `${status}`;
+      confirmButton.onclick = function() {
+          toggleInvestmentStatus(investmentId, status.toLowerCase());
+      };
+
+      // Handle form submission via AJAX
+    toggleForm.onsubmit = function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      fetch(this.action, {
+          method: 'POST',
+          body: formData,
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              location.reload(); // Reload to update status
+          } else {
+              modalMessage.textContent = data.error || 'An error occurred. Please try again.';
+              modalMessage.classList.add('text-danger');
+          }
+      })
+      .catch(error => {
+          modalMessage.textContent = 'An error occurred. Please try again.';
+          modalMessage.classList.add('text-danger');
+      });
+  };
+  }
+  </script>
 
 </body>
 </html>
