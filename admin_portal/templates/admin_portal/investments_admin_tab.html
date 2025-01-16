@@ -129,7 +129,11 @@
                                         onclick="showInvestmentModal('{{ investment.id }}', '{{ investment.status }}', '{{ investment.investment_plan.name }}')"
                                     >
                                         <b>
-                                            <i class="bi bi-toggle-on"></i>
+                                            {% if investment.status %}
+                                            <i class="bi text-danger bi-toggle-on" style="font-size: 18px;"></i>
+                                            {% else %}
+                                            <i class="bi text-success bi-toggle-on" style="font-size: 18px;"></i>
+                                            {% endif %}
                                             {{ investment.status|yesno:"Deactivate,Activate" }} Investment
                                         </b>    
                                     </button>
