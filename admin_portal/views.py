@@ -90,3 +90,16 @@ def get_investment_details(request, pk):
         }
         return JsonResponse(data)
     return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+def toggle_investment_status(request, investment_id):
+    if request.method == "POST":
+        action = request.POST.get("action")
+        try:
+            investment = UserInvestment.objects.get(id=investment_id)
+            investment.status = True if action == 'activate' else False
+            investment.save()
+            return JsonResponse({'status': 'success', 'message': 'Investment status updated.'})
+        except UserInvestment.DoesNotExist:
+            return JsonResponse({"success": False, "message": "Investment not found."}, status=404)
+    return JsonResponse({"success": False, "message": "Invalid request."}, status=400)
