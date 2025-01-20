@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.db.models import Count, Q
 from investments.models import InvestmentPlan, UserInvestment
+from withdrawals.models import WithdrawalRequest
 from .forms import InvestmentFilterForm, InvestmentStatusForm
 from django.contrib import messages
 from utils.filter_form import filter_investments
@@ -11,7 +12,8 @@ from utils.toggle_investment_status import toggle_investment_status
 def admin_dashboard(request):
 
     investments = UserInvestment.objects.all().order_by("-investment_date")
-    plans = InvestmentPlan.objects.all()     
+    plans = InvestmentPlan.objects.all()    
+    withdrawals =  WithdrawalRequest.objects.all().order_by("-created_at").order_by("updated_at")
 
     # Aggregate counts in a single query
     investment_counts = UserInvestment.objects.aggregate(
@@ -41,6 +43,8 @@ def admin_dashboard(request):
     context = {
         'investments': investments,
         'plans': plans,
+        'withdrawals': withdrawals,
+        
         'title': 'Admin Portal',
         "total_investments": investment_counts['total_investments'],
         'total_active': investment_counts['total_active'],
