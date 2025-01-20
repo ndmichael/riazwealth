@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+
 from investments.models import InvestmentPlan, UserInvestment
 from withdrawals.models import WithdrawalRequest
 from referrals.models import Referral
@@ -7,7 +8,6 @@ from withdrawals.forms  import WithdrawalRequestForm
 from django.db.models import Sum, Q
 
 from utils.total_investments_profit import get_user_total_profits, get_total_referral_bonus
-
 from utils.process_form import handle_user_profile_form
 
 # Create your views here.
@@ -32,7 +32,10 @@ def client_dashboard(request):
 
 
 
-    form = WithdrawalRequestForm()
+    if request.POST:
+        withdrawal_form = WithdrawalRequestForm(request.POST, investments=user_investments)
+    else:
+        withdrawal_form = WithdrawalRequestForm(investments=user_investments)
 
     user_form, profile_form = handle_user_profile_form(request)
 
@@ -42,7 +45,7 @@ def client_dashboard(request):
         "user": user,
         "plans": plans,
         "referrals": referrals,
-        "form": form,
+        "withdrawal_form": withdrawal_form,
         "user_form": user_form,
         "profile_form": profile_form,
         "withdrawals" : withdrawals,
