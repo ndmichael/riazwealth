@@ -51,13 +51,23 @@ class UserInvestment(models.Model):
         return f"{self.investment_plan}, Amount: {self.amount} Status: {self.status} {self.user.get_full_name()}"
     
 
+    def get_last_withdrawal_date(self):
+        """
+        Retrieves the last approved withdrawal date.
+        If no withdrawals have been made, it falls back to the investment start date.
+        """
+        last_withdrawal = self.withdrawal_requests.filter(status='approved').order_by('-created_at').first()
+        if last_withdrawal:
+            return last_withdrawal.created_at.date()  # Return the date of the last withdrawal
+        return self.start_date  # If no withdrawal, fallback to the investment start date
+    
     def set_withdrawal_interval(self):
         """
         Set the withdrawal interval based on the amount invested.
         """
         if self.amount >= 10000:
             self.withdrawal_interval_days = 3
-        elif self.amount >= 500:
+        elif self.amount >= 100:
             self.withdrawal_interval_days = 7
         else:
             self.withdrawal_interval_days = 14
