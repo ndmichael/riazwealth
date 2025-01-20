@@ -3,8 +3,10 @@ from .models import WithdrawalRequest
 from crispy_forms.layout import Layout, Submit, Row
 from crispy_forms.helper import FormHelper
 from crispy_bootstrap5.bootstrap5 import FloatingField
+from django.utils import timezone
+from datetime import timedelta
 
-class WithdrawalRequestForm(forms.ModelForm):
+class WithdrawalRequestForm(forms.Form):
     AMOUNT_CHOICES = [
         (10, '$10'),
         (20, '$20'),
@@ -17,25 +19,65 @@ class WithdrawalRequestForm(forms.ModelForm):
         (10000, '$10,000')
     ]
 
+    PAYMENT_OPTIONS = [
+        ('ethereum', 'Ethereum'),
+        ('bitcoin', 'Bitcoin'),
+        ('usdt', 'USDT'),
+    ]
+
+    investment = forms.ChoiceField(
+        choices=[],  # Populated dynamically in the view
+        widget=forms.Select(attrs={'class': 'form-select'})
+    )
+
     amount = forms.ChoiceField(
         choices=AMOUNT_CHOICES,
         widget=forms.Select(attrs={'class': 'form-select'})
     )
-    class Meta:
-        model = WithdrawalRequest
-        fields = ['amount', 'payment_option']  # Include payment_option in the form
+
+    payment_option = forms.ChoiceField(
+        choices=PAYMENT_OPTIONS, 
+        widget=forms.Select(attrs={'class': 'form-select'})
+    )
+
 
     def clean_amount(self):
-        amount = self.cleaned_data.get('amount')
-        # Add your validation logic here as before
-        return amount
+        cleaned_data = super().clean()
+        investment_id = cleaned_data.get('investment')
+        amount = cleaned_data.get('amount')
+
+        # Fetch the investment object (assuming it's passed to the form)
+        investment = next((i for i in self.investments if i.id == int(investment_id)), None)
+
+        if not investment:
+            raise forms.ValidationError("Invalid investment selected.")
+        
+        # Check if the amount exceeds the 20% limit
+        max_withdrawable = investment.total_profit * 0.2
+        if amount > max_withdrawable:
+            raise forms.ValidationError(f"Amount exceeds the maximum withdrawable limit of {max_withdrawable:.2f}.")
+
+        last_withdrawal_date = investment.get_last_withdrawal_date()
+        eligible_date = last_withdrawal_date + timedelta(days=investment.withdrawal_interval_days)
+        # Check if the investment is eligible for withdrawal
+        if eligible_date > timezone.now().date():
+            raise forms.ValidationError(f"Withdrawal not allowed before {investment.next_accrual_date}.")
+
+        return cleaned_data
+
     
-    def __init__(self, *args, **kwargs):
+    def __init__(self, investments=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        if investments:
+            self.fields['investment'].choices = [(i.id, f"Plan: {i.investment_plan.name}") for i in investments]
     
         # super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
+            Row(
+                FloatingField("investment", wrapper_class='col-12', css_class="row-fluid"),
+            ),
             Row(
                 FloatingField("amount", wrapper_class='col-12', css_class="row-fluid"),
             ),
@@ -44,3 +86,7 @@ class WithdrawalRequestForm(forms.ModelForm):
             ),
             Submit('submit', 'REQUEST WITHDRAW', css_class="col-12 btn-lg btn-1")
         )
+
+
+
+
