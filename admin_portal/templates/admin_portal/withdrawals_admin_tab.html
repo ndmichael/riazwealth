@@ -44,7 +44,7 @@
                     <i class="bi bi-briefcase me-2"></i>
                     <div class="pt-3"> 
                         <b>$41, 700</b>
-                        <h5>Pending Requests</h5>
+                        <h5>Pending Amount</h5>
                     </div>
                 </div>
             </div>
@@ -63,17 +63,17 @@
                     <thead>
                         <tr>
                             <!-- <th scope="col">S.NO</th> -->
-                            <th scope="col">Investment Name</th>
+                            <th scope="col">UserName</th>
                             <th scope="col">Amount</th>
-                            <th scope="col">Profit</th>
-                            <th scope="col">Interval</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Date</th>
+                            <th scope="col">Payment Option</th>
+                            <th scope="col">Date Created</th>
+                            <th scope="col">Total Profit</th>
+                            <th scope="col">Total withdrawn</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for investment in investments %}
+                        {% for withdrawal in withdrawals %}
 
                         <tr>
                             <!-- <td>   
@@ -81,33 +81,34 @@
                             </td> -->
                             <td class="fw-bolder">
                                 <a href="#">
-                                    <b>{{investment.investment_plan.name}}</b>
+                                    <b>{{withdrawal.user}}</b>
                                 </a>                                   
                             </td>
                             <td>
-                                ${{investment.amount}}
+                                ${{withdrawal.amount}}
                             </td>
                             <td>
-                                <span>${{investment.calculate_daily_profit}}</span> 
-                            </td>
-                            <td>
-                                {{investment.next_accrual_date}}
-                            </td>
-
-                            <td>
-                                {{investment.investment_date}}
-                            </td>
-
-                            <td>
-                               {% if investment.status %}
+                                <span>${{withdrawal.payment_option}}</span> 
+                                {% if withdrawal.status %}
                                 <span class="fw-bolder text-success">Active</span> 
                                {% else %}
                                 <span class="fw-bolder text-danger">Not Active</span> 
                                {% endif %}
                             </td>
+                            <td>
+                                {{withdrawal.created_date}}
+                            </td>
+
+                            <td>
+                                {{withdrawal.created_date}}
+                            </td>
+
+                            <td>
+                               {{withdrawal.created_date}}
+                            </td>
                             <td class="d-flex flex-row">
                                 <a href="#" data-bs-toggle="modal" 
-                                    data-bs-target="#studentDetailsModal{{investment.id}}" 
+                                    data-bs-target="#studentDetailsModal{{withdrawal.id}}" 
                                     class="btn btn-info btn-lg mb-2 mx-2" 
                                     data-toggle="tooltip" 
                                     data-placement="bottom" 
@@ -115,32 +116,11 @@
                                 >
                                     <i class="bi bi-info-circle text-dark"></i>
                                 </a>
-                                
-                                <a 
-                                    href="" 
-                                    class="btn btn-warning btn-sm mx-2 mb-2" 
-                                    data-toggle="tooltip" 
-                                    data-placement="bottom" 
-                                    title="Edit Student Info"
-                                >
-                                    <i class="bi bi-pencil-square text-dark"></i>
-                                </a>
-
-                                <a 
-                                    href="#" 
-                                    class="btn btn-dark btn-sm mx-2 mb-2" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#DeactivateStudentModal{{investment.id}}" 
-                                    data-toggle="tooltip" 
-                                    data-placement="bottom" 
-                                    title="Deactivate Student">
-                                    <i class="bi bi-x-circle"></i>
-                                </a>
                             </td>
                         </tr>
                         {% empty %}
                         <tr>
-                            <h4 class="alert alert-info">No Investments</h4>
+                            <h4 class="alert alert-info">No withdrawals</h4>
                         </tr>
                         {% endfor %}
                     </tbody>
