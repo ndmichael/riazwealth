@@ -18,5 +18,6 @@ class MakePaymentForm(forms.Form):
 
 
 class ConfirmPaymentForm(forms.Form):
-    confirm_payment = forms.BooleanField()
     send_proof_of_payment = forms.ImageField(required=False)
+    confirm_payment = forms.BooleanField()
+    
