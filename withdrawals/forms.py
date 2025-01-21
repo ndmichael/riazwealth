@@ -1,5 +1,6 @@
 from django import forms
 from .models import WithdrawalRequest
+from investments.models import UserInvestment
 from crispy_forms.layout import Layout, Submit, Row
 from crispy_forms.helper import FormHelper
 from crispy_bootstrap5.bootstrap5 import FloatingField
@@ -41,14 +42,14 @@ class WithdrawalRequestForm(forms.Form):
     )
 
 
-    def clean_amount(self):
+    def clean_data(self):
         cleaned_data = super().clean()
         investment_id = cleaned_data.get('investment')
         amount = cleaned_data.get('amount')
 
         # Fetch the investment object (assuming it's passed to the form)
         investment = next((i for i in self.investments if i.id == int(investment_id)), None)
-
+        
         if not investment:
             raise forms.ValidationError("Invalid investment selected.")
         
@@ -59,20 +60,20 @@ class WithdrawalRequestForm(forms.Form):
 
         last_withdrawal_date = investment.get_last_withdrawal_date()
         eligible_date = last_withdrawal_date + timedelta(days=investment.withdrawal_interval_days)
+
         # Check if the investment is eligible for withdrawal
-        if eligible_date > timezone.now().date():
+        if eligible_date > timezone.now():
             raise forms.ValidationError(f"Withdrawal not allowed before {investment.next_accrual_date}.")
 
         return cleaned_data
-
     
-    def __init__(self, investments=None, *args, **kwargs):
+    def __init__(self, *args, investments=None, **kwargs):
         super().__init__(*args, **kwargs)
 
         if investments:
-            self.fields['investment'].choices = [(i.id, f"Plan: {i.investment_plan.name}") for i in investments]
+            self.fields['investment'].choices = [(i.id, f"Plan: {i.investment_plan.name}") for i in investments if i.status]
+        self.investments = investments
     
-        # super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
@@ -84,7 +85,7 @@ class WithdrawalRequestForm(forms.Form):
              Row(
                 FloatingField("payment_option", wrapper_class='col-12', css_class="row-fluid"),
             ),
-            Submit('submit', 'REQUEST WITHDRAW', css_class="col-12 btn-lg btn-1")
+            Submit('submit', 'REQUEST WITHDRAWAL', css_class="col-12 btn-lg btn-1")
         )
 
 
