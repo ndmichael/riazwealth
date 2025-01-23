@@ -261,14 +261,16 @@
       confirmButton.textContent = `${status}`;
       confirmButton.onclick = function() {
           toggleInvestmentStatus(investmentId, status.toLowerCase(), confirmButton);
-      };
+      }; 
+          
   }
 
 
   // AJAX call for toggling investment status
 function toggleInvestmentStatus(investmentId, action, confirmButton) {
   confirmButton.disabled = true;
-  document.getElementById("loader-screen").style.display = "block";
+  let loader_Screen = document.getElementById("loader-screen");
+  loader_Screen.style.display = "block";
   // Send AJAX request to toggle investment status
   $.ajax({
     url: `investments/${investmentId}/toggle-status/`,
@@ -278,13 +280,16 @@ function toggleInvestmentStatus(investmentId, action, confirmButton) {
         csrfmiddlewaretoken: "{{ csrf_token }}"
     },
     success: function(response) {
+      loader_Screen.style.display = "none"
         swal({
           title: "SUCCESSFULLY UPDATED",
           text: `${response.message}`,
           icon: "success",
           button: "OK!",
+      })
+      .then(() => {
+          location.reload(); // Reload only after the alert is closed
       });
-      location.reload(); // Reload to reflect status change
     },
     error: function(error) {
         alert("An error occurred while updating the investment status.");
