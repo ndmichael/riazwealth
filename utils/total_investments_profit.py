@@ -8,5 +8,5 @@ def get_user_total_profits(user):
 
 def get_total_referral_bonus(user):
     referrals = Referral.objects.filter(referred_by=user)
-    total_bonuses = sum([referral.total_profit for referral in referrals])
+    total_bonuses = sum([referral.referral_bonus for referral in referrals])
     return total_bonuses
