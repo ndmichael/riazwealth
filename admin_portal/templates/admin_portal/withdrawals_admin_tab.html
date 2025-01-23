@@ -52,7 +52,15 @@
 
         <section class="row gy-5 py-4">
             <article class="col-12 mx-auto">
-                <div>
+                <div
+                    class="
+                        bg-white 
+                        rounded-2 
+                        shadow-sm
+                        table-responsive
+                        p-5
+                    "
+                >
                     <table 
                     class="
                         table
@@ -66,9 +74,9 @@
                             <th scope="col">UserName</th>
                             <th scope="col">Amount</th>
                             <th scope="col">Payment Option</th>
-                            <th scope="col">Date Created</th>
                             <th scope="col">Total Profit</th>
-                            <th scope="col">Total withdrawn</th>
+                            <th scope="col">Date Created</th>
+                            <th scope="col">Updated At</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -88,23 +96,26 @@
                                 ${{withdrawal.amount}}
                             </td>
                             <td>
-                                <span>${{withdrawal.payment_option}}</span> 
-                                {% if withdrawal.status %}
-                                <span class="fw-bolder text-success">Active</span> 
-                               {% else %}
-                                <span class="fw-bolder text-danger">Not Active</span> 
+                                <span>{{withdrawal.payment_option}}</span> <br/>
+                                {% if withdrawal.status == "pending" %}
+                                <span class="fw-bolder text-warning">Pending </span> 
+                               {% elif withdrawal.status == "rejected"  %}
+                                <span class="fw-bolder text-danger">Rejected</span> 
+                                {% else %}
+                                <span class="fw-bolder text-success">Approved</span> 
                                {% endif %}
                             </td>
                             <td>
-                                {{withdrawal.created_date}}
+                               <sup class="fw-bold text-success">$</sup> 
+                               {{withdrawal.investment.total_profit}}
                             </td>
 
                             <td>
-                                {{withdrawal.created_date}}
+                                {{withdrawal.created_at}}
                             </td>
 
                             <td>
-                               {{withdrawal.created_date}}
+                               {{withdrawal.updated_at}}
                             </td>
                             <td class="d-flex flex-row">
                                 <a href="#" data-bs-toggle="modal" 
