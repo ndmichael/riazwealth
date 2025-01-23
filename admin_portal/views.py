@@ -6,11 +6,15 @@ from withdrawals.models import WithdrawalRequest
 from .forms import InvestmentFilterForm, InvestmentStatusForm
 from django.contrib import messages
 from utils.filter_form import filter_investments
-from utils.toggle_investment_status import toggle_investment_status
+# from utils.toggle_investment_status import toggle_investment_status
+
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def admin_dashboard(request):
-
+    
     investments = UserInvestment.objects.all().order_by("-investment_date")
     plans = InvestmentPlan.objects.all()    
     withdrawals =  WithdrawalRequest.objects.all().order_by("-created_at").order_by("updated_at")
@@ -80,6 +84,8 @@ def get_investment_details(request, pk):
 
 
 def toggle_investment_status(request, investment_id):
+    print("===== ENTERING toggle_investment_status VIEW =====")  
+    logger.info(f"Entering toggle_investment_status view. Request path: {request.path}, Method: {request.method}") 
     if request.method == "POST":
         action = request.POST.get("action")
         try:
@@ -92,6 +98,7 @@ def toggle_investment_status(request, investment_id):
                 investment.status = False
                 investment.payment_verified = False
             investment.save()
+            logger.info("Exiting toggle_investment_status view.") # Log exit
             return JsonResponse({'status': 'success', 'message': 'Investment status updated.'})
         except UserInvestment.DoesNotExist:
             return JsonResponse({"success": False, "message": "Investment not found."}, status=404)
