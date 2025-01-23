@@ -23,7 +23,8 @@ class WithdrawalRequest(models.Model):
         UserInvestment, 
         on_delete=models.CASCADE, 
         related_name='withdrawal_requests',
-    )  # Links to the specific investment
+        null=True
+    ) 
     
     # Amount requested for withdrawal
     amount = models.DecimalField(max_digits=15, decimal_places=2)
