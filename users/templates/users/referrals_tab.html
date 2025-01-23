@@ -62,25 +62,37 @@
 
         <article class="row gy-4 py-4">
             <div class="col-12 col-lg-10 mx-auto text-center">
-                {% for referral in referrals %}   
                 <div class="table-responsive">
                     <table class="table table-borderless">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Username</th>
+                                <th>Referree</th>
                                 <th>Investment Amount</th>
+                                <th>Bonus</th>
+                                <th>Bonus Status</th>
                                 <th>Date</th>
                             </tr>
                         </thead>
+                        <tbody>
+                        {% for referral in referrals %}   
+                        <tr>
+                            <td>{{referral.id}}</td>
+                            <td>{{referral.referred_to}}</td>
+                            <td>{{referral.referred_to}}</td>
+                            <td>{{referral.bonus}}</td>
+                            <td>{{referral.bonus_status}}</td>
+                            <td>{{referral.created_at}}</td>
+                        </tr>
+                        {% empty %}
+                            <div>
+                                <p class="alert alert-info">No Referrals, Start Referring.</p>
+
+                            </div>
+                        {% endfor %}
+                        </tbody>
                     </table>
                 </div>
-                {% empty %}
-                    <div>
-                        <p class="alert alert-info">No Referrals, Start Referring.</p>
-
-                    </div>
-                {% endfor %}
             </div>
         </article>
     </div>
