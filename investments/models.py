@@ -91,9 +91,9 @@ class UserInvestment(models.Model):
             base_rate = self.investment_plan.daily_profit_rate / 100  # Convert to decimal
 
             # Determine bonus rate based on the invested amount
-            if self.amount > 10000:
+            if self.amount >= 10000:
                 bonus_rate = 0.01  # +1.0%
-            elif self.amount > 5000:
+            elif self.amount >= 5000:
                 bonus_rate = 0.005  # +0.5%
             else:
                 bonus_rate = 0.0  # No bonus
@@ -106,7 +106,7 @@ class UserInvestment(models.Model):
 
             # Update accumulated and total profits
             self.profit_accumulated += self.daily_profit
-            self.total_profit += self.daily_profit
+            self.total_profit += self.daily_profit 
 
             # Set the next accrual date
             self.next_accrual_date = timezone.now().date() + timedelta(days=1)
