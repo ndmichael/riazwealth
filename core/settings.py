@@ -178,3 +178,20 @@ LOGIN_REDIRECT_URL = 'user_dashboard'
 ACCOUNT_LOGOUT_REDIRECT_URL = "account_login"
 # ACCOUNT_LOGIN_ON_SIGNUP = False
 # ACCOUNT_SIGNUP_REDIRECT_URL = "account_login"
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,  # Important: Make sure this is False 
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        '': {  # Root logger
+            'handlers': ['console'],
+            'level': 'DEBUG', # Set to a suitable level (DEBUG for development)
+        },
+    },
+} 
