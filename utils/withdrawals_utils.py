@@ -7,7 +7,7 @@ from django.db.models import Q
 
 def withdrawal_request_filter(request):
     # Get the active tab (default to 'pending')
-    active_tab = request.GET.get('tab', 'all')  # 'pending', 'rejected', 'successful'
+    active_tab = request.GET.get('tab', 'pending')  # 'pending', 'rejected', 'successful'
     search_query = request.GET.get('q', '')
 
     # Filter withdrawals based on the active tab
