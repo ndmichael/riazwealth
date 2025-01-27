@@ -30,8 +30,6 @@ def admin_dashboard(request):
     active_tab = request.GET.get('active_tab', 'content-admin-investment')
     filterForm =  InvestmentFilterForm(request.GET or None)
 
-    # --- Active Tab Handling ---
-    active_tab = request.GET.get('active_tab', active_tab)  
 
     if filterForm.is_valid():
         # Use cleaned data from the form
