@@ -52,6 +52,41 @@
 
         <section class="row gy-5 py-4">
             <article class="col-12 mx-auto">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link {% if active_tab == 'all' %}active{% endif %}" 
+                            href="?tab=all"
+                        >
+                            All Withdrawals
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link {% if active_tab == 'pending' %}active{% endif %}" 
+                            href="?tab=pending"
+                        >
+                            Pending
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link {% if active_tab == 'rejected' %}active{% endif %}" 
+                            href="?tab=rejected"
+                        >
+                            Rejected
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link {% if active_tab == 'successful' %}active{% endif %}" 
+                            href="?tab=successful"
+                        >
+                            Successful
+                        </a>
+                    </li>
+                </ul>
+
                 <div
                     class="
                         bg-white 
@@ -82,7 +117,6 @@
                     </thead>
                     <tbody>
                         {% for withdrawal in withdrawals %}
-
                         <tr>
                             <!-- <td>   
                                 {{forloop.counter}}
