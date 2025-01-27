@@ -179,38 +179,56 @@
   });
 </script> -->
 
-
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-      function activateTab(tabId) {
-          var tabElement = document.querySelector(`a[href="#${tabId}"]`);
-          if (tabElement) {
-              new bootstrap.Tab(tabElement).show();
-          }
-      }
+  // Function to store the active tab ID
+  function setActiveTab() {
+    const activeTab = $('.nav-link.active').attr('href'); // Get the active tab's href
+    console.log(`active tab set:  ${activeTab}`)
+    localStorage.setItem('activeTab', this.getAttribute('href').substring(1));  
+  }
 
-      // Priority 1: URL parameter (for form submissions)
-      const urlParams = new URLSearchParams(window.location.search);
-      const activeTabFromUrl = urlParams.get('active_tab');
-      
-      // Priority 2: Local storage (for remembering between pages)
-      const activeTabFromStorage = localStorage.getItem('activeTab');
+  // Function to set the active tab on page load
+  function getActiveTab() {
+    const tabId = localStorage.getItem('activeTab');
+    console.log(`active tab get ${tabId}`)
+    if (tabId) {
+      var tabElement = document.querySelector(`a[href="#${tabId}"]`);
+      alert(tabElement)
+      new bootstrap.Tab(tabElement).show();
+      localStorage.removeItem('activeTab'); // Clear after use (optional)
+    }
+  }
 
-      // Priority 3: Default tab 
-      const defaultTab = 'content-admin-dashboard';
+  // Call setActiveTab whenever a tab is shown
+  $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function() {
+    setActiveTab();
+  });
+</script>
 
-      // Determine the tab to activate based on priority
-      var activeTab = activeTabFromUrl || activeTabFromStorage || defaultTab; 
-      activateTab(activeTab); 
 
-        var tabElements = document.querySelectorAll('a[data-bs-toggle="tab"]');
-        tabElements.forEach(function(element) {
-            element.addEventListener('shown.bs.tab', function(event) {
-                localStorage.setItem('activeTab', this.getAttribute('href').substring(1)); 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Save the active pill to localStorage when clicked
+        const pills = document.querySelectorAll('[data-bs-toggle="pill"]');
+        pills.forEach(pill => {
+            pill.addEventListener('shown.bs.tab', function (event) {
+                localStorage.setItem('activePill', event.target.getAttribute('href'));
             });
         });
+
+        // Get the active pill from localStorage and activate it
+        const activePill = localStorage.getItem('activePill');
+        if (activePill) {
+            const pillElement = document.querySelector(`[href="${activePill}"]`);
+            if (pillElement) {
+                const pill = new bootstrap.Tab(pillElement);
+                pill.show();
+            }
+        }
     });
-    </script>
+  </script>
+
+
 
     <!-- === Scripts to Load Investment Modal Contents === -->
     <script>
@@ -250,7 +268,6 @@
       const modalTitle = document.getElementById("exampleModalLabel");
       const modalBody = document.querySelector("#investmentStatusModal .modal-body p");
       const confirmButton = document.querySelector("#statusUpdateButton");
-
       status =  status == "True" ? "Deactivate" : "Activate"
   
       // Update modal title and body
@@ -288,7 +305,7 @@ function toggleInvestmentStatus(investmentId, action, confirmButton) {
           button: "OK!",
       })
       .then(() => {
-          location.reload(); // Reload only after the alert is closed
+        location.reload(); // Reload only after the alert is closed
       });
     },
     error: function(error) {
