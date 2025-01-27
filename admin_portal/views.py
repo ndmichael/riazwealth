@@ -6,6 +6,8 @@ from withdrawals.models import WithdrawalRequest
 from .forms import InvestmentFilterForm, InvestmentStatusForm
 from django.contrib import messages
 from utils.filter_form import filter_investments
+from django.core.paginator import Paginator
+from utils.withdrawals_utils import withdrawal_request_filter
 # from utils.toggle_investment_status import toggle_investment_status
 
 import logging
@@ -30,7 +32,6 @@ def admin_dashboard(request):
     active_tab = request.GET.get('active_tab', 'content-admin-investment')
     filterForm =  InvestmentFilterForm(request.GET or None)
 
-
     if filterForm.is_valid():
         # Use cleaned data from the form
         ref_token = filterForm.cleaned_data.get('ref_token')
@@ -40,6 +41,10 @@ def admin_dashboard(request):
         if ref_token or status:
             # Filter investments based on form input
             investments = filter_investments(ref_token, status)
+
+    
+    # Get filtered and paginated data
+    page_obj, active_tab, search_query = withdrawal_request_filter(request)
         
 
     context = {
@@ -56,6 +61,11 @@ def admin_dashboard(request):
         # forms
         "filterForm": filterForm,
         "active_tab": active_tab,
+
+        # handling withdrawals
+        'withdrawals': page_obj,  
+        'active_tab': active_tab, 
+        'search_query': search_query, 
     }
     return render(request, "admin_portal/admin_dashboard.html", context)
 
