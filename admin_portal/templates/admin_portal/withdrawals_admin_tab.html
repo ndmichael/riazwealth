@@ -167,12 +167,17 @@
                                {{withdrawal.updated_at}}
                             </td>
                             <td class="d-flex flex-row">
-                                <a href="#" data-bs-toggle="modal" 
-                                    data-bs-target="#studentDetailsModal{{withdrawal.id}}" 
-                                    class="btn btn-info btn-lg mb-2 mx-2" 
+                                <a 
+                                    href="#" 
+                                    data-id="{{ withdrawal.id }}" 
+                                    data-username="{{ withdrawal.user.username }}" 
+                                    data-amount="{{ withdrawal.amount}}"  
+                                    data-payment="{{withdrawal.payment_option}}"
+                                    data-address="{{withdrawal.user.profiles.usdt_wallet}}"
+                                    class="btn btn-primary confirm-btn btn-lg mb-2 mx-2" 
                                     data-toggle="tooltip" 
                                     data-placement="bottom" 
-                                    title="Studebt Details"
+                                    title="Confirm withdrawals"
                                 >
                                     <i class="bi bi-info-circle text-dark"></i>
                                 </a>
@@ -190,3 +195,29 @@
         </section>
     </div>
 </section>
+
+
+<!-- Confirmation Modal for Withdrawals -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmationModalLabel">Confirm Withdrawal</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to confirm the withdrawal request?</p>
+          <p>User: <span class="fw-bolder" id="modal-username"></span></p>
+          <p><b>Amount: $</b><span class="fw-bolder" id="modal-user-amount"></span></p>
+          <p>Payment Method: <span class="fw-bolder text-info" id="modal-payment"></span></p>
+          <p><strong>Payment Address:</strong>  <br />
+          <span class="h4 fw-bolder" id="modal-payment-address"></span></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-success" id="confirmWithdrawalBtn">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
