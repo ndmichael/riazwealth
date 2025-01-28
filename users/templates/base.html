@@ -313,7 +313,8 @@ function toggleInvestmentStatus(investmentId, action, confirmButton) {
     
       // Handle button click to populate modal
       document.querySelectorAll(".confirm-btn").forEach((button) => {
-        button.addEventListener("click", function () {
+        button.addEventListener("click", function (event) {
+          event.preventDefault();
           const username = this.dataset.username;
           const amount = this.dataset.amount;
           const method = this.dataset.payment;
