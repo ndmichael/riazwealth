@@ -165,20 +165,7 @@
   }
 </script>
 
-<!-- <script>
-  // JavaScript to set the active tab based on the active_tab value
-  document.addEventListener('DOMContentLoaded', function() {
-      var activeTab = "{{ active_tab }}";
-      if (activeTab) {
-          // Logic to activate the tab, e.g., using Bootstrap
-          var tabElement = document.querySelector(`a[href="#${activeTab}"]`);
-          if (tabElement) {
-              new bootstrap.Tab(tabElement).show();
-          }
-      }
-  });
-</script> -->
-
+<!--
 <script>
   // Function to store the active tab ID
   function setActiveTab() {
@@ -204,7 +191,7 @@
     setActiveTab();
   });
 </script>
-
+-->
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -227,7 +214,6 @@
         }
     });
   </script>
-
 
 
     <!-- === Scripts to Load Investment Modal Contents === -->
@@ -316,7 +302,39 @@ function toggleInvestmentStatus(investmentId, action, confirmButton) {
   });
 
 }
+  </script>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const confirmationModal = document.getElementById("confirmationModal");
+      const confirmWithdrawalBtn = document.getElementById("confirmWithdrawalBtn");
+    
+      let selectedWithdrawalId = null;
+    
+      // Handle button click to populate modal
+      document.querySelectorAll(".confirm-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+          const username = this.dataset.username;
+          const amount = this.dataset.amount;
+          const method = this.dataset.payment;
+          const address = this.dataset.address;
+          selectedWithdrawalId = this.dataset.id;
+
+          console.log(`Amount: ${amount}`);
+          console.log(`Method: ${method}`);
+    
+          // Populate modal with data
+          document.getElementById("modal-username").textContent = username;
+          document.getElementById("modal-user-amount").textContent = amount;
+          document.getElementById("modal-payment").textContent = method;
+          document.getElementById("modal-payment-address").textContent = address;
+    
+          // Show the modal
+          const bootstrapModal = new bootstrap.Modal(confirmationModal);
+          bootstrapModal.show();
+        });
+      });
+    });
   </script>
 
 </body>
