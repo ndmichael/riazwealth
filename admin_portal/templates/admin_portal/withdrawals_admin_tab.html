@@ -173,7 +173,14 @@
                                     data-username="{{ withdrawal.user.username }}" 
                                     data-amount="{{ withdrawal.amount}}"  
                                     data-payment="{{withdrawal.payment_option}}"
-                                    data-address="{{withdrawal.user.profiles.usdt_wallet}}"
+                                    {% if withdrawal.payment_option == 'usdt' %}
+                                        data-address="{{withdrawal.user.profiles.usdt_wallet}}"
+                                    {% elif withdrawal.payment_option == 'bitcoin' %}
+                                        data-address="{{withdrawal.user.profiles.bitcoin_wallet}}"
+                                    {% elif withdrawal.payment_option == 'ethereum' %}
+                                        data-address="{{withdrawal.user.profiles.ethereum_wallet}}"
+                                    {% endif %}
+                                    
                                     class="btn btn-primary confirm-btn btn-lg mb-2 mx-2" 
                                     data-toggle="tooltip" 
                                     data-placement="bottom" 
