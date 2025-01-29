@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Count, Q
 from investments.models import InvestmentPlan, UserInvestment
 from withdrawals.models import WithdrawalRequest
@@ -111,3 +113,20 @@ def toggle_investment_status(request, investment_id):
         except UserInvestment.DoesNotExist:
             return JsonResponse({"success": False, "message": "Investment not found."}, status=404)
     return JsonResponse({"success": False, "message": "Invalid request."}, status=400)
+
+
+@login_required
+@csrf_exempt
+def confirm_withdrawal(request, withdrawal_id):
+    if request.method == "POST":
+        withdrawal = get_object_or_404(WithdrawalRequest, id=withdrawal_id)
+        
+        if withdrawal.status != "pending":
+            return JsonResponse({"success": False, "message": "Only pending withdrawals can be confirmed."})
+
+        # Update the withdrawal status
+        withdrawal.status = "successful"
+        withdrawal.save()
+
+        return JsonResponse({"success": True})
+    return JsonResponse({"success": False, "message": "Invalid request method."})
