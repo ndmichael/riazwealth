@@ -335,7 +335,37 @@ function toggleInvestmentStatus(investmentId, action, confirmButton) {
           bootstrapModal.show();
         });
       });
-    });
+
+    // Handle confirmation button click
+    confirmWithdrawalBtn.addEventListener("click", function () {
+      if (selectedWithdrawalId) {
+        confirmWithdrawalBtn.disabled = true;
+        confirmWithdrawalBtn.textContent = "Processing..."
+
+        fetch(`withdrawals/confirm/${selectedWithdrawalId}/`, {
+          method: "POST",
+          headers: {
+            "X-CSRFToken": "{{ csrf_token }}",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              alert("Withdrawal confirmed successfully!");
+              location.reload(); // Reload the page to reflect changes
+            } else {
+              alert("Error confirming withdrawal: " + data.message);
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Something went wrong. Please try again.");
+          });
+        }
+      });
+  });
   </script>
 
 </body>
