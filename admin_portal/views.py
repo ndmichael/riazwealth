@@ -5,10 +5,14 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Count, Q
 from investments.models import InvestmentPlan, UserInvestment
 from withdrawals.models import WithdrawalRequest
-from .forms import InvestmentFilterForm, InvestmentStatusForm
+
+from .forms import InvestmentFilterForm
+from  notifications.forms import GeneralNewsForm
 from django.contrib import messages
-from utils.filter_form import filter_investments
+
 from django.core.paginator import Paginator
+
+from utils.filter_form import filter_investments
 from utils.withdrawals_utils import withdrawal_request_filter
 from utils.referrals_utils import get_users_with_referrals
 # from utils.toggle_investment_status import toggle_investment_status
@@ -54,6 +58,16 @@ def admin_dashboard(request):
     users_paginator = Paginator(users_with_referrals, 10)  # 10 users per page
     page_number = request.GET.get('page')
     users_page = users_paginator.get_page(page_number)
+
+    # General news and Notifications
+    if request.method == 'POST':
+        general_news_form = GeneralNewsForm(request.POST)
+        if general_news_form.is_valid():
+            general_news_form.save()
+            messages.success(request, "News posted successfully!")
+            return redirect("admin_dashboard")
+    else:
+        general_news_form = GeneralNewsForm()
         
 
     context = {
@@ -70,6 +84,7 @@ def admin_dashboard(request):
         # forms
         "filterForm": filterForm,
         "active_tab": active_tab,
+        "general_news_form":  general_news_form,
 
         # handling withdrawals
         'withdrawals': page_obj,  
@@ -142,3 +157,4 @@ def confirm_withdrawal(request, withdrawal_id):
 
         return JsonResponse({"success": True})
     return JsonResponse({"success": False, "message": "Invalid request method."})
+
