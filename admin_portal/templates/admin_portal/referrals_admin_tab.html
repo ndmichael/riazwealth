@@ -8,36 +8,9 @@
         </section>
 
         <section class="row gy-5">
-            <div class="col-6 col-md-3">
-                <div class="shadow-sm summary rounded-3 p-4 text-center">
-                    <i class="bi bi-briefcase-fill me-2"></i>
-                    
-                    <div class="pt-3"> 
-                        <b>48</b>
-                        <h5>Total Requests</h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-md-3">
-                <div class="shadow-sm summary p-4 text-center">
-                    <i class="bi bi-briefcase me-2"></i>
-                    <div class="pt-3"> 
-                        <b>48</b>
-                        <h5>Pending Requests</h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-md-3">
-                <div class="shadow-sm summary p-4 text-center">
-                    <i class="bi bi-briefcase me-2"></i>
-                    <div class="pt-3">
-                        <b>$4,800</b> 
-                        <h5>Approved</h5>
-                    </div>
-                </div>
-            </div>
+            <article class="col-6 col-md-3">
+                
+            </article>
         </section>
 
         <section class="row gy-5 py-4">
@@ -53,17 +26,15 @@
                     <thead>
                         <tr>
                             <!-- <th scope="col">S.NO</th> -->
-                            <th scope="col">Investment Name</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Profit</th>
-                            <th scope="col">Interval</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Total Referred</th>
+                            <th scope="col">Total Referred Bonus</th>
+                            <th scope="col">Highest Referred Bonus</th>
+                            <th scope="col">Date Joined</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for investment in investments %}
+                        {% for user in users %}
 
                         <tr>
                             <!-- <td>   
@@ -71,45 +42,26 @@
                             </td> -->
                             <td class="fw-bolder">
                                 <a href="#">
-                                    <b>{{investment.investment_plan.name}}</b>
+                                    <b>{{user.username}}</b>
                                 </a>                                   
                             </td>
                             <td>
-                                ${{investment.amount}}
+                                {{user.total_referrals}}
                             </td>
                             <td>
-                                <span>${{investment.amount}}</span> 
+                                <span>${{user.total_bonus |default:"0.0"}}</span> 
                             </td>
                             <td>
-                                {{investment.next_accrual_date}}
+                                ${{user.highest_bonus |default:"0.0"}}
                             </td>
 
                             <td>
-                                {{investment.investment_date}}
-                            </td>
-
-                            <td>
-                               {% if investment.status %}
-                                <span class="fw-bolder text-success">Active</span> 
-                               {% else %}
-                                <span class="fw-bolder text-danger">Not Active</span> 
-                               {% endif %}
-                            </td>
-                            <td class="d-flex flex-row">
-                                <a href="#" data-bs-toggle="modal" 
-                                    data-bs-target="#studentDetailsModal{{investment.id}}" 
-                                    class="btn btn-info btn-lg mb-2 mx-2" 
-                                    data-toggle="tooltip" 
-                                    data-placement="bottom" 
-                                    title="Studebt Details"
-                                >
-                                    <i class="bi bi-info-circle text-dark"></i>
-                                </a>
+                                {{user.date_joined}}
                             </td>
                         </tr>
                         {% empty %}
                         <tr>
-                            <h4 class="alert alert-info">No Investments</h4>
+                            <h4 class="alert alert-info">No Users or Referrals</h4>
                         </tr>
                         {% endfor %}
                     </tbody>
