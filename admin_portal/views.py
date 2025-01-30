@@ -50,7 +50,7 @@ def admin_dashboard(request):
     page_obj, active_tab, search_query = withdrawal_request_filter(request)
 
     # Get filtered users and referrals
-    users_with_referrals = get_users_with_referrals()
+    users_with_referrals, total_active_users, total_inactive_users = get_users_with_referrals(request)
     users_paginator = Paginator(users_with_referrals, 10)  # 10 users per page
     page_number = request.GET.get('page')
     users_page = users_paginator.get_page(page_number)
@@ -77,7 +77,9 @@ def admin_dashboard(request):
         'search_query': search_query, 
 
         # handling users and referrals
-        'users': users_page
+        'users': users_page,
+        'total_active': total_active_users,
+        'total_inactive': total_inactive_users
     }
     return render(request, "admin_portal/admin_dashboard.html", context)
 
