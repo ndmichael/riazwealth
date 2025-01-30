@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'accounts',
     'referrals',
     'withdrawals',
+    'notifications',
     
     'django.contrib.admin',
     'django.contrib.auth',
