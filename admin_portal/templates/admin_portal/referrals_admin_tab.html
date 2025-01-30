@@ -8,8 +8,36 @@
         </section>
 
         <section class="row gy-5">
+            <article class="col-12 col-md-6">
+                <form class="mb-3 row" method="get">
+                    <div class="col-12 col-sm-9">
+                        <input 
+                            type="text" 
+                            class="form-control form-control-lg" 
+                            name="user_q" placeholder="Search by username or User ID" 
+                            value=""
+                        >
+                    </div>
+                    <button type="submit" class="btn btn-primary col-12 col-sm-3">Search</button>
+                </form>
+            </article>
             <article class="col-6 col-md-3">
-                
+                <a href="#" class="d-flex summary shadow-sm">
+                    <i class="bi bi-wallet2"></i>
+                    <div class="ps-4">
+                        <p><b>{{total_active}}</b></p>
+                        <p>Active Users</p>   
+                    </div>
+                </a>
+            </article>
+            <article class="col-6 col-md-3">
+                <a href="#" class="d-flex summary shadow-sm">
+                    <i class="bi bi-wallet2"></i>
+                    <div class="ps-4">
+                        <p><b>{{total_inactive}}</b></p>
+                        <p>Inactive Users</p>   
+                    </div>
+                </a>
             </article>
         </section>
 
