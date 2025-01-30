@@ -1,4 +1,6 @@
 {% load static %}
+{% load crispy_forms_tags %}
+
 <section>
     <div class="container">
         <section class="row gy-5 py-4">
@@ -8,8 +10,22 @@
         </section>
 
         <section class="row gy-5">
-            <div class="col-6 col-md-3">
-                
+            <div class="col-12 col-md-7">
+                <form 
+                    class="mt-4 mb-5 p-5 border rounded-3" 
+                    action="" 
+                    method="post"
+                    style="background: rgba(114, 255, 131, 0.4);"
+                >
+                    {% crispy general_news_form %}
+                    <button 
+                        type="submit"
+                        class="btn btn-lg btn-success fw-bolder col-12"
+                        style="font-size: 12px !important; "
+                    >
+                        SEND NEWS
+                    </button>
+                </form>   
             </div>
         </section>
 
