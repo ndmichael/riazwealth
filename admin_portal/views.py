@@ -10,6 +10,7 @@ from django.contrib import messages
 from utils.filter_form import filter_investments
 from django.core.paginator import Paginator
 from utils.withdrawals_utils import withdrawal_request_filter
+from utils.referrals_utils import get_users_with_referrals
 # from utils.toggle_investment_status import toggle_investment_status
 
 import logging
@@ -47,6 +48,8 @@ def admin_dashboard(request):
     
     # Get filtered and paginated data
     page_obj, active_tab, search_query = withdrawal_request_filter(request)
+
+    users_with_referrals = get_users_with_referrals()
         
 
     context = {
@@ -68,6 +71,9 @@ def admin_dashboard(request):
         'withdrawals': page_obj,  
         'active_tab': active_tab, 
         'search_query': search_query, 
+
+        # handling users and referrals
+        'users': users_with_referrals
     }
     return render(request, "admin_portal/admin_dashboard.html", context)
 
