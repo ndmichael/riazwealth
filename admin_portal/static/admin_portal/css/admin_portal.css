@@ -132,6 +132,11 @@
     padding: 0 15px;
 }
 
+
+.floating_textarea_height{
+    height: 200px !important;
+}
+
   
 @media (max-width: 768px) {
     .main-content {
