@@ -16,6 +16,7 @@ from django.core.paginator import Paginator
 from utils.filter_form import filter_investments
 from utils.withdrawals_utils import withdrawal_request_filter
 from utils.referrals_utils import get_users_with_referrals
+from utils.general_news_utils import post_general_news
 # from utils.toggle_investment_status import toggle_investment_status
 
 import logging
@@ -62,15 +63,7 @@ def admin_dashboard(request):
     page_number = request.GET.get('page')
     users_page = users_paginator.get_page(page_number)
 
-    # General news and Notifications
-    if request.method == 'POST':
-        general_news_form = GeneralNewsForm(request.POST)
-        if general_news_form.is_valid():
-            general_news_form.save()
-            messages.success(request, "News posted successfully!")
-            return redirect("admindashboard")
-    else:
-        general_news_form = GeneralNewsForm()
+    general_news_form_handler = post_general_news(request)
         
 
     context = {
@@ -88,7 +81,7 @@ def admin_dashboard(request):
         # forms
         "filterForm": filterForm,
         "active_tab": active_tab,
-        "general_news_form":  general_news_form,
+        "general_news_form":  general_news_form_handler,
 
         # handling withdrawals
         'withdrawals': page_obj,  
