@@ -1,5 +1,6 @@
 from  notifications.forms import GeneralNewsForm
 from django.contrib import messages
+from django.shortcuts import redirect
 
 
 def post_general_news(request):
@@ -9,5 +10,5 @@ def post_general_news(request):
             form.save()
             messages.success(request, "News posted successfully!")
             return redirect("admin_dashboard")
-    else:
-        form = GeneralNewsForm()
+        return form
+    return GeneralNewsForm()
