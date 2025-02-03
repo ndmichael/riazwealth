@@ -41,64 +41,37 @@
                     ">
                     <thead>
                         <tr>
-                            <!-- <th scope="col">S.NO</th> -->
-                            <th scope="col">Investment Name</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Profit</th>
-                            <th scope="col">Interval</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col">S.NO</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Message</th>
+                            <th scope="col">Date Sent</th>
+
                         </tr>
                     </thead>
                     <tbody>
-                        {% for investment in investments %}
+                        {% for notification in notifications %}
 
                         <tr>
-                            <!-- <td>   
+                            <td>   
                                 {{forloop.counter}}
-                            </td> -->
+                            </td>
                             <td class="fw-bolder">
                                 <a href="#">
-                                    <b>{{investment.investment_plan.name}}</b>
+                                    <b>{{notification.title}}</b>
                                 </a>                                   
                             </td>
                             <td>
-                                ${{investment.amount}}
+                                {{notification.message | truncatechars:40}}
                             </td>
                             <td>
-                                <span>${{investment.amount}}</span> 
-                            </td>
-                            <td>
-                                {{investment.next_accrual_date}}
+                                <span>{{notification.created_at}}</span> 
                             </td>
 
-                            <td>
-                                {{investment.investment_date}}
-                            </td>
-
-                            <td>
-                               {% if investment.status %}
-                                <span class="fw-bolder text-success">Active</span> 
-                               {% else %}
-                                <span class="fw-bolder text-danger">Not Active</span> 
-                               {% endif %}
-                            </td>
-                            <td class="d-flex flex-row">
-                                <a href="#" data-bs-toggle="modal" 
-                                    data-bs-target="#studentDetailsModal{{investment.id}}" 
-                                    class="btn btn-info btn-lg mb-2 mx-2" 
-                                    data-toggle="tooltip" 
-                                    data-placement="bottom" 
-                                    title="Studebt Details"
-                                >
-                                    <i class="bi bi-info-circle text-dark"></i>
-                                </a>
-                            </td>
+                            
                         </tr>
                         {% empty %}
                         <tr>
-                            <h4 class="alert alert-info">No Investments</h4>
+                            <h4 class="alert alert-info">No General Messages</h4>
                         </tr>
                         {% endfor %}
                     </tbody>
