@@ -64,7 +64,7 @@
             <!-- === Notifications Section === -->
              <section class="row my-5 g-4">
                 <article class="col-12 col-md-6">
-                    <div class="border shadow-sm p-2 p-md-4 bg-light">
+                    <div class="border shadow-sm p-2 p-md-4 bg-light rounded-end-4">
                         <header class="h3">
                             General Informations
                         </header>
@@ -89,7 +89,7 @@
                                 data-bs-parent="#accordionExample"
                             >
                                 <div class="accordion-body">
-                                  {{new.message}}
+                                  {{new.message | truncatechars:100 |safe}}
                                 </div>
                               </div>
                             </div>
@@ -104,7 +104,7 @@
 
                 <!--=== Start of key notifications ===-->
                 <article class="col-12 col-md-6">
-                    <div class="border shadow-sm p-2 p-md-4 bg-light">
+                    <div class="border shadow-sm p-2 p-md-4 bg-light rounded-start-4">
                         <header class="h3">
                             Notifications
                         </header>
@@ -129,7 +129,7 @@
                                 data-bs-parent="#accordionExample"
                             >
                                 <div class="accordion-body">
-                                  {{new.message | truncatechars:20 |safe}}
+                                  {{new.message | truncatechars:100 |safe}}
                                 </div>
                               </div>
                             </div>
