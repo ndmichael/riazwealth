@@ -10,6 +10,7 @@ class GeneralNewsForm(forms.ModelForm):
         model = GeneralNotification
         fields = ['title', 'message']
 
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -18,6 +19,6 @@ class GeneralNewsForm(forms.ModelForm):
         self.helper.layout = Layout(
             Row(
                 FloatingField("title", wrapper_class='col-md-12'),
-                FloatingField("message", wrapper_class='col-md-12'),
+                FloatingField("message", wrapper_class='col-md-12', css_class="floating_textarea_height"),
             ),
         )
