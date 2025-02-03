@@ -5,6 +5,9 @@ from django.contrib import messages
 from investments.models import InvestmentPlan, UserInvestment
 from withdrawals.models import WithdrawalRequest
 from referrals.models import Referral
+from notifications.models import GeneralNotification
+
+
 from withdrawals.forms  import WithdrawalRequestForm
 from django.db.models import Sum, Q
 from decimal import Decimal
@@ -24,6 +27,7 @@ def client_dashboard(request):
     withdrawals = WithdrawalRequest.objects.filter(user=user)
     plans = InvestmentPlan.objects.all()
     user_investments = UserInvestment.objects.filter(user=user)
+    general_news = GeneralNotification.objects.all()
     
     withdrawals_amount = withdrawals.aggregate(total=Sum('amount', default=0.00, filter=Q(status="approved")))['total']
     total_investments = user_investments.count()
@@ -87,6 +91,7 @@ def client_dashboard(request):
         "user": user,
         "plans": plans,
         "referrals": referrals,
+        "general_news": general_news,
         "withdrawal_form": withdrawal_form,
         "user_form": user_form,
         "profile_form": profile_form,
