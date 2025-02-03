@@ -72,9 +72,11 @@
                     <thead class="bg-light">
                         <tr>
                             <th scope="col">WITHDRAWAL'S CODE</th>
-                            <th scope="col">OPTIONS</th>
+                            <th scope="col">From</th>
+                            <th scope="col">Amount</th>
                             <th scope="col">PAYMENT METHOD</th>
                             <th scope="col">Status</th>
+                            <th>Date Sent</th>
                         </tr>
                     </thead>
                     <tbody
@@ -90,10 +92,28 @@
                                <span class="fw-bold">{{withdrawal.id | upper}}</span>
                             </td>
                             <td>
+                                <span class="fw-bold">{{withdrawal.investment.investment_plan}}</span>
+                             </td>
+                             <td>
+                                <span class="fw-bold">${{withdrawal.amount}}</span>
+                             </td>
+                            <td>
                                 {{withdrawal.payment_option}}
                             </td>
                             <td>
-                                {{withdrawal.payment_status}}
+                                {% if withdrawal.status == "pending" %}
+                                <span class="badge text-bg-warning">{{withdrawal.status}}</span>
+                                {% elif withdrawal.status == "rejected" %}
+                                <span class="badge text-bg-danger">{{withdrawal.status}}</span>
+                                {% elif withdrawal.status == "approved" %}
+                                <span class="badge text-bg-success">{{withdrawal.status}}</span>
+                                {% else %}
+                                <span class="badge text-bg-secondary">Wrong status</span>
+                                {% endif %}
+
+                            </td>
+                            <td>
+                                {{withdrawal.created_at}}
                             </td>
                         </tr>
                         {% empty %}
