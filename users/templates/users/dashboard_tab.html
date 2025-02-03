@@ -78,8 +78,10 @@
                                     data-bs-toggle="collapse" 
                                     data-bs-target="#collapse{{new.id}}" 
                                     aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" 
-                                    aria-controls="collapse{{new.id}}">
-                                  {{new.title}}
+                                    aria-controls="collapse{{new.id}}"
+                                >
+                                    <i class="bi bi-bell-fill text-primary me-2"></i>
+                                  {{new.title |upper}}
                                 </button>
                               </h2>
                               <div 
