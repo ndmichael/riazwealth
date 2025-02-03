@@ -61,6 +61,88 @@
                 </div>
             </section>
 
+            <!-- === Notifications Section === -->
+             <section class="row my-5 g-4">
+                <article class="col-12 col-md-6">
+                    <div class="border shadow-sm p-2 p-md-4 bg-light">
+                        <header class="h3">
+                            General Informations
+                        </header>
+                        <div class="accordion" id="accordionExample">
+                            {% for new in general_news %}
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="heading{{ item.id }}">
+                                <button 
+                                    class="accordion-button {% if not forloop.first %}collapsed{% endif %}" 
+                                    type="button" 
+                                    data-bs-toggle="collapse" 
+                                    data-bs-target="#collapse{{new.id}}" 
+                                    aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" 
+                                    aria-controls="collapse{{new.id}}">
+                                  {{new.title}}
+                                </button>
+                              </h2>
+                              <div 
+                                id="collapse{{new.id}}" 
+                                class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" 
+                                aria-labelledby="heading{{ new.id }}" 
+                                data-bs-parent="#accordionExample"
+                            >
+                                <div class="accordion-body">
+                                  {{new.message}}
+                                </div>
+                              </div>
+                            </div>
+                            {% empty %}
+                            <div class="alert alert-info">
+                                No General News
+                            </div>
+                            {% endfor %}
+                        </div>   
+                    </div>
+                </article>
+
+                <!--=== Start of key notifications ===-->
+                <article class="col-12 col-md-6">
+                    <div class="border shadow-sm p-2 p-md-4 bg-light">
+                        <header class="h3">
+                            Notifications
+                        </header>
+                        <div class="accordion" id="accordionExample">
+                            {% for new in general_news %}
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="heading{{ item.id }}">
+                                <button 
+                                    class="accordion-button {% if not forloop.first %}collapsed{% endif %}" 
+                                    type="button" 
+                                    data-bs-toggle="collapse" 
+                                    data-bs-target="#collapse{{new.id}}" 
+                                    aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" 
+                                    aria-controls="collapse{{new.id}}">
+                                  {{new.title}}
+                                </button>
+                              </h2>
+                              <div 
+                                id="collapse{{new.id}}" 
+                                class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" 
+                                aria-labelledby="heading{{ new.id }}" 
+                                data-bs-parent="#accordionExample"
+                            >
+                                <div class="accordion-body">
+                                  {{new.message | truncatechars:20 |safe}}
+                                </div>
+                              </div>
+                            </div>
+                            {% empty %}
+                            <div class="alert alert-info">
+                                No General News
+                            </div>
+                            {% endfor %}
+                        </div>   
+                    </div>
+                </article>
+             </section>
+
             <section class="row pt-5 g-5">
                 <div class="col-12 col-lg-10">
                     <div>
