@@ -39,6 +39,52 @@
         color: #dc3545;
         /* font-weight: bold; */
       }
+
+      /* General Accordion Styling */
+.accordion-item {
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 128, 0, 0.2); /* Green shadow */
+}
+
+/* Accordion Header Styling */
+.accordion-button {
+  background-color: #eaf5ea; /* Light green background */
+  color: #155724; /* Dark green text */
+  font-weight: bold;
+  padding: 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Active (Expanded) Accordion */
+.accordion-button:not(.collapsed) {
+  background-color: #32CD32; /* Green active background */
+  color: white; /* White text when active */
+  box-shadow: none;
+}
+
+/* Change icon color when active */
+.accordion-button::after {
+  filter: brightness(0.5);
+}
+
+/* Accordion Body Styling */
+.accordion-body {
+  background-color: #f0fff4; /* Soft green body */
+  color: #155724;
+  padding: 20px;
+  font-size: 16px;
+  border-top: 1px solid #28a745; /* Green border */
+}
+
+/* Hover Effect */
+.accordion-button:hover {
+  background-color: #218838; /* Darker green */
+  color: white;
+}
+
     </style>
 
 </head>
