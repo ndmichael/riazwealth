@@ -8,6 +8,7 @@ from withdrawals.models import WithdrawalRequest
 
 from .forms import InvestmentFilterForm
 from  notifications.forms import GeneralNewsForm
+from notifications.models import GeneralNotification
 from django.contrib import messages
 
 from django.core.paginator import Paginator
@@ -27,6 +28,8 @@ def admin_dashboard(request):
     investments = UserInvestment.objects.all().order_by("-investment_date")
     plans = InvestmentPlan.objects.all()    
     withdrawals =  WithdrawalRequest.objects.all().order_by("-created_at").order_by("updated_at")
+    general_notifications = GeneralNotification.objects.all().order_by("-created_at")
+
 
     # Aggregate counts in a single query
     investment_counts = UserInvestment.objects.aggregate(
@@ -65,7 +68,7 @@ def admin_dashboard(request):
         if general_news_form.is_valid():
             general_news_form.save()
             messages.success(request, "News posted successfully!")
-            return redirect("admin_dashboard")
+            return redirect("admindashboard")
     else:
         general_news_form = GeneralNewsForm()
         
@@ -74,6 +77,7 @@ def admin_dashboard(request):
         'investments': investments,
         'plans': plans,
         'withdrawals': withdrawals,
+        "notifications": general_notifications,
         
         'title': 'Admin Portal',
         "total_investments": investment_counts['total_investments'],
