@@ -7,13 +7,26 @@
                 <legend class="text-center pb-4">
                     <h3>Request Withdrawals</h3>
                 </legend>
+                {% if user.profiles.usdt_wallet or user.profiles.bitcoin_wallet or user.profiles.ethereum_wallet %}
                 <form method="post" class="p-5 border bg-light">
                     {% csrf_token %}
                     {% crispy withdrawal_form %}
                 </form>
+                {% else %}
+                <h5 class="alert alert-info">
+                    <span>Update payments wallets to Display Form.</span>
+                </h5>
+                {% endif %}
             </div>
 
             <div class="col-12 col-lg-6">
+                <header
+                    class="h4 alert alert-danger"
+                >
+                    <i class="bi bi-exclamation-triangle text-danger"></i>
+                    Please Make sure your wallet address are correct
+                    as selected.
+                </header>
                 <div class="p-3 bg-white table-responsive">
                     <table class="table table-striped table-hover">
                         <tr>
