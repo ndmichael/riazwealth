@@ -9,6 +9,7 @@ from datetime import timedelta
 
 class WithdrawalRequestForm(forms.Form):
     AMOUNT_CHOICES = [
+        ('', '---SELECT AMOUNT---'),
         (10, '$10'),
         (20, '$20'),
         (50, '$50'),
@@ -21,9 +22,9 @@ class WithdrawalRequestForm(forms.Form):
     ]
 
     PAYMENT_OPTIONS = [
+        ('usdt', 'USDT'),
         ('ethereum', 'Ethereum'),
         ('bitcoin', 'Bitcoin'),
-        ('usdt', 'USDT'),
     ]
 
     investment = forms.ChoiceField(
