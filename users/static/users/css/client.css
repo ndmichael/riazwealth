@@ -57,13 +57,13 @@
     overflow: auto;
 }
 
-#content-dashboard .summary{
+.summary{
     background-color: #FFF;
     padding: 10px 10px;
     border: 1px solid var(--secondary-color);
 }
 
-#content-dashboard .summary .bi{
+.summary .bi{
     color: #32CD32;
     font-size: 1.7rem;
 }
@@ -73,18 +73,6 @@
 **/
 .table tr td{
     background: transparent !important;
-}
-
-
-#referral .summary{
-    background-color: #FFF;
-    padding: 10px 10px;
-    border: 1px solid var(--secondary-color);
-}
-
-#referral .bi{
-    color: #32CD32;
-    font-size: 1.7rem;
 }
 
 .main-content {
