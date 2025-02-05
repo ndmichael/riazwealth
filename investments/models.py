@@ -37,6 +37,7 @@ class UserInvestment(models.Model):
     payment_proof = models.ImageField(upload_to='payment_proofs/', null=True, blank=True)
     payment_verified = models.BooleanField(default=False) 
     status = models.BooleanField(default=False) 
+    last_accrual_date = models.DateField(blank=True, null=True)
     next_accrual_date = models.DateField(blank=True, null=True)
     withdrawal_interval_days = models.PositiveIntegerField(default=7) 
     investment_date = models.DateTimeField(default=timezone.now)
@@ -108,8 +109,10 @@ class UserInvestment(models.Model):
             self.profit_accumulated += self.daily_profit
             self.total_profit += self.daily_profit 
 
+            today = timezone.now().date()
             # Set the next accrual date
-            self.next_accrual_date = timezone.now().date() + timedelta(days=1)
+            self.last_accrual_date = today
+            self.next_accrual_date = today + timedelta(days=1)
 
             # Save changes
             self.save()
@@ -120,7 +123,7 @@ class UserInvestment(models.Model):
         Accrue daily profit if today matches the next accrual date.
         """
         today = timezone.now().date()
-        if self.status and self.payment_verified and today >= self.next_accrual_date:
+        if self.status and self.payment_verified:
             self.calculate_daily_profit()
 
 
