@@ -164,7 +164,7 @@ def confirm_withdrawal(request, withdrawal_id):
             return JsonResponse({"success": False, "message": "Only pending withdrawals can be confirmed."})
 
         # Update the withdrawal status
-        withdrawal.status = "successful"
+        withdrawal.status = "approved"
         withdrawal.save()
 
         return JsonResponse({"success": True})
