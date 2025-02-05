@@ -13,7 +13,7 @@
                     <i class="bi bi-credit-card-2-back me-2"></i>
                     
                     <div class="pt-3"> 
-                        <h4>48</h4>
+                        <h4>{{total_withdrawal_requests}}</h4>
                         <p>Total Requests</p>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                 <div class="shadow-sm summary p-3 text-center">
                     <i class="bi bi-hourglass-split me-2"></i>
                     <div class="pt-3"> 
-                        <h4>48</h4>
+                        <h4>{{total_pending_requests}}</h4>
                         <p>Pending Requests</p>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                 <div class="shadow-sm summary p-3 text-center">
                     <i class="bi bi-check-circle-fill me-2"></i>
                     <div class="pt-3">
-                        <h4>$4,800</h4> 
+                        <h4>${{total_approved_amount}}</h4> 
                         <p>Approved</p>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                 <div class="shadow-sm summary p-3 text-center">
                     <i class="bi bi-clock-history me-2"></i>
                     <div class="pt-3"> 
-                        <h4>$41, 700</h4>
+                        <h4>${{total_pending_amount}}</h4>
                         <p>Pending Amount</p>
                     </div>
                 </div>
@@ -181,12 +181,12 @@
                                         data-address="{{withdrawal.user.profiles.ethereum_wallet}}"
                                     {% endif %}
                                     
-                                    class="btn btn-primary confirm-btn btn-lg mb-2 mx-2" 
+                                    class="btn btn-success confirm-btn btn-lg mb-2 mx-2" 
                                     data-toggle="tooltip" 
                                     data-placement="bottom" 
                                     title="Confirm withdrawals"
                                 >
-                                    <i class="bi bi-info-circle text-dark"></i>
+                                    <i class="bi bi-check2-circle text-light"></i>
                                 </a>
                             </td>
                         </tr>
