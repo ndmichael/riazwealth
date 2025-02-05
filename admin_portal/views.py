@@ -170,3 +170,45 @@ def confirm_withdrawal(request, withdrawal_id):
         return JsonResponse({"success": True})
     return JsonResponse({"success": False, "message": "Invalid request method."})
 
+
+import datetime
+
+from django.shortcuts import redirect
+from django.contrib import messages
+from django.utils import timezone 
+from django.contrib.auth.decorators import user_passes_test  # Import decorator
+
+from investments.models import UserInvestment
+
+# Create a decorator to check if the user is a superuser (admin)
+@user_passes_test(lambda u: u.is_superuser or u.is_staff)
+@login_required
+def accrue_profits_for_all_users(request):
+    """
+    Admin action to accrue profits for all eligible users. Runs only once per day.
+    """
+    if request.method == 'POST':
+        # Get today's date in the correct timezone
+        today = timezone.now().date()  
+
+        # Find investments where:
+        # - status is True (active)
+        # - payment_verified is True
+        # - next_accrual_date is less than or equal to today
+        # - AND profit has NOT been accrued for today 
+        investments_to_update = UserInvestment.objects.filter(
+            status=True,
+            payment_verified=True,
+            next_accrual_date__lte=today,
+            last_accrual_date__lt=today  or None
+        )
+
+        # Loop and accrue
+        for investment in investments_to_update:
+            investment.accrue_profit()
+
+        messages.success(request, 'Profits accrued successfully for eligible users.')
+    else:
+        messages.error(request, 'Invalid request method.')
+
+    return redirect('admin_dashboard') 
