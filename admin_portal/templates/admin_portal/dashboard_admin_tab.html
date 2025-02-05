@@ -11,7 +11,7 @@
                     <i class="bi bi-graph-up-arrow"></i>
                     <div class="ps-4">
                         <p>Total Earnings</p>
-                        <p><b>0</b></p>
+                        <p><b><sup>$</sup>{{total_amount_invested}}</b></p>
                     </div>
                 </a>
             </div>
@@ -21,7 +21,7 @@
                     <i class="bi bi-briefcase"></i>
                     <div class="ps-4">
                         <p>Total Clients</p>
-                        <p><b>0</b></p>
+                        <p><b>{{total_users}}</b></p>
                     </div>
                 </a>
             </div>
@@ -30,7 +30,7 @@
                     <i class="bi bi-coin"></i>
                     <div class="ps-4">
                         <p>Plans</p>
-                        <p><b>0</b></p>
+                        <p><b>{{total_plans}}</b></p>
                     </div>
                 </a>
             </div>
@@ -39,8 +39,17 @@
                 <a href="#" class="d-flex summary shadow-sm">
                     <i class="bi bi-people"></i>
                     <div class="ps-4">
-                        <p>Total Referrals</p>
-                        <p><b>0</b></p>
+                        <p>Approved Withdrawals</p>
+                        <p><b><sub>$</sub>{{total_approved_withdrawals_amount}}</b></p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <a href="#" class="d-flex summary shadow-sm">
+                    <i class="bi bi-currency-bitcoin"></i>
+                    <div class="ps-4">
+                        <p>Withdrawals Request</p>
+                        <p><b>{{total_withdrawal_requests}}</b></p>
                     </div>
                 </a>
             </div>
@@ -50,20 +59,12 @@
                     <i class="bi bi-wallet2"></i>
                     <div class="ps-4">
                         <p>Total Investments</p>
-                        <p><b>0</b></p>
+                        <p><b>{{total_investments}}</b></p>
                     </div>
                 </a>
             </div>
 
-            <div class="col-12 col-sm-6 col-lg-4">
-                <a href="#" class="d-flex summary shadow-sm">
-                    <i class="bi bi-currency-bitcoin"></i>
-                    <div class="ps-4">
-                        <p>Withdrawals Request</p>
-                        <p><b>0</b></p>
-                    </div>
-                </a>
-            </div>
+            
         </section>
     </div>
 </section>
