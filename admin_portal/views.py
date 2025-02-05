@@ -76,8 +76,8 @@ def admin_dashboard(request):
         
         'title': 'Admin Portal',
         "total_investments": investment_counts['total_investments'],
-        'total_active': investment_counts['total_active'],
-        'total_pending': investment_counts['total_pending'],
+        'total_active_investments': investment_counts['total_active'],
+        'total_pending_investments': investment_counts['total_pending'],
 
 
         # forms
@@ -92,8 +92,8 @@ def admin_dashboard(request):
 
         # handling users and referrals
         'users': users_page,
-        'total_active': total_active_users,
-        'total_inactive': total_inactive_users,
+        'total_active_users': total_active_users,
+        'total_inactive_users': total_inactive_users,
 
         # dashboard stats
         **stats_context
