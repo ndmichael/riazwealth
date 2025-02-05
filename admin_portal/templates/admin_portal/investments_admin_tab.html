@@ -40,6 +40,26 @@
             </div>
         </section>
 
+        <!-- Logic to handle confirming all accrual profit for eligible investments ===-->
+         <section class="row">
+            <article class="col-12 col-md-8 mx-auto">
+                <form 
+                    method="post" 
+                    action="{% url 'accrue_profits_for_all_users' %}"
+                    class="border p-4 text-center"
+                >
+                    {% csrf_token %}
+                    <button 
+                        type="submit" 
+                        class="btn btn-lg btn-outline-primary py-3 px-5"
+                        style="font-size: small;"
+                    >
+                        Accrue Daily Profits
+                    </button>
+                </form>
+            </article>
+         </section>
+
         <section class="row gy-5 py-4">
             <article class="col-12 mx-auto">
                 <div
