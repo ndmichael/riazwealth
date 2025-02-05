@@ -17,7 +17,7 @@ from utils.filter_form import filter_investments
 from utils.withdrawals_utils import withdrawal_request_filter
 from utils.referrals_utils import get_users_with_referrals
 from utils.general_news_utils import post_general_news
-from utils.admin_dashboard_utils import get_admin_dashboard_stats
+from utils.admin_stats_utils import get_admin_dashboard_stats, get_withdrawal_stats
 # from utils.toggle_investment_status import toggle_investment_status
 
 import logging
@@ -65,7 +65,11 @@ def admin_dashboard(request):
     users_page = users_paginator.get_page(page_number)
 
     general_news_form_handler = post_general_news(request)
-    stats_context = get_admin_dashboard_stats()
+
+    admin_stats_context = get_admin_dashboard_stats()
+    withdrawal_stats_context = get_withdrawal_stats()
+
+    print(withdrawal_stats_context)
         
 
     context = {
@@ -75,6 +79,8 @@ def admin_dashboard(request):
         "notifications": general_notifications,
         
         'title': 'Admin Portal',
+
+        # for the investments logic
         "total_investments": investment_counts['total_investments'],
         'total_active_investments': investment_counts['total_active'],
         'total_pending_investments': investment_counts['total_pending'],
@@ -96,7 +102,11 @@ def admin_dashboard(request):
         'total_inactive_users': total_inactive_users,
 
         # dashboard stats
-        **stats_context
+        **admin_stats_context,
+
+        # withdrawals stats
+        **withdrawal_stats_context
+
     }
     return render(request, "admin_portal/admin_dashboard.html", context)
 
