@@ -203,12 +203,15 @@ def accrue_profits_for_all_users(request):
             last_accrual_date__lt=today  or None
         )
 
-        # Loop and accrue
-        for investment in investments_to_update:
-            investment.accrue_profit()
+        if investments_to_update:
+            # Loop and accrue
+            for investment in investments_to_update:
+                investment.accrue_profit()
+                messages.success(request, 'Profits accrued successfully for eligible users.')
+        else:
+            messages.error(request, 'No pending profit accrual for today.')
 
-        messages.success(request, 'Profits accrued successfully for eligible users.')
     else:
         messages.error(request, 'Invalid request method.')
 
-    return redirect('admin_dashboard') 
+    return redirect('admindashboard') 
