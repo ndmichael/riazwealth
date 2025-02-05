@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 
 def admin_dashboard(request):
     
-    investments = UserInvestment.objects.all().order_by("-investment_date")
+    investments = UserInvestment.objects.select_related("user", "investment_plan").order_by("-investment_date")
     plans = InvestmentPlan.objects.all()    
     withdrawals =  WithdrawalRequest.objects.all().order_by("-created_at").order_by("updated_at")
     general_notifications = GeneralNotification.objects.all().order_by("-created_at")

@@ -43,7 +43,7 @@ class WithdrawalRequestForm(forms.Form):
     )
 
 
-    def clean_data(self):
+    def clean(self):
         cleaned_data = super().clean()
         investment_id = cleaned_data.get('investment')
         amount = cleaned_data.get('amount')
@@ -72,7 +72,9 @@ class WithdrawalRequestForm(forms.Form):
         super().__init__(*args, **kwargs)
 
         if investments:
-            self.fields['investment'].choices = [(i.id, f"Plan: {i.investment_plan.name}") for i in investments if i.status]
+            self.fields['investment'].choices = [
+                    (i.id, f"Plan: {i.investment_plan.name}") for i in investments if i.status
+                ]
         self.investments = investments
     
         self.helper = FormHelper()
