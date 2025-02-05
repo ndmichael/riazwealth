@@ -167,6 +167,7 @@
                                {{withdrawal.updated_at}}
                             </td>
                             <td class="d-flex flex-row">
+                                {% if withdrawal.status == 'pending' %}
                                 <a 
                                     href="#" 
                                     data-id="{{ withdrawal.id }}" 
@@ -188,6 +189,9 @@
                                 >
                                     <i class="bi bi-check2-circle text-light"></i>
                                 </a>
+                                {% else %}
+                                ---
+                                {% endif %}
                             </td>
                         </tr>
                         {% empty %}
