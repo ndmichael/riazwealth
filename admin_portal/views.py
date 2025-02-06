@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.decorators.csrf import csrf_exempt
+
 from django.db.models import Count, Q
 from investments.models import InvestmentPlan, UserInvestment
 from withdrawals.models import WithdrawalRequest
+from referrals.models import Referral
 
 from .forms import InvestmentFilterForm
 from  notifications.forms import GeneralNewsForm
@@ -142,7 +145,12 @@ def toggle_investment_status(request, investment_id):
             if action == 'activate':
                 investment.status = True
                 investment.payment_verified = True
-                investment.calculate_daily_profit()
+
+                referral = Referral.objects.filter(referred_to=investment.user).first()
+                if referral and not referral.bonus_status:
+                    investment.apply_referral_bonus(referral)                  
+
+                # investment.calculate_daily_profit()
             else: 
                 investment.status = False
                 investment.payment_verified = False
@@ -171,14 +179,7 @@ def confirm_withdrawal(request, withdrawal_id):
     return JsonResponse({"success": False, "message": "Invalid request method."})
 
 
-import datetime
 
-from django.shortcuts import redirect
-from django.contrib import messages
-from django.utils import timezone 
-from django.contrib.auth.decorators import user_passes_test  # Import decorator
-
-from investments.models import UserInvestment
 
 # Create a decorator to check if the user is a superuser (admin)
 @user_passes_test(lambda u: u.is_superuser or u.is_staff)
