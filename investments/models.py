@@ -4,6 +4,7 @@ from datetime import timedelta
 from django.utils import timezone
 from uuid import uuid4
 from decimal import Decimal
+from referrals.models import Referral
 
 
 
@@ -127,6 +128,23 @@ class UserInvestment(models.Model):
             self.calculate_daily_profit()
 
 
+    def apply_referral_bonus(self, referral):
+        """Applies referral bonus for the given referral."""
+        bonus = referral.calculate_referral_bonus(self.amount) 
+        print(f"from ref apply referral bonus: {bonus}")
+        referrer_investment = referral.referred_by.user_investments.first() 
+
+        if referrer_investment:
+            referrer_investment.total_profit += bonus
+            referrer_investment.profit_accumulated += bonus
+            referrer_investment.save()
+            # Mark the bonus as applied
+            referral.bonus_status = True
+            referral.bonus = bonus
+            referral.used_at = timezone.now()
+            referral.save()
+
+
     def generate_unique_ref_token(self):
         while True:
             token = uuid4().hex[-10:].upper()  # Generate a new reference
@@ -139,7 +157,19 @@ class UserInvestment(models.Model):
         if self.payment_verified and not self.next_accrual_date:
             self.next_accrual_date = timezone.now().date() + timedelta(days=1)
 
-        super().save(*args, **kwargs)  # Call the parent save method
+       
+        # # pk will be None for a newly created object
+        # if self.payment_verified and not self.pk:  
+        #     # Find the referral relationship (if it exists)
+        #     referral = Referral.objects.filter(referee=self.user).first()
+        #     if referral and not referral.bonus_status:
+        #         self.apply_referral_bonus(referral)
+            
+        #     referral = Referral.objects.filter(referee=self.user).first()
+        #     if referral and not referral.bonus_applied:  # Check bonus_applied
+        #         self.apply_referral_bonus(referral)
+
+        super().save(*args, **kwargs)  
 
     
 
