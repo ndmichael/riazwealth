@@ -6,6 +6,7 @@ from crispy_forms.helper import FormHelper
 from crispy_bootstrap5.bootstrap5 import FloatingField
 from django.utils import timezone
 from datetime import timedelta
+from decimal import Decimal
 
 class WithdrawalRequestForm(forms.Form):
     AMOUNT_CHOICES = [
@@ -46,7 +47,7 @@ class WithdrawalRequestForm(forms.Form):
     def clean(self):
         cleaned_data = super().clean()
         investment_id = cleaned_data.get('investment')
-        amount = cleaned_data.get('amount')
+        amount = Decimal(cleaned_data.get('amount'))
 
         # Fetch the investment object (assuming it's passed to the form)
         investment = next((i for i in self.investments if i.id == int(investment_id)), None)
@@ -55,7 +56,7 @@ class WithdrawalRequestForm(forms.Form):
             raise forms.ValidationError("Invalid investment selected.")
         
         # Check if the amount exceeds the 20% limit
-        max_withdrawable = investment.total_profit * 0.2
+        max_withdrawable = investment.total_profit * Decimal(0.2)
         if amount > max_withdrawable:
             raise forms.ValidationError(f"Amount exceeds the maximum withdrawable limit of {max_withdrawable:.2f}.")
 
@@ -64,7 +65,7 @@ class WithdrawalRequestForm(forms.Form):
 
         # Check if the investment is eligible for withdrawal
         if eligible_date > timezone.now():
-            raise forms.ValidationError(f"Withdrawal not allowed before {investment.next_accrual_date}.")
+            raise forms.ValidationError(f"Withdrawal not allowed before {eligible_date.date()}.")
 
         return cleaned_data
     
