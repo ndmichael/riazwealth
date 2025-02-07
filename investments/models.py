@@ -157,18 +157,6 @@ class UserInvestment(models.Model):
         if self.payment_verified and not self.next_accrual_date:
             self.next_accrual_date = timezone.now().date() + timedelta(days=1)
 
-       
-        # # pk will be None for a newly created object
-        # if self.payment_verified and not self.pk:  
-        #     # Find the referral relationship (if it exists)
-        #     referral = Referral.objects.filter(referee=self.user).first()
-        #     if referral and not referral.bonus_status:
-        #         self.apply_referral_bonus(referral)
-            
-        #     referral = Referral.objects.filter(referee=self.user).first()
-        #     if referral and not referral.bonus_applied:  # Check bonus_applied
-        #         self.apply_referral_bonus(referral)
-
         super().save(*args, **kwargs)  
 
     
