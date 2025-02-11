@@ -114,7 +114,7 @@ def admin_dashboard(request):
 
 
 def get_investment_details(request, pk):
-    print(f"{pk} : {type(pk)}")
+
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest' and request.method == 'GET':
         investment = get_object_or_404(UserInvestment, id=pk)
         data = {
@@ -147,7 +147,7 @@ def toggle_investment_status(request, investment_id):
 
                 referral = Referral.objects.filter(referred_to=investment.user).first()
                 if referral and not referral.bonus_status:
-                    investment.apply_referral_bonus(referral)    
+                    investment.apply_referral_bonus(referral)     
 
                 send_notification(
                     user=request.user,
