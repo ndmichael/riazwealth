@@ -10,8 +10,7 @@ from withdrawals.models import WithdrawalRequest
 from referrals.models import Referral
 
 from .forms import InvestmentFilterForm
-from  notifications.forms import GeneralNewsForm
-from notifications.models import GeneralNotification
+from notifications.models import GeneralNotification, UserNotification
 from django.contrib import messages
 
 from django.core.paginator import Paginator
@@ -19,7 +18,7 @@ from django.core.paginator import Paginator
 from utils.filter_form import filter_investments
 from utils.withdrawals_utils import withdrawal_request_filter
 from utils.referrals_utils import get_users_with_referrals
-from utils.general_news_utils import post_general_news
+from utils.general_news_utils import post_general_news, send_notification
 from utils.admin_stats_utils import get_admin_dashboard_stats, get_withdrawal_stats
 # from utils.toggle_investment_status import toggle_investment_status
 
@@ -208,7 +207,14 @@ def accrue_profits_for_all_users(request):
             # Loop and accrue
             for investment in investments_to_update:
                 investment.accrue_profit()
-                messages.success(request, 'Profits accrued successfully for eligible users.')
+                daily_profit = investment.daily_profit
+                # Send a notification
+                send_notification(
+                    user=request.user,
+                    notification_type="investment",
+                    message=f"${daily_profit} has been accrue to your wallet."
+                )
+                messages.success(request, f'Profits accrued successfully for eligible users.')
         else:
             messages.error(request, 'No pending profit accrual for today.')
 
