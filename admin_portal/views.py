@@ -149,7 +149,7 @@ def toggle_investment_status(request, investment_id):
                 if referral and not referral.bonus_status:
                     investment.apply_referral_bonus(referral)                  
 
-                # investment.calculate_daily_profit()
+            # investment.calculate_daily_profit()
             else: 
                 investment.status = False
                 investment.payment_verified = False
@@ -173,6 +173,15 @@ def confirm_withdrawal(request, withdrawal_id):
         # Update the withdrawal status
         withdrawal.status = "approved"
         withdrawal.save()
+
+        # Send a notification
+        send_notification(
+            user=request.user,
+            notification_type="withdrawal",
+            message=f"""withdrawal with id {withdrawal.id}.
+            ${withdrawal.amount} has been approved.
+            """
+        )
 
         return JsonResponse({"success": True})
     return JsonResponse({"success": False, "message": "Invalid request method."})
