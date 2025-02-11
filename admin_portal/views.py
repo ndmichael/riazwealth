@@ -135,7 +135,7 @@ def get_investment_details(request, pk):
 
 
 def toggle_investment_status(request, investment_id):
-    print("===== ENTERING toggle_investment_status VIEW =====")  
+
     logger.info(f"Entering toggle_investment_status view. Request path: {request.path}, Method: {request.method}") 
     if request.method == "POST":
         action = request.POST.get("action")
@@ -147,12 +147,29 @@ def toggle_investment_status(request, investment_id):
 
                 referral = Referral.objects.filter(referred_to=investment.user).first()
                 if referral and not referral.bonus_status:
-                    investment.apply_referral_bonus(referral)                  
+                    investment.apply_referral_bonus(referral)    
+
+                send_notification(
+                    user=request.user,
+                    notification_type="investment",
+                    message=f"""Investment with token:{investment.ref_token.upper()}
+                    has been approved.
+                    Name: {investment.investment_plan.name.capitalize()}
+                    Amount: {investment.amount}
+                    """
+                )              
 
             # investment.calculate_daily_profit()
             else: 
                 investment.status = False
                 investment.payment_verified = False
+                send_notification(
+                    user=request.user,
+                    notification_type="investment",
+                    message=f"""Investment with token:{investment.ref_token.upper()}
+                    has been Rejected.
+                    """
+                ) 
             investment.save()
             logger.info("Exiting toggle_investment_status view.") # Log exit
             return JsonResponse({'status': 'success', 'message': 'Investment status updated.'})
