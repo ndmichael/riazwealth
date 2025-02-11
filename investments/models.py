@@ -5,7 +5,7 @@ from django.utils import timezone
 from uuid import uuid4
 from decimal import Decimal
 from referrals.models import Referral
-
+from utils.general_news_utils import send_notification
 
 
 payment_method = (
@@ -131,7 +131,6 @@ class UserInvestment(models.Model):
     def apply_referral_bonus(self, referral):
         """Applies referral bonus for the given referral."""
         bonus = referral.calculate_referral_bonus(self.amount) 
-        print(f"from ref apply referral bonus: {bonus}")
         referrer_investment = referral.referred_by.user_investments.first() 
 
         if referrer_investment:
@@ -143,6 +142,12 @@ class UserInvestment(models.Model):
             referral.bonus = bonus
             referral.used_at = timezone.now()
             referral.save()
+
+            send_notification(
+                user=referral.referred_by,
+                notification_type="referral",
+                message=f"""${referral.bonus} bonus has been credited."""
+            ) 
 
 
     def generate_unique_ref_token(self):
