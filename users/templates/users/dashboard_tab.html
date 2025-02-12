@@ -113,9 +113,22 @@
                         
                             <ul class="list-group list-group-flush">
                                 {% for notification in notifications %}
-                                    <li class="list-group-item {% if not notification.is_read %}fw-bold{% endif %}">
-                                        {{ notification.message }} 
-                                        <small class="text-muted d-block">{{ notification.created_at|date:"M d, Y H:i" }}</small>
+                                    <li 
+                                        class="
+                                            list-group-item 
+                                            {% if not notification.is_read %}fw-bold{% endif %}
+                                            d-flex
+                                            justify-content-between
+                                        "
+                                    >
+                                        <div>
+                                            {{ notification.message }} 
+                                            <small class="text-muted d-block">{{ notification.created_at|date:"M d, Y H:i" }}</small>
+                                        </div>
+
+                                        <div>
+                                            <i class="bi bi-chevron-double-right"></i>
+                                        </div>
                                     </li>
                                 {% empty %}
                                     <li class="alert alert-info">No new notifications</li>
