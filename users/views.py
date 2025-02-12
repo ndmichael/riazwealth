@@ -5,7 +5,7 @@ from django.contrib import messages
 from investments.models import InvestmentPlan, UserInvestment
 from withdrawals.models import WithdrawalRequest
 from referrals.models import Referral
-from notifications.models import GeneralNotification
+from notifications.models import GeneralNotification, UserNotification
 
 
 from withdrawals.forms  import WithdrawalRequestForm
@@ -28,6 +28,7 @@ def client_dashboard(request):
     plans = InvestmentPlan.objects.all()
     user_investments = UserInvestment.objects.filter(user=user)
     general_news = GeneralNotification.objects.all().order_by("-created_at")[:5]
+    notifications = UserNotification.objects.filter(is_read = False).order_by("-created_at")
     
     withdrawals_amount = withdrawals.aggregate(total=Sum('amount', default=0.00, filter=Q(status="approved")))['total']
     total_investments = user_investments.count()
@@ -92,6 +93,7 @@ def client_dashboard(request):
         "plans": plans,
         "referrals": referrals,
         "general_news": general_news,
+        "notifications": notifications,
         "withdrawal_form": withdrawal_form,
         "user_form": user_form,
         "profile_form": profile_form,
