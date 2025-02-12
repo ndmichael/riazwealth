@@ -120,6 +120,11 @@
                                             d-flex
                                             justify-content-between
                                         "
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#notificationModal"
+                                        data-type="{{notification.notification_type}}"
+                                        data-message="{{ notification.message }}"
+                                        data-timestamp='{{ notification.created_at|date:"M d, Y H:i" }}'
                                     >
                                         <div>
                                             {{ notification.message }} 
@@ -223,23 +228,42 @@
         </div>
     </section>
 
-    <!-- 
-            <tr>
-                <td>
-                    Referral Links
-                </td>
-                <td class="text-end">
-                    <button
-                        class="btn btn-lg btn-success copy"
-                        id="copyref"
-                        onclick="copyRef()"
-                    >
-                        <i class="bi bi-clipboard-check-fill pe-3 text-light"></i>Copy Link
-                    </button>
-                    <input 
-                        id="reflink"
-                        type="hidden" 
-                        value="{{ request.scheme }}://{{ request.get_host }}/accounts/signup/?referral={{ user.profiles.referral_code }}"
-                    />
-                </td>
-            </tr> -->
+
+<!-- Single Modal -->
+<div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="notificationModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessage"></p>
+                <small class="text-muted d-block" id="modalTimestamp"></small>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var notificationModal = document.getElementById('notificationModal');
+    notificationModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget; // Button that triggered the modal
+        let notificationType = button.getAttribute('data-type');
+        var message = button.getAttribute('data-message'); // Extract info from data-* attributes
+        var timestamp = button.getAttribute('data-timestamp');
+
+        // Update the modal's content
+        var modalHeader = notificationModal.querySelector('#notificationModalLabel');
+        var modalMessage = notificationModal.querySelector('#modalMessage');
+        var modalTimestamp = notificationModal.querySelector('#modalTimestamp');
+
+        modalHeader.textContent = `Type: ${notificationType}`;
+        modalMessage.textContent = message;
+        modalTimestamp.textContent = timestamp;
+    });
+</script>
