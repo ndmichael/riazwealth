@@ -27,7 +27,7 @@ def client_dashboard(request):
     withdrawals = WithdrawalRequest.objects.filter(user=user)
     plans = InvestmentPlan.objects.all()
     user_investments = UserInvestment.objects.filter(user=user)
-    general_news = GeneralNotification.objects.all()
+    general_news = GeneralNotification.objects.all().order_by("-created_at")[:5]
     
     withdrawals_amount = withdrawals.aggregate(total=Sum('amount', default=0.00, filter=Q(status="approved")))['total']
     total_investments = user_investments.count()
