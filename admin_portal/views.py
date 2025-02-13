@@ -225,20 +225,21 @@ def accrue_profits_for_all_users(request):
         investments_to_update = UserInvestment.objects.filter(
             status=True,
             payment_verified=True,
-            next_accrual_date__lte=today,
-            last_accrual_date__lt=today  or None
+            next_accrual_date__lte=today
+        ).filter(
+            Q(last_accrual_date__lt=today) | Q(last_accrual_date__isnull=True)  
         )
 
-        if investments_to_update:
+        if investments_to_update.exists():
             # Loop and accrue
             for investment in investments_to_update:
                 investment.accrue_profit()
-                daily_profit = investment.daily_profit
+
                 # Send a notification
                 send_notification(
-                    user=request.user,
+                    user=investment.user,
                     notification_type="investment",
-                    message=f"${daily_profit} has been accrue to your wallet."
+                    message=f"""${investment.daily_profit} has been accrue to your wallet."""
                 )
                 messages.success(request, f'Profits accrued successfully for eligible users.')
         else:
