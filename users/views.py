@@ -16,7 +16,11 @@ from withdrawals.forms  import WithdrawalRequestForm
 from django.db.models import Sum, Q
 from decimal import Decimal
 
-from utils.total_investments_profit import get_user_total_profits, get_total_referral_bonus
+from utils.total_investments_profit import (
+    get_user_total_profits, 
+    get_total_referral_bonus,
+    get_total_investment_amount
+)
 from utils.process_form import handle_user_profile_form
 
 import logging
@@ -41,6 +45,7 @@ def client_dashboard(request):
     
     total_profits = get_user_total_profits(user)
     total_bonuses = get_total_referral_bonus(user)
+    invested_amount = get_total_investment_amount(user)
 
     # Time for referrals
     referrals = Referral.objects.filter(referred_by=user)
@@ -58,9 +63,6 @@ def client_dashboard(request):
             investment_id = withdrawal_form.cleaned_data['investment']
             payment_option = withdrawal_form.cleaned_data['payment_option']
             amount = withdrawal_form.cleaned_data['amount']
-
-            print(f"amount: {amount}")
-
             
             try:
                 # Fetch the actual UserInvestment instance corresponding to the selected ID
@@ -106,11 +108,13 @@ def client_dashboard(request):
         "withdrawals" : withdrawals,
         "user_investments": user_investments,
         "withdrawals_amount": withdrawals_amount,
+
         "total_investments": total_investments,
         "total_plans": total_plans,
         "total_referrals": total_referrals,
         "total_profits": total_profits,
         "total_bonuses": total_bonuses,
+        "invested_amount": invested_amount,
     }
     return render(request, "users/client_dashboard.html", context)
 
