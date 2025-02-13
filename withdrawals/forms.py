@@ -47,6 +47,10 @@ class WithdrawalRequestForm(forms.Form):
     def clean(self):
         cleaned_data = super().clean()
         investment_id = cleaned_data.get('investment')
+        amount = cleaned_data.get('amount')
+        if amount is None:
+            raise forms.ValidationError("Amount is required.")
+
         amount = Decimal(cleaned_data.get('amount'))
 
         # Fetch the investment object (assuming it's passed to the form)
@@ -90,7 +94,7 @@ class WithdrawalRequestForm(forms.Form):
              Row(
                 FloatingField("payment_option", wrapper_class='col-12', css_class="row-fluid"),
             ),
-            Submit('submit', 'REQUEST WITHDRAWAL', css_class="col-12 btn-lg btn-1")
+            Submit('withdrawal_form_submit', 'REQUEST WITHDRAWAL', css_class="col-12 btn-lg btn-1")
         )
 
 
