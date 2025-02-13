@@ -120,6 +120,20 @@
     padding: 0 15px;
 }
 
+.notifications{
+    cursor: pointer;
+    transition: .3s ease-in-out;
+    box-sizing: border-box;
+}
+
+.notifications:hover{
+    border-left: 1px solid green;
+}
+
+.notifications:hover i{
+    color: #32CD32;
+}
+
   
 @media (max-width: 768px) {
     .main-content {
