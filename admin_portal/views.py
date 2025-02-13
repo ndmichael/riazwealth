@@ -183,9 +183,21 @@ def toggle_investment_status(request, investment_id):
 def confirm_withdrawal(request, withdrawal_id):
     if request.method == "POST":
         withdrawal = get_object_or_404(WithdrawalRequest, id=withdrawal_id)
+        # Get the user's investment
+        investment = withdrawal.user.user_investments.first()  
         
         if withdrawal.status != "pending":
             return JsonResponse({"success": False, "message": "Only pending withdrawals can be confirmed."})
+
+        if not investment:
+            return JsonResponse({"success": False, "message": "No active investment found for this user."})
+
+        if withdrawal.amount > investment.profit_accumulated:
+            return JsonResponse({"success": False, "message": "Insufficient funds to withdraw."})
+
+        # Deduct from profit_accumulated and total_profit
+        investment.profit_accumulated -= withdrawal.amount
+        investment.save()
 
         # Update the withdrawal status
         withdrawal.status = "approved"
@@ -193,7 +205,7 @@ def confirm_withdrawal(request, withdrawal_id):
 
         # Send a notification
         send_notification(
-            user=request.user,
+            user=withdrawal.user,
             notification_type="withdrawal",
             message=f"""withdrawal with id {withdrawal.id}.
             ${withdrawal.amount} has been approved.
