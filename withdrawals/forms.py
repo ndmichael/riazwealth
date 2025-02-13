@@ -56,7 +56,7 @@ class WithdrawalRequestForm(forms.Form):
             raise forms.ValidationError("Invalid investment selected.")
         
         # Check if the amount exceeds the 20% limit
-        max_withdrawable = investment.total_profit * Decimal(0.2)
+        max_withdrawable = investment.profit_accumulated * Decimal(0.2)
         if amount > max_withdrawable:
             raise forms.ValidationError(f"Amount exceeds the maximum withdrawable limit of {max_withdrawable:.2f}.")
 
