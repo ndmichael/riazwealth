@@ -63,8 +63,9 @@ class WithdrawalRequestForm(forms.Form):
         last_withdrawal_date = investment.get_last_withdrawal_date()
         eligible_date = last_withdrawal_date + timedelta(days=investment.withdrawal_interval_days)
 
+        print(f"eligble date: {eligible_date} and timezone: {timezone.now()}")
         # Check if the investment is eligible for withdrawal
-        if eligible_date > timezone.now():
+        if eligible_date.date() > timezone.now().date():
             raise forms.ValidationError(f"Withdrawal not allowed before {eligible_date.date()}.")
 
         return cleaned_data
