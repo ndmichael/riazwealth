@@ -15,8 +15,8 @@ def withdrawal_request_filter(request):
         withdrawals = WithdrawalRequest.objects.filter(status='pending').order_by("-created_at").order_by("-updated_at")
     elif active_tab == 'rejected':
         withdrawals = WithdrawalRequest.objects.filter(status='rejected').order_by("-created_at").order_by("-updated_at")
-    elif active_tab == 'successful':
-        withdrawals = WithdrawalRequest.objects.filter(status='successful').order_by("-created_at").order_by("-updated_at")
+    elif active_tab == 'approved':
+        withdrawals = WithdrawalRequest.objects.filter(status='approved').order_by("-created_at").order_by("-updated_at")
     else:
         withdrawals = WithdrawalRequest.objects.all().order_by("-created_at").order_by("-updated_at")  # Fallback for invalid tab values
 
