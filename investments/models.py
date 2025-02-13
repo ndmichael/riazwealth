@@ -59,7 +59,7 @@ class UserInvestment(models.Model):
         """
         last_withdrawal = self.withdrawal_requests.filter(status='approved').order_by('-created_at').first()
         if last_withdrawal:
-            return last_withdrawal.created_at.date()  # Return the date of the last withdrawal
+            return last_withdrawal.created_at  # Return the date of the last withdrawal
         return self.investment_date  # If no withdrawal, fallback to the investment start date
     
     def set_withdrawal_interval(self):
