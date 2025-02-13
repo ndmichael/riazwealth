@@ -89,6 +89,17 @@ class UserInvestment(models.Model):
         Calculate daily profit based on the investment plan, invested amount, and bonus tiers.
         """
         if self.status and self.payment_verified:
+            today = timezone.now().date()
+        
+            # If last_accrual_date is missing, start from the investment date
+            last_accrual = self.last_accrual_date or self.investment_date.date()
+            
+            # Count the number of missed days
+            missed_days = (today - last_accrual).days
+        
+            if missed_days <= 0:
+                return  # No profit accrual needed
+            
             # Base rate from the investment plan
             base_rate = self.investment_plan.daily_profit_rate / 100  # Convert to decimal
 
@@ -103,12 +114,15 @@ class UserInvestment(models.Model):
             # Calculate the total daily rate
             total_rate = base_rate + Decimal(bonus_rate)
 
+            # self.amount rate
+            self.daily_profit = self.amount * total_rate  
+
             # Calculate daily profit
-            self.daily_profit = self.amount * total_rate
+            total_missed_profit = self.amount * total_rate * missed_days
 
             # Update accumulated and total profits
-            self.profit_accumulated += self.daily_profit
-            self.total_profit += self.daily_profit 
+            self.profit_accumulated += total_missed_profit
+            self.total_profit += total_missed_profit 
 
             today = timezone.now().date()
             # Set the next accrual date
@@ -123,7 +137,6 @@ class UserInvestment(models.Model):
         """
         Accrue daily profit if today matches the next accrual date.
         """
-        today = timezone.now().date()
         if self.status and self.payment_verified:
             self.calculate_daily_profit()
 
