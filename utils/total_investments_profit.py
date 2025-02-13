@@ -3,7 +3,7 @@ from referrals.models import Referral
 
 def get_user_total_profits(user):
     investments = UserInvestment.objects.filter(user=user)
-    total_profits = sum([investment.total_profit for investment in investments])
+    total_profits = sum([investment.profit_accumulated for investment in investments])
     return total_profits
 
 def get_total_referral_bonus(user):
