@@ -1,6 +1,17 @@
 {% load static %}
     <section>
         <div class="container">
+            {% if main_notification %}
+            <section class="row">
+                <div class="col-12">
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <b>{{main_notification.message}}</b>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </section>
+            {% endif %}
+
             <section class="row gy-4">
                 <div class="col-12 col-sm-6 col-lg-4">
                     <a class="d-flex summary shadow-sm">
