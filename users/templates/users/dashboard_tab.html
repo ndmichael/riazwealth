@@ -133,6 +133,7 @@
                                         "
                                         data-bs-toggle="modal" 
                                         data-bs-target="#notificationModal"
+                                        data-id="{{ notification.id }}"
                                         data-type="{{notification.notification_type}}"
                                         data-message="{{ notification.message }}"
                                         data-timestamp='{{ notification.created_at|date:"M d, Y H:i" }}'
@@ -262,19 +263,64 @@
 
 <script>
     var notificationModal = document.getElementById('notificationModal');
+    let currentNotificationId = null;
+
     notificationModal.addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget; // Button that triggered the modal
         let notificationType = button.getAttribute('data-type');
         var message = button.getAttribute('data-message'); // Extract info from data-* attributes
         var timestamp = button.getAttribute('data-timestamp');
+        currentNotificationId = button.getAttribute('data-id');
 
         // Update the modal's content
         var modalHeader = notificationModal.querySelector('#notificationModalLabel');
         var modalMessage = notificationModal.querySelector('#modalMessage');
         var modalTimestamp = notificationModal.querySelector('#modalTimestamp');
 
+        // Send AJAX request to mark as read
+        markAsRead(currentNotificationId);
+
         modalHeader.textContent = `Type: ${notificationType}`;
         modalMessage.textContent = message;
         modalTimestamp.textContent = timestamp;
     });
+
+    function markAsRead(notificationId) {
+        fetch('/users/mark-as-read/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken') // Include CSRF token for security
+            },
+            body: JSON.stringify({ id: notificationId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Optionally update the UI to reflect the change
+                var listItem = document.querySelector(`li[data-id='${notificationId}']`);
+                if (listItem) {
+                    //listItem.classList.remove('fw-bold');
+                    listItem.remove();
+                }
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    // Function to get CSRF token from cookies
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
 </script>
