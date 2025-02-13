@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+from django.http import JsonResponse
+import json
+from django.views.decorators.csrf import csrf_exempt
+
 from investments.models import InvestmentPlan, UserInvestment
 from withdrawals.models import WithdrawalRequest
 from referrals.models import Referral
@@ -118,3 +122,18 @@ def user_dashboard(request):
     if request.user.is_staff:
         return redirect('admindashboard')
     return redirect('clientdashboard')
+
+
+@csrf_exempt
+def mark_as_read(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        notification_id = data.get('id')
+        try:
+            notification = UserNotification.objects.get(id=notification_id)
+            notification.is_read = True
+            notification.save()
+            return JsonResponse({'success': True})
+        except UserNotification.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Notification not found'})
+    return JsonResponse({'success': False, 'error': 'Invalid request'})
