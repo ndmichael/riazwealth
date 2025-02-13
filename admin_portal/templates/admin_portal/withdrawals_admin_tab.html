@@ -94,8 +94,8 @@
                     </li>
                     <li class="nav-item">
                         <a 
-                            class="nav-link {% if active_tab == 'successful' %}active{% endif %}" 
-                            href="?tab=successful"
+                            class="nav-link {% if active_tab == 'approved' %}active{% endif %}" 
+                            href="?tab=approved"
                         >
                             Successful
                         </a>
@@ -150,7 +150,7 @@
                                 <span class="fw-bolder text-warning">Pending </span> 
                                {% elif withdrawal.status == "rejected"  %}
                                 <span class="fw-bolder text-danger">Rejected</span> 
-                                {% else %}
+                                {% elif withdrawal.status == "approved" %}
                                 <span class="fw-bolder text-success">Approved</span> 
                                {% endif %}
                             </td>
