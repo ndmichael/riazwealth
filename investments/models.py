@@ -52,7 +52,6 @@ class UserInvestment(models.Model):
     def __str__(self):
         return f"{self.investment_plan}, Amount: {self.amount} Status: {self.status} {self.user.get_full_name()}"
     
-
     def get_last_withdrawal_date(self):
         """
         Retrieves the last approved withdrawal date.
@@ -131,7 +130,6 @@ class UserInvestment(models.Model):
 
             # Save changes
             self.save()
-
 
     def accrue_profit(self):
         """
