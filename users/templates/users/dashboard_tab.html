@@ -1,5 +1,5 @@
 {% load static %}
-    <section>
+    <section class="user-notification">
         <div class="container">
             {% if main_notification %}
             <section class="row">
@@ -130,6 +130,7 @@
                                             {% if not notification.is_read %}fw-bold{% endif %}
                                             d-flex
                                             justify-content-between
+                                            notifications
                                         "
                                         data-bs-toggle="modal" 
                                         data-bs-target="#notificationModal"
