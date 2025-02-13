@@ -9,7 +9,6 @@
                 </legend>
                 {% if user.profiles.usdt_wallet or user.profiles.bitcoin_wallet or user.profiles.ethereum_wallet %}
                 <form method="post" class="p-5 bg-light border">
-                    {% csrf_token %}
                     {% crispy withdrawal_form %}
                 </form>
                 {% else %}
