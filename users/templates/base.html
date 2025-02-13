@@ -366,9 +366,6 @@ function toggleInvestmentStatus(investmentId, action, confirmButton) {
           const method = this.dataset.payment;
           const address = this.dataset.address;
           selectedWithdrawalId = this.dataset.id;
-
-          console.log(`Amount: ${amount}`);
-          console.log(`Method: ${method}`);
     
           // Populate modal with data
           document.getElementById("modal-username").textContent = username;
