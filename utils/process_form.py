@@ -6,13 +6,13 @@ from accounts.models import Profile
 from investments.models import InvestmentPlan, UserInvestment
 
 
-def handle_user_profile_form(request):
+def handle_user_profile_form(request, post_data):
     user = request.user
     profile, created = Profile.objects.get_or_create(user=user)
 
     user_form = UserForm(instance=user)
     profile_form = ProfileForm(instance=profile)
-    if request.method == "POST":
+    if post_data:
         user_form = UserForm(request.POST, instance=user)
         profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
         if user_form.is_valid() and profile_form.is_valid():
