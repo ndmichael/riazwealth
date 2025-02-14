@@ -10,7 +10,7 @@ from withdrawals.models import WithdrawalRequest
 from referrals.models import Referral
 
 from .forms import InvestmentFilterForm
-from notifications.models import GeneralNotification, UserNotification
+from notifications.models import GeneralNotification
 from django.contrib import messages
 
 from django.core.paginator import Paginator
