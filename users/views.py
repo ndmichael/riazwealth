@@ -61,8 +61,6 @@ def client_dashboard(request):
             withdrawal_form = WithdrawalRequestForm(request.POST, investments=user_investments)
             
             if withdrawal_form.is_valid():
-                print(f"result: {withdrawal_form.cleaned_data}")
-
                 # Get the selected investment ID from the form's cleaned data
                 investment_id = withdrawal_form.cleaned_data['investment']
                 payment_option = withdrawal_form.cleaned_data['payment_option']
@@ -86,10 +84,6 @@ def client_dashboard(request):
                 except UserInvestment.DoesNotExist:
                     messages.error(request, "Invalid investment selected.")
                     return redirect("clientdashboard")
-        
-            else:
-                # Print form errors for debugging
-                print("Form Errors:", withdrawal_form.errors)
 
         elif "user_form_submit" in request.POST: 
             user_form, profile_form = handle_user_profile_form(request, post_data=True)
