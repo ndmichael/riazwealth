@@ -42,11 +42,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "crispy_forms",
     "crispy_bootstrap5",
+
     'allauth',
     'allauth.account',
     "allauth.socialaccount",
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
+
+    # set celery beat
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -179,6 +183,11 @@ LOGIN_REDIRECT_URL = 'user_dashboard'
 ACCOUNT_LOGOUT_REDIRECT_URL = "account_login"
 # ACCOUNT_LOGIN_ON_SIGNUP = False
 # ACCOUNT_SIGNUP_REDIRECT_URL = "account_login"
+
+# Celery settings
+CELERY_BROKER_URL = "redis://localhost:6379/0"  # Change this to Railway Redis URL in production
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
 
 
 # LOGGING = {
