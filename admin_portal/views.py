@@ -147,7 +147,7 @@ def toggle_investment_status(request, investment_id):
                     investment.apply_referral_bonus(referral)     
 
                 send_notification(
-                    user=request.user,
+                    user=investment.user,
                     notification_type="investment",
                     message=f"""Investment with token:{investment.ref_token.upper()}
                     has been approved.
