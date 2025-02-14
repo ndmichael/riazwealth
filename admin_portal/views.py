@@ -69,10 +69,7 @@ def admin_dashboard(request):
     general_news_form_handler = post_general_news(request)
 
     admin_stats_context = get_admin_dashboard_stats()
-    withdrawal_stats_context = get_withdrawal_stats()
-
-    print(withdrawal_stats_context)
-        
+    withdrawal_stats_context = get_withdrawal_stats()    
 
     context = {
         'investments': investments,
