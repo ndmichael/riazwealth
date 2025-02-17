@@ -28,6 +28,9 @@
     <!-- swiss alert box custom -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
       em.is-invalid {
         color: #dc3545;
@@ -331,6 +334,17 @@
       ethereum.style.display = "none";
     }
   });
+</script>
+
+<!-- AOS Animations -->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    /**** javascript code for aos file ****/
+    AOS.init({
+        delay: 0,
+        duration: 800,
+        easing: 'ease-in-sine',
+    });
 </script>
 </body>
 </html>
