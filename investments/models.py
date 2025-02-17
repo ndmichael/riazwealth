@@ -57,7 +57,7 @@ class UserInvestment(models.Model):
         Retrieves the last approved withdrawal date.
         If no withdrawals have been made, it falls back to the investment start date.
         """
-        last_withdrawal = self.withdrawal_requests.filter(status='approved').order_by('-created_at').first()
+        last_withdrawal = self.withdrawal_requests.order_by('-created_at').first()
         if last_withdrawal:
             return last_withdrawal.created_at  # Return the date of the last withdrawal
         return self.investment_date  # If no withdrawal, fallback to the investment start date
