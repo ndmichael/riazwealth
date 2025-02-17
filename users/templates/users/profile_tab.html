@@ -9,7 +9,13 @@
                     <header class="p-3 border-bottom text-center">
                         <h3>PROFILE INFO</h3>
                     </header>
-                    <form action="" method="post" class="p-5">
+                    <form 
+                        action="" 
+                        method="post" 
+                        class="
+                            p-5
+                            animate__animated animate__fadeInUp
+                        ">
                         {% csrf_token %}
                         {% crispy user_form %}
                         {% crispy profile_form %}
