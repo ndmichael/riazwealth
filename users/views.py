@@ -36,7 +36,7 @@ def client_dashboard(request):
     plans = InvestmentPlan.objects.all()
     user_investments = UserInvestment.objects.filter(user=user)
     general_news = GeneralNotification.objects.all().order_by("-created_at")[:5]
-    notifications = UserNotification.objects.filter(is_read = False).order_by("-created_at")
+    notifications = UserNotification.objects.filter(is_read = False, user=user).order_by("-created_at")
     main_notification = notifications.first()
     
     withdrawals_amount = withdrawals.aggregate(total=Sum('amount', default=0.00, filter=Q(status="approved")))['total']
