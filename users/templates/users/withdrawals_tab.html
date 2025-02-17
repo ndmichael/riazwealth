@@ -8,7 +8,12 @@
                     <h3>Request Withdrawals</h3>
                 </legend>
                 {% if user.profiles.usdt_wallet or user.profiles.bitcoin_wallet or user.profiles.ethereum_wallet %}
-                <form method="post" class="p-5 bg-light border">
+                <form 
+                    method="post" 
+                    class="
+                        p-5 bg-light border
+                        animate__animated animate__zoomIn
+                    ">
                     {% crispy withdrawal_form %}
                 </form>
                 {% else %}
