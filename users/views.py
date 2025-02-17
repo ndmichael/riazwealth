@@ -32,7 +32,7 @@ logger = logging.getLogger(__name__)
 @login_required
 def client_dashboard(request):
     user = request.user
-    withdrawals = WithdrawalRequest.objects.filter(user=user)
+    withdrawals = WithdrawalRequest.objects.filter(user=user).order_by("-created_at")
     plans = InvestmentPlan.objects.all()
     user_investments = UserInvestment.objects.filter(user=user)
     general_news = GeneralNotification.objects.all().order_by("-created_at")[:5]
