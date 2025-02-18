@@ -7,9 +7,6 @@
     color: black;
 }
 
-
-
-
 html, body{
   font-size-adjust: none;
   font-size: 14px;
@@ -26,6 +23,13 @@ html, body{
   --secondary-color-400: rgb(50, 205, 50, .4);
   --secondary-color-200: rgb(50, 205, 50, .2);
   --section-padding: 5.5rem 10px;
+}
+
+
+input[type="text"]::placeholder {
+  color: #888;
+  font-size: small;
+  font-weight: bold;
 }
 
 .form-floating label {
