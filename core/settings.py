@@ -4,6 +4,7 @@ import environ
 # Initialise environment 
 env = environ.Env()
 environ.Env.read_env()
+ENVIRONMENT = env('ENVIRONMENT', default='production')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -92,20 +93,31 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
+# if env('ENVIRONMENT') == 'development':
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': env('NAME'),
+#             'USER': env('USER') ,
+#             'PASSWORD': env('PASSWORD') ,
+#             'HOST': 'localhost',
+#             'PORT': '5432',
+#         }
+#     }
+# else:
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-
         'ENGINE': 'django.db.backends.postgresql',
-
-        'NAME': env('NAME'),
-        'USER': env('USER') ,
-        'PASSWORD': env('PASSWORD') ,
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': 'railway',
+        'URL': env('POSTGRES_URL'),
+        'USER': env('PGUSER'),
+        'PASSWORD': env('PGPASSWORD'),
+        'HOST': env('PGHOST'),
+        'PORT': env('PGPORT'),
     }
 }
+
 
 
 # Password validation
@@ -171,7 +183,6 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 # ACCOUNT_RATE_LIMITS = 7
 ACCOUNT_AUTHENTICATION_METHOD = "username"
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "index"
-
 
 ACCOUNT_RATE_LIMITS = {
     # 'section_name': ('num_requests', 'time_period'),
