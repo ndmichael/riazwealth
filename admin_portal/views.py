@@ -248,7 +248,7 @@ def accrue_profits_for_all_users(request):
                 send_notification(
                     user=investment.user,
                     notification_type="investment",
-                    message=f"""${investment.daily_profit} has been accrue to your wallet."""
+                    message=f"""${investment.daily_profit:.2f} has been accrue to your wallet."""
                 )
                 messages.success(request, f'Profits accrued successfully for eligible users.')
         else:
