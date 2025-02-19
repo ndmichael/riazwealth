@@ -204,6 +204,11 @@ CELERY_BROKER_URL = "redis://localhost:6379/0"  # Change this to Railway Redis U
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
+# Trusted Origin
+CSRF_TRUSTED_ORIGINS = [
+    'https://riazvest-production.up.railway.app'
+]
+
 
 # LOGGING = {
 #     'version': 1,
