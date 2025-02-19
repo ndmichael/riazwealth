@@ -22,7 +22,8 @@ DEBUG = env("DEBUG")
 ALLOWED_HOSTS = [
     "localhost", 
     "127.0.0.1", 
-    "riazvest-production.up.railway.app"
+    "riazvest-production.up.railway.app",
+    "riazvest.com",
 ]
 
 
@@ -206,7 +207,8 @@ CELERY_TASK_SERIALIZER = 'json'
 
 # Trusted Origin
 CSRF_TRUSTED_ORIGINS = [
-    'https://riazvest-production.up.railway.app'
+    'https://riazvest-production.up.railway.app',
+    'riazvest.com'
 ]
 
 
