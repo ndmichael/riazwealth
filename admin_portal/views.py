@@ -26,9 +26,10 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-
+# Create a decorator to check if the user is a superuser (admin)
+@user_passes_test(lambda u: u.is_superuser or u.is_staff)
+@login_required
 def admin_dashboard(request):
-    
     investments = UserInvestment.objects.select_related("user", "investment_plan").order_by("-investment_date")
     plans = InvestmentPlan.objects.all()    
     withdrawals =  WithdrawalRequest.objects.all().order_by("-created_at").order_by("updated_at")

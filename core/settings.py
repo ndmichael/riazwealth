@@ -186,8 +186,14 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "none"
 # ACCOUNT_RATE_LIMITS = 7
-ACCOUNT_AUTHENTICATION_METHOD = "username"
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "index"
+
+# Ensure username is required
+ACCOUNT_USERNAME_REQUIRED = True
+
+# Ensure email is required
+ACCOUNT_EMAIL_REQUIRED = True
 
 ACCOUNT_RATE_LIMITS = {
     # 'section_name': ('num_requests', 'time_period'),
@@ -208,7 +214,7 @@ CELERY_TASK_SERIALIZER = 'json'
 # Trusted Origin
 CSRF_TRUSTED_ORIGINS = [
     'https://riazvest-production.up.railway.app',
-    'riazvest.com'
+    'https://riazvest.com'
 ]
 
 
