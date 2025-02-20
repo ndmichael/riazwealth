@@ -26,7 +26,7 @@ html, body{
 }
 
 
-input[type="text"]::placeholder {
+input[type="text"]::placeholder, input[type="password"]::placeholder {
   color: #888;
   font-size: small;
   font-weight: bold;
@@ -76,6 +76,18 @@ a{
   color: aliceblue;
   font-weight: 700;
   font-size: small;
+}
+
+/* Base styling for the icon */
+#toggler-icon {
+  font-size: 5.5rem !important;
+  color: #000;  /* Change to desired color */
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect */
+.navbar-toggler:hover #toggler-icon {
+  color: #007bff;  /* Change color on hover */
 }
 
 /** css for the hero page **/
