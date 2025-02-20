@@ -78,6 +78,26 @@ a{
   font-size: small;
 }
 
+/* Base styling for the icon */
+.navbar-toggler{
+  border: 1px solid var(--secondary-color);
+}
+
+#toggler-icon {
+  font-size: 1.8rem !important;
+  color: var(--secondary-color);  /* Change to desired color */
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect */
+.navbar-toggler:hover{
+  border: 1px solid var(--primary-color);
+}
+
+.navbar-toggler:hover #toggler-icon {
+  color: #007bff;  /* Change color on hover */
+}
+
 /** css for the hero page **/
 #hero-page{
     background: linear-gradient(rgba(29, 16, 80, 0.5), rgba(60, 16, 164, 0.7)), 
