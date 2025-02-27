@@ -79,13 +79,21 @@ a{
 }
 
 /* Base styling for the icon */
+.navbar-toggler{
+  border: 1px solid var(--secondary-color);
+}
+
 #toggler-icon {
-  font-size: 5.5rem !important;
-  color: #000;  /* Change to desired color */
+  font-size: 1.8rem !important;
+  color: var(--secondary-color);  /* Change to desired color */
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
 /* Hover effect */
+.navbar-toggler:hover{
+  border: 1px solid var(--primary-color);
+}
+
 .navbar-toggler:hover #toggler-icon {
   color: #007bff;  /* Change color on hover */
 }
@@ -99,14 +107,14 @@ a{
     min-height: 90vh;
 }
 
-#hero-page .row{
-    background: rgb(255, 255, 255, 0.5); overflow: hidden;
+/* #hero-page .row{
+    background: rgb(255, 255, 255, 0.5);
     box-shadow: 20px 20px 50px rgb(0, 0, 0, 0.5);
     border-top: 1px solid rgb(255, 255, 255, 0.5);
     border-left: 1px solid rgb(255, 255, 255, 0.5);
     backdrop-filter: blur(7px);
     border-radius: 15px;
-}
+} */
 
 
 #hero-page h1{
@@ -699,3 +707,44 @@ background-color: var(--secondary-color);
     color: #fff;
   }
 
+
+/*
+  == for smaller screen
+*/
+@media (max-width: 768px) {
+  .navbar {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .btn-1 {
+    padding: 1rem 2rem;
+    font-weight: 700;
+    font-size: 12px;
+    background: var(--secondary-color) !important;
+    color: var(--primary-color-one);
+    box-shadow: #32325d40 0px 50px 100px -20px,
+                 rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, 
+                 rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+  }
+
+  .btn-outline-1{
+      padding: .8rem 2rem;
+      font-weight: 700;
+      font-size: 14px;
+      border: 2px double var(--secondary-color);
+      background: whitesmoke !important;
+      color: var(--secondary-color);
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, 
+                  rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, 
+                  rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  }
+
+  .container, .container-fluid {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0 auto;
+  }
+
+}

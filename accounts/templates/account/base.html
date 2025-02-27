@@ -33,59 +33,78 @@
 
     <style>
       .aside{
-        width: 450px;
-        height: 100% !important;
-        position: fixed; 
+        height: 100vh !important;
         background: #003366;
         z-index: 100;
-        overflow-x: hidden;
-      }
+        overflow: auto;
+        position:  static;
+      }   
 
-      .content-wrapper{
-        width: 100%;
-        min-height: 100vh;
-        padding-left: 450px;
-        background: #f8f9fa;
+    .left-content {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
+
     </style>
     
 </head>
 <body>
 
-  <section class="aside d-flex flex-column align-items-start d-none d-md-block border-end">
-    <img src="{% static '/images/logo.PNG' %}" alt="" class="img-fluid">
-    <div class="text-center pt-4">
-      <h3 class="text-white display-5 fw-bolder">RiazVest</h3>
-      <p class="text-light h5 ">
-        Grow Your Wealth, Secure Your Future
-      </p>
-    </div>
-  </section>
-
-  <!-- Alertify JavaScript -->
-  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
-
-  <section class="content-wrapper">
-    <!-- 
-        ==== Pop up alert message ===
-    -->
-    {% for message in messages %}
-        <script>
-                alertify.set('notifier','position', 'top-right');
-                alertify.{{message.tags}}('{{message}}');
-        </script>
-        
-    {% endfor %}
-    {% block content %}
-
-    {% endblock content %}
-
-    <footer>
-      <div class="pt-lg-5 text-center" style="color: hsl(217, 10%, 50.8%)">&copy; {% trans "Copyright" %}
-        <strong><span>RiazVest Capital Investment.</span></strong><br />
-        {% trans "All Rights Reserved" %}
+  <section class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 left-content d-none d-md-block aside  m-0 p-0">
+        {% block left_content %}
+          <img src="{% static '/images/logo.PNG' %}" alt="" class="img-fluid w-100 bg-white">
+          <div class="text-center pt-4">
+            <h3 class="text-white display-5 fw-bolder">RiazVest</h3>
+            <p class="text-light h5 ">
+              Grow Your Wealth, Secure Your Future
+            </p>
+          </div>
+        {% endblock left_content %}
       </div>
-    </footer>
+      
+      <div 
+        class="
+          col-12 col-md-8 m-0 p-0 
+          bg-light 
+          d-flex flex-column align-items-center justify-content-center
+        "
+      >
+        <!-- Alertify JavaScript -->
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+
+        <!-- == Pop up alert message == -->
+        {% for message in messages %}
+        <script>
+            alertify.set('notifier','position', 'top-right');
+            alertify.{{message.tags}}('{{message}}');
+        </script>
+        {% endfor %}
+
+        <a href="" 
+          class="text-center d-block d-md-none">
+          <img 
+            src="{% static '/images/logo.PNG' %}" 
+            alt="" 
+            class="img-fluid"
+            style="width: 100px; height: 100px; object-fit:cover"
+          >
+        </a>
+        
+        {% block content %}
+        
+        {% endblock content %}
+
+        <footer>
+          <div class="pt-4 text-center" style="color: hsl(217, 10%, 50.8%)">&copy; {% trans "Copyright" %}
+            <strong><span>RiazVest Capital Investment.</span></strong><br />
+            {% trans "All Rights Reserved" %}
+          </div>
+        </footer>
+      </div>
+    </div>
   </section>
         
 <!-- Bootstrap js -->
