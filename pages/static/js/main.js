@@ -40,6 +40,29 @@ new Swiper(".clients-slider", {
   },
 });
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    var swiper = new Swiper(".myTestimonial", {
+        slidesPerView: 1,  // Default for small screens
+        spaceBetween: 20, // Space between slides
+        loop: true,  // Enables infinite scrolling
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+            640: { slidesPerView: 2, spaceBetween: 30 }, // Medium screens
+            1024: { slidesPerView: 3, spaceBetween: 40 }, // Large screens
+        },
+    });
+    console.log(`swiper ${swiper}`)
+});
+
+
 /**
  * Animation on scroll
  */
