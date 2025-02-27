@@ -289,30 +289,20 @@ background-color: var(--secondary-color);
     color: var(--secondary-color);
 }
 
-.carousel-inner{
-    margin-bottom: 4rem;
-}
-
-.carousel-inner .testimony{
+.swiper .testimony{
     padding: 20px;
     border-radius: 10px;
 }
 
-.carousel-inner .testimony p{
+.swiper .testimony p{
     padding-top: 25px;
     padding-bottom: 35px;
     color: #6a6d73;
 }
 
-.carousel-inner .testimony .choice-plan{
+.swiper .testimony .choice-plan{
     color: var(--secondary-color) !important;
     font-weight: 700;
-}
-
-.carousel-control-next .bi, .carousel-control-prev .bi{
-    font-size: 3.4rem;
-    color: var(--secondary-color);
-    
 }
 
 /** 
@@ -756,14 +746,6 @@ background-color: var(--secondary-color);
 }
 
 @media (max-width: 576px) {
-  .carousel-control-prev,
-  .carousel-control-next {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .carousel .row {
-    margin: 0;
-    padding: 1rem;
-  }
+
 }
 
