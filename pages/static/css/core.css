@@ -5,6 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     color: black;
+    /* outline: 1px solid rgba(255, 0, 0, 0.2); */
 }
 
 html, body{
@@ -108,7 +109,7 @@ a{
 }
 
 #hero-page .row{
-    background: rgb(255, 255, 255, 0.5); overflow: hidden;
+    background: rgb(255, 255, 255, 0.5);
     box-shadow: 20px 20px 50px rgb(0, 0, 0, 0.5);
     border-top: 1px solid rgb(255, 255, 255, 0.5);
     border-left: 1px solid rgb(255, 255, 255, 0.5);
@@ -712,9 +713,12 @@ background-color: var(--secondary-color);
   == for smaller screen
 */
 @media (max-width: 768px) {
+  .navbar {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
   .btn-1 {
-    /* padding-left: 2rem;
-    padding-right: 2rem; */
     padding: 1rem 2rem;
     font-weight: 700;
     font-size: 12px;
@@ -737,4 +741,29 @@ background-color: var(--secondary-color);
                   rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, 
                   rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   }
+
+  .container, .container-fluid {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0 auto;
+  }
+
+  #hero-page .row {
+    padding: 1rem;
+    margin: 0;
+  }
+
 }
+
+@media (max-width: 576px) {
+  .carousel-control-prev,
+  .carousel-control-next {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .carousel .row {
+    margin: 0;
+    padding: 1rem;
+  }
+}
+
