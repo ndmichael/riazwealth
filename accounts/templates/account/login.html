@@ -6,31 +6,31 @@
 
 {% block content %}
   <!-- Section: Log In -->
-      <article class="col-lg-8 mx-auto bg-light">
-            <form class="login p-2 p-md-5" method="POST" action="{% url 'account_login' %}">
-              <div>
-                <h1 class="h2 fw-bold text-center">{% trans "Welcome Back" %}</h1>
-                <p class="text-center text-muted">{% trans "Login again to start building your dollars portfolio." %}</p>
-              </div>
-              <br />
-              <div class="row">
-                {% csrf_token %}
-                {{ form|crispy }}
-                {% if redirect_field_value %}
-                  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                {% endif %}
-                <a class="button secondaryAction" href="{% url 'account_reset_password' %}"></a>
-                <div class="pb-4">
-                  <button class="btn btn-1 fw-bolder btn-lg col-12 primaryAction" type="submit">{% trans "Sign In" %}</button>
-                </div>
-                <div class="text-white d-flex justify-content-center">
-                  <span class="pe-2">{% trans "Don't have an Account" %}</span>
-                  <a class="text-primary fw-bolder secondaryAction d-flex" href="{% url 'account_signup' %}">
-                    {% trans "Sign up" %}
-                  </a>
-                </div>
-              </div>
-            </form>
-      </article>
+  <article class="col-lg-8 mx-auto">
+        <form class="login p-2 p-md-5" method="POST" action="{% url 'account_login' %}">
+          <div>
+            <h1 class="h2 fw-bold text-center">{% trans "Welcome Back" %}</h1>
+            <p class="text-center text-muted">{% trans "Login again to start building your dollars portfolio." %}</p>
+          </div>
+          <br />
+          <div class="row">
+            {% csrf_token %}
+            {{ form|crispy }}
+            {% if redirect_field_value %}
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <a class="button secondaryAction" href="{% url 'account_reset_password' %}"></a>
+            <div class="pb-4">
+              <button class="btn btn-1 fw-bolder btn-lg col-12 primaryAction" type="submit">{% trans "Sign In" %}</button>
+            </div>
+            <div class="text-white d-flex justify-content-center">
+              <span class="pe-2">{% trans "Don't have an Account" %}</span>
+              <a class="text-primary fw-bolder secondaryAction d-flex" href="{% url 'account_signup' %}">
+                {% trans "Sign up" %}
+              </a>
+            </div>
+          </div>
+        </form>
+  </article>
   <!-- Section: Log In -->
 {% endblock content %}
