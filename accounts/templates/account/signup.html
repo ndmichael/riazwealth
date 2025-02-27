@@ -7,34 +7,26 @@
 {% endblock %}
 
 {% block content %}
-<section class="container">
-  <div class="row">
-    <article class="col-12 col-md-10 mx-auto">
-      <form 
-          class="signup p-2 p-md-5 bg-light" 
-          id="signup_form" method="post" 
-          enctype="multipart/form-data" 
-          action="{% url 'account_signup' %}"
-        >
-          <header class="pb-4 text-center">
-            <h1 class="h3 fw-bolder">Begin Your Journey Today</h1>
-            <p class="text-muted">
-              Start building your future
-              and fullfill your dreams today
-            </p>
-          </header>
-          {% csrf_token %}
-          {% crispy form %}
-          {% if redirect_field_value %}
-            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-          {% endif %}
-          <button class="btn btn-1 btn-lg col-12 col-md-12 shadow" type="submit" value="create account">
-            {% trans "CREATE ACCOUNT" %}
-            </button>
-        </form>
-
-    </article>
-  </div>
-</section>
-
+  <form 
+    class="signup p-2 p-md-5 col-md-10 mx-auto" 
+    id="signup_form" method="post" 
+    enctype="multipart/form-data" 
+    action="{% url 'account_signup' %}"
+  >
+    <header class="pb-4 text-center">
+      <h1 class="h3 fw-bolder">Begin Your Journey Today</h1>
+      <p class="text-muted">
+        Start building your future
+        and fullfill your dreams today
+      </p>
+    </header>
+    {% csrf_token %}
+    {% crispy form %}
+    {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <button class="btn btn-1 btn-lg col-12  shadow" type="submit" value="create account">
+      {% trans "CREATE ACCOUNT" %}
+    </button>
+</article>
 {% endblock %}
