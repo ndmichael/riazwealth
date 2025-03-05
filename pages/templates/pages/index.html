@@ -305,7 +305,7 @@
 
             <!-- === REAL ESTATE column  === -->
             <article class="col-12  col-lg-4">
-                <a href="#" class="plans p-5 shadow rounded-5" id="realestates">
+                <a href="{% url 'plans' %}" class="plans p-5 shadow rounded-5" id="realestates">
                     <div class="plan-details" data-aos="zoom-in">
                         <h2 class="h3">Real Estates</h2>
                         <h3 class="h1 pricing">
@@ -332,17 +332,17 @@
                             <p>Referrals: 5%</p>
                         </div>
                         
-                        <button class="btn btn-outline-1 mt-4">
+                        <button class="btn btn-outline-1 mt-4 d-inline-block">
                             Invest Now
                         </button>
                     </div>
                 </a>
-            </article> -->
+            </article>
             
             <!-- === Manage the see more -->
             <article class="col-12 ms-auto">
                 <a 
-                    href="#" 
+                    href="{% url 'plans' %}" 
                     class="fw-bolder w-auto d-flex justify-content-end" 
                     style="font-size: 16px !important; color: darkslateblue;"
                 >
