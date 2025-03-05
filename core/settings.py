@@ -181,6 +181,11 @@ ACCOUNT_FORMS = {
     "signup": "accounts.forms.MyCustomSignupForm"
 }
 
+# auth backend allauth and django
+AUTHENTICATION_BACKENDS = [
+    "allauth.account.auth_backends.AuthenticationBackend",  # Allauth authentication
+    "django.contrib.auth.backends.ModelBackend",  # Default Django authentication
+]
 
 # Setups for allauth
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
