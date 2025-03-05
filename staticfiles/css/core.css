@@ -196,10 +196,38 @@ background-color: var(--secondary-color);
 }
 
 #investmentPlans .plans{
-    color: white !important;
-    font-weight: 700;
-    text-decoration: none;
-    padding-top: 3rem !important;
+  color: white !important;
+  font-weight: 700;
+  text-decoration: none;
+  padding-top: 3rem !important;
+  position: relative;
+  display: block;
+
+  /* Setup background */
+  background-position: top !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% 100%, cover;
+  transition: 0.5s ease-in-out;
+}
+
+/* === Animate background === 
+ ** This dont actually animate just kinda adjust the background color.
+*/
+.plans:hover{
+  background-size: 120% 120%, cover !important;
+  background-position: center !important;
+}
+
+/* Change button color on hover */
+.plans:hover .btn {
+  background-color: #ff5733 !important; /* Change to your desired color */
+  color: white;
+  border-color: #fa6948;
+}
+
+/* Smooth button transition */
+.btn {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #investmentPlans .plans .plan-details{
@@ -236,26 +264,21 @@ background-color: var(--secondary-color);
     text-shadow: -2px 4px 7px rgb(0,0,0,0.7);
 }
 
-#investmentPlans #oil-gas{
+#oil-gas{
     background: linear-gradient(to bottom, rgb(0, 51, 102, .4) 20%, rgb(0, 51, 102, .9)),
                 url("/static/images/oil_gas.jpg");
-    background-size: cover;
-    background-position:top;
 }
 
-#investmentPlans #realestates{
+#realestates{
     background: linear-gradient(to bottom, rgb(0, 51, 102, .4) 20%, rgb(0, 51, 102, .9)),
                 url("/static/images/realestate.jpg");
-    background-size: cover;
-    background-position:top;
 }
 
-#investmentPlans #silver_gold{
+#silver_gold{
     background: linear-gradient(to bottom, rgb(0, 51, 102, .4) 20%, rgb(0, 51, 102, .9)),
                 url("/static/images/precious_stones.jpg");
-    background-size: cover;
-    background-position:top;
 }
+
 
 /** === Achievements === **/
 #achievements{
