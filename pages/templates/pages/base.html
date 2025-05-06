@@ -128,13 +128,13 @@
           <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
             {% if request.user.is_authenticated and request.user.is_staff %}
             <li class="nav-item">
-              <a class="btn btn-success" href="{% url 'admindashboard' %}" target="_blank">
+              <a class="btn btn-success" href="{% url 'admindashboard' %}">
                 Welcome, {{user.username }}
               </a>
             </li>
             {% elif request.user.is_authenticated %}
               <li class="nav-item">
-                <a class="btn btn-success" href="{% url 'clientdashboard' %}" target="_blank">
+                <a class="btn btn-success" href="{% url 'clientdashboard' %}">
                   Welcome, {{user.username }}
                 </a>
               </li>
@@ -143,7 +143,6 @@
               class="btn btn-outline-light py-3 m-2" 
               href="{% url 'account_login' %}" 
               style="font-size: small; font-weight: 600; width: 8em;"
-              target="_blank"
             >
               Sign In
             </a>
@@ -151,7 +150,6 @@
             <a 
               class="btn btn-light py-3 my-2"
               href="{% url 'account_signup' %}" 
-              target="_blank"
               style="font-size: small; font-weight: 600; width: 12em;"
             >
               Get Started For Free
