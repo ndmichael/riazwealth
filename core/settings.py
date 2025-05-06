@@ -58,6 +58,9 @@ INSTALLED_APPS = [
 
     # set celery beat
     'django_celery_beat',
+
+    # anymail
+    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -111,7 +114,7 @@ if env('ENVIRONMENT') == 'development':
             'PORT': '5432',
         }
     }
-else:
+elif env('ENVIRONMENT') == 'production':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -211,6 +214,21 @@ LOGIN_REDIRECT_URL = 'user_dashboard'
 ACCOUNT_LOGOUT_REDIRECT_URL = "account_login"
 # ACCOUNT_LOGIN_ON_SIGNUP = False
 # ACCOUNT_SIGNUP_REDIRECT_URL = "account_login"
+
+# Mailgun setup
+# Use Anymail's Mailgun backend
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+
+# Your Mailgun API key and domain
+ANYMAIL = {
+    "MAILGUN_API_KEY": "your-mailgun-api-key",
+    "MAILGUN_SENDER_DOMAIN": "your-sandbox-or-domain.mailgun.org",
+}
+
+# Optional email defaults
+DEFAULT_FROM_EMAIL = "Your App Name <noreply@your-domain.com>"
+SERVER_EMAIL = "server@your-domain.com"
+
 
 # Celery settings
 CELERY_BROKER_URL = "redis://localhost:6379/0"  # Change this to Railway Redis URL in production
