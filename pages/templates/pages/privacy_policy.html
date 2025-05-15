@@ -1,0 +1,83 @@
+{% extends 'pages/base.html' %} 
+{% load static %} 
+
+{% block content %}
+<!--=== THE PRIVACY && POLICY PAGE ===-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Privacy Policy</title>
+</head>
+<body>
+    <section class="breadcrumb-pages">
+        <div class="container">
+            <section class="row">
+                <article class="col-12 col-lg-8 offset-lg-2 mx-auto text-center">
+                    <h1>Privacy and Policy</h1>
+                    <p class="text-light">
+                        Your privacy matters. We are committed to protecting your personal data and ensuring transparency in how it's used.
+                    </p>
+                </article>
+            </section>
+        </div>
+    </section>
+
+    <!--=== BREADCRUMB SECTION ===-->
+    <nav class="breadcrumbLink py-4" style="background: #dee2e6;">
+        <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item">Privacy policies</li>
+        </ol>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row">
+            <article class="col-12 col-md-10 offset-md-1">
+                <h1>Privacy Policy</h1>
+
+                <p>Your privacy is important to us. This Privacy Policy explains how we collect, use, and safeguard your information when you use our investment platform.</p>
+
+                <h2>1. Information We Collect</h2>
+                <ul>
+                    <li><strong>Personal Information:</strong> Name, email address, and payment wallet details.</li>
+                    <li><strong>Account Information:</strong> Login credentials and user ID.</li>
+                    <li><strong>Transaction Data:</strong> Records of investments, withdrawals, referral bonuses, and profits.</li>
+                    <li><strong>Technical Data:</strong> Cookies (for security and functionality).</li>
+                </ul>
+
+                <h2>2. How We Use Your Information</h2>
+                <ul>
+                    <li>To create and manage your user account</li>
+                    <li>To authenticate your identity and ensure platform security</li>
+                    <li>To process transactions (investments and withdrawals)</li>
+                    <li>To send <strong>transactional emails only</strong>, such as account alerts, system updates, or legal notifications</li>
+                    <li>To respond to customer support inquiries</li>
+                    <li>To comply with regulatory and legal obligations</li>
+                </ul>
+                <p><strong>We do not send promotional or marketing emails. All communications are strictly related to platform activity and legal requirements.</strong></p>
+
+                <h2>3. Information Sharing</h2>
+                <p>We do not sell, trade, or rent users’ personal information. We may share data with trusted third parties only when necessary to provide our services (e.g., payment processors) and only under strict confidentiality obligations.</p>
+
+                <h2>4. Data Security</h2>
+                <p>We implement appropriate technical and organizational security measures to protect your personal data against unauthorized access, alteration, or disclosure.</p>
+
+                <h2>5. Your Rights</h2>
+                <p>You have the right to access, correct, or delete your personal data. You may request this by contacting us at {{ support_email }}</p>
+
+                <h2>6. Cookies</h2>
+                <p>We use cookies only for essential functionality and security. By using our platform, you consent to the use of cookies.</p>
+
+                <h2>7. Changes to This Policy</h2>
+                <p>We may update this Privacy Policy from time to time. When we do, we will revise the "Last updated" date at the top of the page.</p>
+
+                <h2>8. Contact Us</h2>
+                <p>If you have any questions about this Privacy Policy or your personal data, please contact us at <a href="mailto:{{ s }}">support@riazvest.com</a>.</p>
+            </article>
+        </div>
+    </div>
+
+{% endblock content %}
