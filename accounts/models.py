@@ -79,7 +79,7 @@ class Profile(models.Model):
     bitcoin_wallet = models.CharField(max_length=150)
     ethereum_wallet = models.CharField(max_length=150)
     usdt_wallet = models.CharField(max_length=150)
-    referral_code = models.CharField(max_length=10, unique=True, blank=True)
+    referral_code = models.CharField(max_length=10, unique=True, blank=True, null=True)
 
     def __str__(self) -> str:
         return f"{self.user.username}"
