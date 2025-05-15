@@ -44,3 +44,7 @@ def contact(request):
         'form': form,
     }
     return render(request, 'pages/contact.html', context)
+
+
+def privacy_policy(request):
+    return render(request, "pages/privacy_policy.html")
