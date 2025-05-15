@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import (
-    index, about, faqs, plans, partnerships, contact
+    index, about, faqs, plans, partnerships, contact,
+    privacy_policy
 )
 
 
@@ -11,4 +12,5 @@ urlpatterns = [
     path('plans/', plans, name='plans'),
     path('partnerships/', partnerships, name='partnerships'),
     path('contact/', contact, name='contact'),
+    path("privacy-policy/", privacy_policy, name="privacy-policy"),
 ]
