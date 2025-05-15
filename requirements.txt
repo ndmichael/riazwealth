@@ -16,9 +16,11 @@ cron-descriptor==1.4.5
 cryptography==43.0.1
 Django==5.1.1
 django-allauth==65.0.2
+django-anymail==13.0
 django-celery-beat==2.7.0
 django-crispy-forms==2.3
 django-environ==0.11.2
+django-redis==5.4.0
 django-timezone-field==7.1
 gunicorn==23.0.0
 idna==3.10
