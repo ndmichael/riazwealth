@@ -19,9 +19,10 @@ from decimal import Decimal
 from utils.total_investments_profit import (
     get_user_total_profits, 
     get_total_referral_bonus,
-    get_total_investment_amount
+    get_total_investment_amount,
 )
 from utils.process_form import handle_user_profile_form
+from utils.market import MarketService
 
 import logging
 
@@ -135,3 +136,16 @@ def mark_as_read(request):
         except UserNotification.DoesNotExist:
             return JsonResponse({'success': False, 'error': 'Notification not found'})
     return JsonResponse({'success': False, 'error': 'Invalid request'})
+
+
+def dashboard_view(request):
+    crypto = MarketService.get_crypto_prices()
+    stocks = MarketService.get_stock_prices()
+    print(f"crypto: {crypto}")
+    context = {
+        "crypto_prices": crypto,
+        "stock_prices": stocks,
+        "market_view": request.GET.get("market", "crypto")  # Toggle
+    }
+    return render(request, "users/dashboard.html", context)
+
