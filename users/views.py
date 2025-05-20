@@ -89,6 +89,10 @@ def client_dashboard(request):
         elif "user_form_submit" in request.POST: 
             user_form, profile_form = handle_user_profile_form(request, post_data=True)
 
+    crypto = MarketService.get_crypto_prices()
+    stocks = MarketService.get_stock_prices()
+    print("crypto: ", stocks)
+
     context ={
         "title": "client dashboard",
         "user": user,
@@ -110,6 +114,11 @@ def client_dashboard(request):
         "total_profits": total_profits,
         "total_bonuses": total_bonuses,
         "invested_amount": invested_amount,
+
+        #market results
+        "crypto_prices": crypto,
+        "stock_prices": stocks,
+        "market_view": request.GET.get("market", "crypto")
     }
     return render(request, "users/client_dashboard.html", context)
 
