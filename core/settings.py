@@ -229,6 +229,9 @@ ANYMAIL = {
 DEFAULT_FROM_EMAIL = "Your App Name <noreply@your-domain.com>"
 SERVER_EMAIL = "server@your-domain.com"
 
+# For stock market predictions
+ALPHA_VANTAGE_API_KEY = env("ALPHA_VANTAGE_API_KEY")
+
 
 # Celery settings
 CELERY_BROKER_URL = "redis://localhost:6379/0"  # Change this to Railway Redis URL in production
