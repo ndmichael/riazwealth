@@ -1,0 +1,94 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+<section id="referral">
+  <div class="container">
+    <article class="row gy-4">
+      <div class="col-12 col-lg-10 mx-auto text-center">
+        <div class="h2">Your Live Market Place.</div>
+
+        <div class="market-toggle my-3">
+          <a href="?market=crypto" class="btn btn-outline-success {% if market_view == 'crypto' %}active{% endif %}">Crypto</a>
+          <a href="?market=stock" class="btn btn-outline-secondary {% if market_view == 'stock' %}active{% endif %}">Stocks</a>
+        </div>
+
+        <ul class="nav nav-tabs mb-4">
+          <li class="nav-item">
+            <a class="nav-link {% if active_tab == 'crypto' %}active{% endif %}" href="?tab=crypto">Crypto</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if active_tab == 'stock' %}active{% endif %}" href="?tab=stock">Stock</a>
+          </li>
+        </ul>
+
+        {% if market_view == 'crypto' %}
+          <h5 class="mb-3">Live Crypto Prices</h5>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover table-sm custom-table">
+              <thead class="table-success">
+                <tr>
+                  <th>Name</th>
+                  <th>Symbol</th>
+                  <th>Price (USD)</th>
+                  <th>Market Cap</th>
+                  <th>Volume (24h)</th>
+                  <th>Change (24h)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for coin, data in crypto_prices.items %}
+                  <tr>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.symbol|upper }}</td>
+                    <td>${{ data.price|floatformat:2 }}</td>
+                    <td>${{ data.market_cap }}</td>
+                    <td>${{ data.volume_24h }}</td>
+                    <td class="{% if data.change_24h < 0 %}text-danger{% else %}text-success{% endif %}">
+                      {{ data.change_24h|floatformat:2 }}%
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+        {% elif market_view == 'stock' %}
+          <h5 class="mb-3">Live Stock Prices</h5>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover table-sm custom-table">
+              <thead class="table-secondary">
+                <tr>
+                  <th>Symbol</th>
+                  <th>Price</th>
+                  <th>Open</th>
+                  <th>High</th>
+                  <th>Low</th>
+                  <th>Volume</th>
+                  <th>Change</th>
+                  <th>Last Trading Day</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for symbol, data in stock_prices.items %}
+                  <tr>
+                    <td>{{ data.symbol }}</td>
+                    <td>${{ data.price|floatformat:2 }}</td>
+                    <td>${{ data.open|floatformat:2 }}</td>
+                    <td>${{ data.high|floatformat:2 }}</td>
+                    <td>${{ data.low|floatformat:2 }}</td>
+                    <td>{{ data.volume }}</td>
+                    <td class="{% if data.change < 0 %}text-danger{% else %}text-success{% endif %}">
+                      {{ data.change_percent }}
+                    </td>
+                    <td>{{ data.latest_trading_day }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% endif %}
+      </div>
+    </article>
+  </div>
+</section>
