@@ -91,7 +91,6 @@ def client_dashboard(request):
 
     crypto = MarketService.get_crypto_prices()
     stocks = MarketService.get_stock_prices()
-    print("crypto: ", stocks)
 
     context ={
         "title": "client dashboard",
