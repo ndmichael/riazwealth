@@ -13,14 +13,7 @@
           <a href="?market=stock" class="btn btn-outline-secondary {% if market_view == 'stock' %}active{% endif %}">Stocks</a>
         </div>
 
-        <ul class="nav nav-tabs mb-4">
-          <li class="nav-item">
-            <a class="nav-link {% if active_tab == 'crypto' %}active{% endif %}" href="?tab=crypto">Crypto</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {% if active_tab == 'stock' %}active{% endif %}" href="?tab=stock">Stock</a>
-          </li>
-        </ul>
+        <!-- -->
 
         {% if market_view == 'crypto' %}
           <h5 class="mb-3">Live Crypto Prices</h5>
