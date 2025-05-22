@@ -102,6 +102,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+print(f"environment: {ENVIRONMENT} env: {env('ENVIRONMENT')}")
 
 if ENVIRONMENT == 'development':
     DATABASES = {
