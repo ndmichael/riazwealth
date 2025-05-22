@@ -8,6 +8,7 @@ class MarketService:
 
 
     @staticmethod
+
     def get_crypto_prices():
         cache_key = 'market:crypto_prices'
         prices = cache.get(cache_key)
@@ -17,9 +18,8 @@ class MarketService:
         url = "https://api.coingecko.com/api/v3/coins/markets"
         params = {
             "vs_currency": "usd",
-            "ids": "bitcoin,ethereum",
-            "order": "market_cap_desc",
-            "per_page": 2,
+            "order": "market_cap_desc",  # top by market cap
+            "per_page": 10,              # top 10
             "page": 1,
             "sparkline": False
         }
@@ -44,6 +44,42 @@ class MarketService:
 
         return {}
 
+    # def get_crypto_prices():
+    #     cache_key = 'market:crypto_prices'
+    #     prices = cache.get(cache_key)
+    #     if prices:
+    #         return prices
+
+    #     url = "https://api.coingecko.com/api/v3/coins/markets"
+    #     params = {
+    #         "vs_currency": "usd",
+    #         "ids": "bitcoin,ethereum",
+    #         "order": "market_cap_desc",
+    #         "per_page": 2,
+    #         "page": 1,
+    #         "sparkline": False
+    #     }
+
+    #     response = requests.get(url, params=params)
+
+    #     if response.status_code == 200:
+    #         data = response.json()
+    #         formatted = {
+    #             coin['id']: {
+    #                 "symbol": coin['symbol'],
+    #                 "name": coin['name'],
+    #                 "price": coin['current_price'],
+    #                 "market_cap": coin['market_cap'],
+    #                 "volume_24h": coin['total_volume'],
+    #                 "change_24h": coin['price_change_percentage_24h']
+    #             }
+    #             for coin in data
+    #         }
+    #         cache.set(cache_key, formatted, timeout=MarketService.CACHE_TIMEOUT)
+    #         return formatted
+
+    #     return {}
+
 
     @staticmethod
     def get_stock_prices(symbols=None):
@@ -56,7 +92,9 @@ class MarketService:
             return prices
 
         # Set default symbols if none provided
-        symbols = symbols or ['AAPL', 'GOOGL', 'MSFT']
+        symbols = symbols or ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA',]
+                                # 'NVDA', 'META', 'NFLX', 'INTC', 'IBM',
+                                # 'AMD', 'BA', 'BABA', 'PYPL', 'ORCL']
         api_key = settings.ALPHA_VANTAGE_API_KEY  # Add this to your .env or settings
 
         url = "https://www.alphavantage.co/query"
