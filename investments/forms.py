@@ -14,7 +14,10 @@ class MakePaymentForm(forms.Form):
         decimal_places=2, 
         widget=forms.NumberInput({'class': 'form-control-lg', 'min':100})
     )
-    payment_type = forms.ChoiceField(choices=payment_method, widget=forms.Select({'class': 'form-select form-select-lg'}))
+    payment_type = forms.ChoiceField(
+        choices=payment_method, 
+        widget=forms.Select({'class': 'form-select form-select-lg', 'autocomplete': 'off'})
+    )
 
 
 class ConfirmPaymentForm(forms.Form):

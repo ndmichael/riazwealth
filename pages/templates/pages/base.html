@@ -311,28 +311,28 @@
   const el = document.getElementById("id_payment_type");
   const usdt = document.getElementById("usdt");
   const btc = document.getElementById("btc");
-  const ethereum = document.getElementById("ethereum");
-  console.log("usdt: ", usdt)
-  console.log("ubtc: ", btc)
+  const eth = document.getElementById("ethereum");
+  //console.log("usdt: ", usdt)
+  //console.log("ubtc: ", btc)
 
   el.addEventListener("change", function handleChange(event) {
     const result = event.target.value;
     if (result === "usdt") {
       usdt.style.display = "block";
       btc.style.display = "none";
-      ethereum.style.display = "none";
+      eth.style.display = "none";
     } else if (result === "bitcoin") {
       usdt.style.display = "none";
       btc.style.display = "block";
-      ethereum.style.display = "none";
+      eth.style.display = "none";
     } else if (result === "ethereum") {
       usdt.style.display = "none";
       btc.style.display = "none";
-      ethereum.style.display = "block";
+      eth.style.display = "block";
     } else {
       usdt.style.display = "none";
       btc.style.display = "none";
-      ethereum.style.display = "none";
+      eth.style.display = "none";
     }
   });
 </script>
