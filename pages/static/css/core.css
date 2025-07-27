@@ -77,6 +77,11 @@ a{
   color: aliceblue;
   font-weight: 700;
   font-size: small;
+  transition: color 0.3s ease;
+}
+
+.navbar-expand-xl .nav-item a:hover {
+  color:  rgba(255, 255, 255, 0.75);  /* Light transparent hover */
 }
 
 /* Base styling for the icon */
