@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from .models import InvestmentPlan
+from django.contrib.auth.decorators import login_required
 from .forms import MakePaymentForm, ConfirmPaymentForm
 from django.contrib import messages
 from utils.process_form import handle_investment_creation
 
 
-
+@login_required
 def buy_investment(request, plan: str):
     # Get the investment plan by name
     try:
