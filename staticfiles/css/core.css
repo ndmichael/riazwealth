@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: black;
+    color: inherit;
     /* outline: 1px solid rgba(255, 0, 0, 0.2); */
 }
 
@@ -26,6 +26,18 @@ html, body{
   --section-padding: 5.5rem 10px;
 }
 
+div#google_translate_element span, 
+.goog-te-menu-value span, 
+.goog-te-banner-frame, 
+.goog-te-gadget {
+    color: black !important;
+    background-color: inherit !important;
+    font-size: .8rem;
+}
+
+img.goog-te-gadget-icon {
+    display: none !important;
+}
 
 input[type="text"]::placeholder, input[type="password"]::placeholder {
   color: #888;
@@ -77,6 +89,11 @@ a{
   color: aliceblue;
   font-weight: 700;
   font-size: small;
+  transition: color 0.3s ease;
+}
+
+.navbar-expand-xl .nav-item a:hover {
+  color:  rgba(255, 255, 255, 0.75);  /* Light transparent hover */
 }
 
 /* Base styling for the icon */
