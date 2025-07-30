@@ -35,6 +35,9 @@ div#google_translate_element span,
     font-size: .8rem;
 }
 
+img.goog-te-gadget-icon {
+    display: none !important;
+}
 
 input[type="text"]::placeholder, input[type="password"]::placeholder {
   color: #888;
