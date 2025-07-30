@@ -124,14 +124,15 @@
                 </a
               >
             </li>
-          </ul>  
 
-          <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
             <li class="nav-item">
               <a class="nav-link" href="#">
                   <span style="height: 20px !important;">{% google_translate %}</span>
               </a>
             </li>
+          </ul>  
+
+          <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
             {% if request.user.is_authenticated and request.user.is_staff %}
             <li class="nav-item">
               <a class="btn btn-success" href="{% url 'admindashboard' %}">
