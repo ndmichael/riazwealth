@@ -61,6 +61,7 @@ INSTALLED_APPS = [
 
     # anymail
     'anymail',
+    'google_translate',
 ]
 
 MIDDLEWARE = [
