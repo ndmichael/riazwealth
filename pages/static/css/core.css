@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: black;
+    color: inherit;
     /* outline: 1px solid rgba(255, 0, 0, 0.2); */
 }
 
@@ -24,6 +24,15 @@ html, body{
   --secondary-color-400: rgb(50, 205, 50, .4);
   --secondary-color-200: rgb(50, 205, 50, .2);
   --section-padding: 5.5rem 10px;
+}
+
+div#google_translate_element span, 
+.goog-te-menu-value span, 
+.goog-te-banner-frame, 
+.goog-te-gadget {
+    color: black !important;
+    background-color: inherit !important;
+    font-size: .8rem;
 }
 
 
