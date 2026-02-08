@@ -208,7 +208,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 
 ACCOUNT_RATE_LIMITS = {
     # 'section_name': ('num_requests', 'time_period'),
-    'login_failed': '5/600s',  # 5 attempts per 600 seconds (10 minutes)
+    'login_failed': "5/600s",  # 5 attempts per 600 seconds (10 minutes)
 }
 
 # or any other page
