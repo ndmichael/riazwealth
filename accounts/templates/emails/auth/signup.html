@@ -1,9 +1,16 @@
 {% extends "emails/brand_base.html" %}
 
+{% block title %}
+Confirm your email
+{% endblock %}
+
 {% block content %}
 <p style="margin-bottom:24px">
   Please confirm your email address to activate your account.
 </p>
 
-{% include "emails/components/button.html" %}
+{% include "emails/components/button.html" with
+   action_url=activate_url
+   action_label="Confirm Email"
+%}
 {% endblock %}
