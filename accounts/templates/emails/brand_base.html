@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
   <body style="margin:0;padding:0;background:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif;">
+
     <table width="100%" cellpadding="0" cellspacing="0">
       <tr>
         <td align="center" style="padding:40px 10px">
-          <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:8px;overflow:hidden">
+          <table width="600" cellpadding="0" cellspacing="0"
+                 style="background:#ffffff;border-radius:8px;overflow:hidden">
 
             <!-- Header -->
             <tr>
               <td style="padding:24px;text-align:center;border-bottom:1px solid #e5e7eb">
-                <img src="{{ brand.logo_url }}" alt="{{ brand.app_name }}"
-                     height="40" style="display:block;margin:0 auto">
+                <img
+                  src="{{ brand.logo_url|default:'https://riazvest.com/static/images/logo.PNG' }}"
+                  alt="{{ brand.app_name|default:'Riazvest Investments' }}"
+                  height="40"
+                  style="display:block;margin:0 auto;max-width:100%;">
               </td>
             </tr>
 
@@ -18,12 +23,14 @@
             <tr>
               <td style="padding:32px">
                 <h1 style="margin:0 0 16px;font-size:22px;color:#111">
-                  {{ title }}
+                    {% block title %}{{ title|default:"" }}{% endblock %}
                 </h1>
 
+                {% if message %}
                 <p style="margin:0 0 20px;font-size:15px;color:#374151;line-height:1.6">
                   {{ message }}
                 </p>
+                {% endif %}
 
                 {% block content %}{% endblock %}
               </td>
@@ -31,16 +38,23 @@
 
             <!-- Footer -->
             <tr>
-              <td style="padding:24px;background:#f9fafb;border-top:1px solid #e5e7eb;font-size:12px;color:#6b7280;text-align:center">
-                © {{ brand.app_name }} ·
-                <a href="{{ brand.app_url }}" style="color:#6b7280;text-decoration:none">
+              <td style="padding:24px;background:#f9fafb;border-top:1px solid #e5e7eb;
+                         font-size:12px;color:#6b7280;text-align:center">
+
+                © {{ brand.app_name|default:"Riazvest" }} ·
+                <a href="{{ brand.app_url|default:'https://riazvest.com' }}"
+                   style="color:#6b7280;text-decoration:none">
                   Visit website
                 </a>
+
                 <br><br>
+
                 Need help?
-                <a href="mailto:{{ brand.support_email }}" style="color:#2563eb;text-decoration:none">
-                  {{ brand.support_email }}
+                <a href="mailto:{{ brand.support_email|default:'support@riazvest.com' }}"
+                   style="color:#2563eb;text-decoration:none">
+                  {{ brand.support_email|default:"support@riazvest.com" }}
                 </a>
+
               </td>
             </tr>
 
@@ -48,5 +62,6 @@
         </td>
       </tr>
     </table>
+
   </body>
 </html>
