@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ("sites", "0002_alter_domain_unique"),
-        ("accounts", "000X_previous"),  # replace with actual previous migration
+        ("accounts", "0005_alter_profile_referral_code.py"), 
     ]
 
     operations = [
