@@ -195,7 +195,7 @@ AUTHENTICATION_BACKENDS = [
 # Setups for allauth
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_EMAIL_VERIFICATION = "optional"
 # ACCOUNT_RATE_LIMITS = 7
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "index"
@@ -214,22 +214,24 @@ ACCOUNT_RATE_LIMITS = {
 # or any other page
 LOGIN_REDIRECT_URL = 'user_dashboard'
 ACCOUNT_LOGOUT_REDIRECT_URL = "account_login"
-# ACCOUNT_LOGIN_ON_SIGNUP = False
+ACCOUNT_LOGIN_ON_SIGNUP = False
 # ACCOUNT_SIGNUP_REDIRECT_URL = "account_login"
 
-# Mailgun setup
-# Use Anymail's Mailgun backend
-EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+# RESEND SETUP
+# Use Resend backend
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-# Your Mailgun API key and domain
-ANYMAIL = {
-    "MAILGUN_API_KEY": "your-mailgun-api-key",
-    "MAILGUN_SENDER_DOMAIN": "your-sandbox-or-domain.mailgun.org",
-}
+EMAIL_HOST = "smtp.resend.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = "resend"
+EMAIL_HOST_PASSWORD = env("RESEND_API_KEY")
 
 # Optional email defaults
-DEFAULT_FROM_EMAIL = "Your App Name <noreply@your-domain.com>"
-SERVER_EMAIL = "server@your-domain.com"
+DEFAULT_FROM_EMAIL = "noreply@riazvest.com"
+SERVER_EMAIL = "contact@riazvest.com"
+
 
 # For stock market predictions
 ALPHA_VANTAGE_API_KEY = env("ALPHA_VANTAGE_API_KEY")
