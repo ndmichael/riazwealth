@@ -27,7 +27,6 @@ ALLOWED_HOSTS = [
     "riazvest.com",
 ]
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -62,7 +61,11 @@ INSTALLED_APPS = [
     # anymail
     'anymail',
     'google_translate',
+
+    'django.contrib.sites'
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -230,7 +233,9 @@ EMAIL_HOST_PASSWORD = env("RESEND_API_KEY")
 
 # Optional email defaults
 DEFAULT_FROM_EMAIL = "noreply@riazvest.com"
-SERVER_EMAIL = "contact@riazvest.com"
+SERVER_EMAIL = "support@riazvest.com"
+
+ACCOUNT_EMAIL_HTML_EMAIL = True
 
 
 # For stock market predictions
@@ -241,6 +246,10 @@ ALPHA_VANTAGE_API_KEY = env("ALPHA_VANTAGE_API_KEY")
 CELERY_BROKER_URL = "redis://localhost:6379/0"  # Change this to Railway Redis URL in production
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
+
+
+
+SITE_URL = "http://127.0.0.1:8000"
 
 # Trusted Origin
 CSRF_TRUSTED_ORIGINS = [
