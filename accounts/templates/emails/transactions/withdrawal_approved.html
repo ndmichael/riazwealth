@@ -1,0 +1,18 @@
+{% extends "emails/brand_base.html" %}
+
+{% block content %}
+<p>
+  Your withdrawal request has been approved.
+</p>
+
+<table cellpadding="0" cellspacing="0" style="margin-top:16px;font-size:14px">
+  <tr>
+    <td><strong>Amount:</strong></td>
+    <td style="padding-left:10px">{{ amount }}</td>
+  </tr>
+  <tr>
+    <td><strong>Method:</strong></td>
+    <td style="padding-left:10px">{{ method }}</td>
+  </tr>
+</table>
+{% endblock %}
