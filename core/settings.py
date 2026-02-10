@@ -204,7 +204,7 @@ ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "index"
 
-ACCOUNT_ADAPTER = "accounts.adapters.AccountAdapter"
+ACCOUNT_ADAPTER = "allauth.account.adapter.DefaultAccountAdapter"
 EMAIL_TIMEOUT = 10
 
 # Ensure username is required
