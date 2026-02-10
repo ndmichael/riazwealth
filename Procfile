@@ -1,1 +1,1 @@
-web: python manage.py migrate --noinput && gunicorn core.wsgi
+web: gunicorn core.wsgi 
