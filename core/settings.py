@@ -225,19 +225,27 @@ ACCOUNT_LOGIN_ON_SIGNUP = False
 # ACCOUNT_SIGNUP_REDIRECT_URL = "account_login"
 
 # RESEND SETUP
-# Use Resend backend
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-
-EMAIL_HOST = "smtp.resend.com"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-EMAIL_HOST_USER = "noreply@riazvest.com"
-EMAIL_HOST_PASSWORD = env("RESEND_API_KEY")
-
-# Optional email defaults
+# settings.py
+ACCOUNT_ADAPTER = "accounts.adapters.AccountAdapter"
 DEFAULT_FROM_EMAIL = "noreply@riazvest.com"
-SERVER_EMAIL = "support@riazvest.com"
+RESEND_API_KEY = env("RESEND_API_KEY")
+
+# no EMAIL_HOST*, no EMAIL_BACKEND
+
+
+# Use Resend backend
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+# EMAIL_HOST = "smtp.resend.com"
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+
+# EMAIL_HOST_USER = "noreply@riazvest.com"
+# EMAIL_HOST_PASSWORD = env("RESEND_API_KEY")
+
+# # Optional email defaults
+# DEFAULT_FROM_EMAIL = "noreply@riazvest.com"
+# SERVER_EMAIL = "support@riazvest.com"
 
 ACCOUNT_EMAIL_HTML_EMAIL = True
 
