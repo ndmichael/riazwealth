@@ -18,6 +18,7 @@ def fix_sites(apps, schema_editor):
         ON CONFLICT (id) DO NOTHING;
         """)
 
+        
         # 3. Mark sites migration as applied
         cursor.execute("""
         INSERT INTO django_migrations (app, name, applied)
