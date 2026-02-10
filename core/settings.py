@@ -199,10 +199,13 @@ AUTHENTICATION_BACKENDS = [
 # Setups for allauth
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_EMAIL_VERIFICATION = "optional"
 # ACCOUNT_RATE_LIMITS = 7
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "index"
+
+ACCOUNT_ADAPTER = "accounts.adapters.AccountAdapter"
+EMAIL_TIMEOUT = 10
 
 # Ensure username is required
 ACCOUNT_USERNAME_REQUIRED = True
@@ -237,6 +240,8 @@ DEFAULT_FROM_EMAIL = "noreply@riazvest.com"
 SERVER_EMAIL = "support@riazvest.com"
 
 ACCOUNT_EMAIL_HTML_EMAIL = True
+
+
 
 
 # For stock market predictions
