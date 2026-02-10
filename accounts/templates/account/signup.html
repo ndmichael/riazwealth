@@ -8,7 +8,8 @@
 
 {% block content %}
   <form 
-    class="signup p-2" 
+    class="signup p-2 w-100" 
+    style="max-width: 620px;"
     id="signup_form" method="post" 
     enctype="multipart/form-data" 
     action="{% url 'account_signup' %}"
