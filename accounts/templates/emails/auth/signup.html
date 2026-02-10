@@ -1,16 +1,24 @@
 {% extends "emails/brand_base.html" %}
 
 {% block title %}
-Confirm your email
+Verify your email address
 {% endblock %}
 
 {% block content %}
-<p style="margin-bottom:24px">
-  Please confirm your email address to activate your account.
+<p style="margin-bottom:16px">
+  Thanks for signing up to <strong>Riazvest</strong>.
 </p>
 
-{% include "emails/components/button.html" with
-   action_url=activate_url
-   action_label="Confirm Email"
+<p style="margin-bottom:24px">
+  To help secure your account and ensure you receive important notifications, please confirm your email address.
+  <p>
+    You can continue using your account without verification, but some features may be limited until your email is confirmed.
+  </p>
+</p>
+
+{% include "emails/components/button.html"
+   with action_url=activate_url
+        action_label="Verify Email"
 %}
+
 {% endblock %}

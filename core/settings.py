@@ -204,9 +204,6 @@ ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "index"
 
-ACCOUNT_ADAPTER = "accounts.adapters.AccountAdapter"
-EMAIL_TIMEOUT = 10
-
 # Ensure username is required
 ACCOUNT_USERNAME_REQUIRED = True
 
@@ -229,6 +226,7 @@ ACCOUNT_LOGIN_ON_SIGNUP = False
 ACCOUNT_ADAPTER = "accounts.adapters.AccountAdapter"
 DEFAULT_FROM_EMAIL = "noreply@riazvest.com"
 RESEND_API_KEY = env("RESEND_API_KEY")
+EMAIL_TIMEOUT = 10
 
 # no EMAIL_HOST*, no EMAIL_BACKEND
 
