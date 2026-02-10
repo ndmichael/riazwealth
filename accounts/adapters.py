@@ -8,19 +8,25 @@ resend.api_key = os.environ["RESEND_API_KEY"]
 
 class AccountAdapter(DefaultAccountAdapter):
     def send_mail(self, template_prefix, email, context):
-        subject = render_to_string(
-            f"{template_prefix}_subject.txt", context
-        ).strip()
-
-        html = render_to_string(
-            f"{template_prefix}_message.html", context
+        subject = "".join(
+            render_to_string(f"{template_prefix}_subject.txt", context).splitlines()
         )
 
-        text = strip_tags(html)
+        html = None
+        try:
+            html = render_to_string(f"{template_prefix}_message.html", context)
+        except Exception:
+            pass
+
+        text = (
+            render_to_string(f"{template_prefix}_message.txt", context)
+            if html is None
+            else strip_tags(html)
+        )
 
         resend.Emails.send({
             "from": "Riazvest <noreply@riazvest.com>",
-            "to": email,
+            "to": [email],
             "subject": subject,
             "html": html,
             "text": text,
