@@ -25,6 +25,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1", 
     "riazvest-production.up.railway.app",
     "riazvest.com",
+    "www.riazvest.com"
 ]
 
 # Application definition
