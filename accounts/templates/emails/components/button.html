@@ -1,20 +1,29 @@
-<table role="presentation" cellspacing="0" cellpadding="0" style="margin:24px 0;">
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:24px 0;">
   <tr>
-    <td align="center"
-        bgcolor="{{ brand.accent_color|default:'#2563eb' }}"
-        style="border-radius:6px;">
-      <a href="{{ action_url }}"
-         style="
-           display:inline-block;
-           color:#ffffff;
-           text-decoration:none;
-           padding:12px 22px;
-           font-size:14px;
-           font-weight:600;
-           letter-spacing:0.3px;
-         ">
-        {{ action_label }}
-      </a>
+    <td align="center">
+      <table role="presentation" cellspacing="0" cellpadding="0">
+        <tr>
+          <td
+            bgcolor="{{ brand.accent_color|default:'#2563eb' }}"
+            style="
+              border-radius:6px;
+              padding:14px 28px;
+              mso-padding-alt:14px 28px;
+            ">
+            <a href="{{ action_url }}"
+               style="
+                 display:inline-block;
+                 color:#ffffff;
+                 text-decoration:none;
+                 font-size:15px;
+                 font-weight:600;
+                 line-height:1;
+               ">
+              {{ action_label }}
+            </a>
+          </td>
+        </tr>
+      </table>
     </td>
   </tr>
 </table>
