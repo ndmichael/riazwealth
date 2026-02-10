@@ -223,7 +223,7 @@ ACCOUNT_LOGIN_ON_SIGNUP = False
 
 # RESEND SETUP
 # settings.py
-ACCOUNT_ADAPTER = "accounts.adapters.AccountAdapter"
+# ACCOUNT_ADAPTER = "accounts.adapters.AccountAdapter"
 DEFAULT_FROM_EMAIL = "noreply@riazvest.com"
 RESEND_API_KEY = env("RESEND_API_KEY")
 EMAIL_TIMEOUT = 10
