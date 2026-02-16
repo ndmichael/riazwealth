@@ -2,10 +2,16 @@
 from django.db.models import Sum, Count
 from investments.models import UserInvestment, CustomUser, InvestmentPlan
 from withdrawals.models import WithdrawalRequest  # Assuming models are in the same app
+from decimal import Decimal
 
 def get_admin_dashboard_stats():
     """Calculates and returns aggregate data for the admin dashboard."""
-    aggregate_data = UserInvestment.objects.aggregate(
+    approved_investments = UserInvestment.objects.filter(
+        status=True,
+        payment_verified=True
+    )
+
+    aggregate_data = approved_investments.aggregate(
         total_amount_invested=Sum('amount'),
         total_investments=Count('id'),
     )
@@ -16,11 +22,11 @@ def get_admin_dashboard_stats():
         status='approved'
     ).aggregate(
         total=Sum('amount')
-    )['total'] or 0 
+    )['total'] or Decimal("0.00")
 
     return {
         'total_investments': aggregate_data['total_investments'],
-        'total_amount_invested': aggregate_data['total_amount_invested'],
+        'total_amount_invested': aggregate_data['total_amount_invested'] or Decimal("0.00"),
         'total_users': total_users,
         'total_plans': total_plans,
         'total_withdrawal_requests': total_withdrawal_requests,
