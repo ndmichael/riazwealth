@@ -1,0 +1,14 @@
+{% extends "emails/brand_base.html" %}
+
+{% block title %}Withdrawal Approved{% endblock %}
+
+{% block content %}
+<p>Hello {{ user.first_name }},</p>
+
+<p>Your withdrawal request has been approved and is now being processed.</p>
+
+<p><strong>Amount:</strong> ${{ withdrawal.amount }}</p>
+<p><strong>Payment Method:</strong> {{ withdrawal.payment_option|upper }}</p>
+
+<p>Funds will be sent shortly.</p>
+{% endblock %}
