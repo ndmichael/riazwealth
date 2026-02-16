@@ -1,12 +1,14 @@
+from django.db import transaction
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.views.decorators.csrf import csrf_exempt
 
 from django.db.models import Count, Q
 from investments.models import InvestmentPlan, UserInvestment
 from withdrawals.models import WithdrawalRequest
+from withdrawals.forms import AdminCreateWithdrawalForm
 from referrals.models import Referral
 
 from .forms import InvestmentFilterForm
@@ -21,6 +23,8 @@ from utils.referrals_utils import get_users_with_referrals
 from utils.general_news_utils import post_general_news, send_notification
 from utils.admin_stats_utils import get_admin_dashboard_stats, get_withdrawal_stats
 # from utils.toggle_investment_status import toggle_investment_status
+from django.contrib.admin.views.decorators import staff_member_required
+
 
 import logging
 
@@ -71,6 +75,7 @@ def admin_dashboard(request):
 
     admin_stats_context = get_admin_dashboard_stats()
     withdrawal_stats_context = get_withdrawal_stats()    
+    admin_withdrawal_form = AdminCreateWithdrawalForm()
 
     context = {
         'investments': investments,
@@ -105,7 +110,9 @@ def admin_dashboard(request):
         **admin_stats_context,
 
         # withdrawals stats
-        **withdrawal_stats_context
+        **withdrawal_stats_context,
+        
+        "admin_withdrawal_form": admin_withdrawal_form,
 
     }
     return render(request, "admin_portal/admin_dashboard.html", context)
@@ -176,47 +183,7 @@ def toggle_investment_status(request, investment_id):
     return JsonResponse({"success": False, "message": "Invalid request."}, status=400)
 
 
-@login_required
-@csrf_exempt
-def confirm_withdrawal(request, withdrawal_id):
-    if request.method == "POST":
-        withdrawal = get_object_or_404(WithdrawalRequest, id=withdrawal_id)
-        # Get the user's investment
-        investment = withdrawal.user.user_investments.first()  
-        
-        if withdrawal.status != "pending":
-            return JsonResponse({"success": False, "message": "Only pending withdrawals can be confirmed."})
-
-        if not investment:
-            return JsonResponse({"success": False, "message": "No active investment found for this user."})
-
-        if withdrawal.amount > investment.profit_accumulated:
-            return JsonResponse({"success": False, "message": "Insufficient funds to withdraw."})
-
-        # Deduct from profit_accumulated and total_profit
-        investment.profit_accumulated -= withdrawal.amount
-        investment.save()
-
-        # Update the withdrawal status
-        withdrawal.status = "approved"
-        withdrawal.save()
-
-        # Send a notification
-        send_notification(
-            user=withdrawal.user,
-            notification_type="withdrawal",
-            message=f"""withdrawal with id {withdrawal.id}.
-            ${withdrawal.amount} has been approved.
-            """
-        )
-
-        return JsonResponse({"success": True})
-    return JsonResponse({"success": False, "message": "Invalid request method."})
-
-
-
-
-# Create a decorator to check if the user is a superuser (admin)
+# Create a decorator to check if the user is a superuser or staff (admin)
 @user_passes_test(lambda u: u.is_superuser or u.is_staff)
 @login_required
 def accrue_profits_for_all_users(request):
@@ -259,3 +226,5 @@ def accrue_profits_for_all_users(request):
         messages.error(request, 'Invalid request method.')
 
     return redirect('admindashboard') 
+
+
