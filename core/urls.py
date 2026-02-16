@@ -7,8 +7,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('pages.urls')),
     path('users/', include('users.urls')),
-    path('users/', include('admin_portal.urls')),
-    path('users/', include('investments.urls')),
+    path('admin-portal/', include('admin_portal.urls')),
+    path('investments/', include('investments.urls')),
+    path('withdrawals/', include('withdrawals.urls')),
     path('accounts/', include('allauth.urls')),
 ]
 if settings.DEBUG:
