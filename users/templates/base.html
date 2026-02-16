@@ -374,6 +374,21 @@ function toggleInvestmentStatus(investmentId, action, confirmButton) {
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie) {
+          const cookies = document.cookie.split(";");
+          for (let cookie of cookies) {
+            cookie = cookie.trim();
+            if (cookie.startsWith(name + "=")) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+
       const confirmationModal = document.getElementById("confirmationModal");
       const confirmWithdrawalBtn = document.getElementById("confirmWithdrawalBtn");
     
@@ -410,7 +425,7 @@ function toggleInvestmentStatus(investmentId, action, confirmButton) {
         fetch(`withdrawals/confirm/${selectedWithdrawalId}/`, {
           method: "POST",
           headers: {
-            "X-CSRFToken": "{{ csrf_token }}",
+            "X-CSRFToken": getCookie("csrftoken"),
             "Content-Type": "application/json",
           },
           body: JSON.stringify({}),
