@@ -22,8 +22,7 @@ from utils.withdrawals_utils import withdrawal_request_filter
 from utils.referrals_utils import get_users_with_referrals
 from utils.general_news_utils import post_general_news, send_notification
 from utils.admin_stats_utils import get_admin_dashboard_stats, get_withdrawal_stats
-# from utils.toggle_investment_status import toggle_investment_status
-from django.contrib.admin.views.decorators import staff_member_required
+from datetime import timedelta
 
 
 import logging
@@ -149,6 +148,13 @@ def toggle_investment_status(request, investment_id):
             if action == 'activate':
                 investment.status = True
                 investment.payment_verified = True
+
+                # Start accrual from today (no retroactive profit)
+                investment.last_accrual_date = timezone.now().date()
+                investment.next_accrual_date = timezone.now().date() + timedelta(days=1)
+
+                # Apply package bonus FIRST
+                investment.apply_package_bonus()
 
                 referral = Referral.objects.filter(referred_to=investment.user).first()
                 if referral and not referral.bonus_status:
