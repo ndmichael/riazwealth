@@ -20,6 +20,7 @@ from utils.total_investments_profit import (
     get_user_total_profits, 
     get_total_referral_bonus,
     get_total_investment_amount,
+    get_total_package_bonus
 )
 from utils.process_form import handle_user_profile_form
 from utils.market import MarketService
@@ -35,7 +36,11 @@ def client_dashboard(request):
     user = request.user
     withdrawals = WithdrawalRequest.objects.filter(user=user).order_by("-created_at")
     plans = InvestmentPlan.objects.all()
-    user_investments = UserInvestment.objects.filter(user=user)
+    user_investments = UserInvestment.objects.filter(
+        user=user, 
+        status=True,
+        payment_verified=True
+    )
     general_news = GeneralNotification.objects.all().order_by("-created_at")[:5]
     notifications = UserNotification.objects.filter(is_read = False, user=user).order_by("-created_at")
     main_notification = notifications.first()
@@ -47,6 +52,7 @@ def client_dashboard(request):
     total_profits = get_user_total_profits(user)
     total_bonuses = get_total_referral_bonus(user)
     invested_amount = get_total_investment_amount(user)
+    total_package_bonus = get_total_package_bonus(user)
 
     # Time for referrals
     referrals = Referral.objects.filter(referred_by=user)
@@ -112,6 +118,7 @@ def client_dashboard(request):
         "total_referrals": total_referrals,
         "total_profits": total_profits,
         "total_bonuses": total_bonuses,
+        "total_package_bonus": total_package_bonus,
         "invested_amount": invested_amount,
 
         #market results
