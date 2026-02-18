@@ -41,6 +41,19 @@ class UserInvestment(models.Model):
     last_accrual_date = models.DateField(blank=True, null=True)
     next_accrual_date = models.DateField(blank=True, null=True)
     withdrawal_interval_days = models.PositiveIntegerField(default=7) 
+    package_bonus_percentage = models.DecimalField(
+        max_digits=5,
+        decimal_places=2,
+        default=0
+    )
+
+    package_bonus_amount = models.DecimalField(
+        max_digits=15,
+        decimal_places=2,
+        default=0
+    )
+
+    package_bonus_applied = models.BooleanField(default=False)
     investment_date = models.DateTimeField(default=timezone.now)
     ref_token = models.CharField(
         null=False, 
@@ -103,15 +116,7 @@ class UserInvestment(models.Model):
             base_rate = self.investment_plan.daily_profit_rate / 100  # Convert to decimal
 
             # Determine bonus rate based on the invested amount
-            if self.amount >= 10000:
-                bonus_rate = 0.01  # +1.0%
-            elif self.amount >= 5000:
-                bonus_rate = 0.005  # +0.5%
-            else:
-                bonus_rate = 0.0  # No bonus
-
-            # Calculate the total daily rate
-            total_rate = base_rate + Decimal(bonus_rate)
+            total_rate = base_rate
 
             # self.amount rate
             self.daily_profit = self.amount * total_rate  
@@ -160,6 +165,32 @@ class UserInvestment(models.Model):
                 message=f"""${referral.bonus} bonus has been credited."""
             ) 
 
+    def apply_package_bonus(self):
+        """
+        Applies one-time package bonus based on investment amount.
+        """
+        if self.package_bonus_applied:
+            return
+
+        bonus_percentage = Decimal(0)
+
+        if self.amount >= 10000:
+            bonus_percentage = Decimal(10)
+        elif self.amount >= 5000:
+            bonus_percentage = Decimal(5)
+        elif self.amount >= 1000:
+            bonus_percentage = Decimal(1)
+
+        if bonus_percentage > 0:
+            bonus_amount = (self.amount * bonus_percentage) / Decimal(100)
+
+            self.package_bonus_percentage = bonus_percentage
+            self.package_bonus_amount = bonus_amount
+
+            self.profit_accumulated += bonus_amount
+            self.total_profit += bonus_amount
+
+            self.package_bonus_applied = True
 
     def generate_unique_ref_token(self):
         while True:
