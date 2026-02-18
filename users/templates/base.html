@@ -459,5 +459,66 @@ function toggleInvestmentStatus(investmentId, action, confirmButton) {
       });
   </script>
 
+  <!-- Fetches dynamic user_investments and total profits -accumulated profits -->
+  <script>
+    const userSelect = document.getElementById("id_user");
+    const investmentSelect = document.getElementById("id_investment");
+
+    const userTotalProfitEl = document.getElementById("userTotalProfit");
+    const userAccumulatedProfitEl = document.getElementById("userAccumulatedProfit");
+
+    function resetInvestmentsUI() {
+      investmentSelect.innerHTML = `<option value="">---SELECT INVESTMENT---</option>`;
+      userTotalProfitEl.textContent = "0.00";
+      userAccumulatedProfitEl.textContent = "0.00";
+    }
+
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie) {
+        const cookies = document.cookie.split(";");
+        for (let cookie of cookies) {
+          cookie = cookie.trim();
+          if (cookie.startsWith(name + "=")) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+
+    async function loadUserInvestments(userId) {
+      resetInvestmentsUI();
+      if (!userId) return;
+
+      const res = await fetch(`/withdrawals/admin/user-investments/${userId}/`, {
+        headers: { "X-CSRFToken": getCookie("csrftoken") }
+      });
+      const data = await res.json();
+
+      // totals across approved investments
+      userTotalProfitEl.textContent = data.totals.total_profit_sum;
+      userAccumulatedProfitEl.textContent = data.totals.accumulated_sum;
+
+      // populate dropdown (show per-investment total profit + accumulated)
+      for (const inv of data.investments) {
+        const opt = document.createElement("option");
+        opt.value = inv.id;
+        opt.textContent = `${inv.plan} — Total: $${inv.total_profit} — Acc: $${inv.profit_accumulated}`;
+        investmentSelect.appendChild(opt);
+      }
+    }
+
+    if (userSelect && investmentSelect) {
+      userSelect.addEventListener("change", (e) => {
+        loadUserInvestments(e.target.value);
+      });
+
+      // if modal opens and a user is preselected
+      if (userSelect.value) loadUserInvestments(userSelect.value);
+    }
+  </script>
+
 </body>
 </html>
