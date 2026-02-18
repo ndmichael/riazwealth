@@ -51,7 +51,16 @@
                         <i class="bi bi-coin"></i>
                         <div class="ps-4">
                             <p>Profits Balance</p>
-                            <p><b>${{total_profits}}</b></p>
+                            <p>
+                                <b>${{ total_profits }},</b>
+                                <!-- Small breakdown --> <br/>
+                                <small class="text-muted">
+                                    Package Bonuses: <b>${{ total_package_bonus }}</b>
+                                    {{approved_investments}}
+                                </small>
+                            </p>
+
+                            
                         </div>
                     </a>
                 </div>
@@ -236,7 +245,17 @@
                                             Invested Amount:
                                         </td>
                                         <td class="text-end">
-                                            <b><sup>$</sup>{{investment.amount}}</b>
+                                            <b><sup class="text-success">$</sup>{{investment.amount}}</b>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            Package Bonus:
+                                        </td>
+                                        <td class="text-end">
+                                            <b>{{ investment.package_bonus_percentage }}% -
+                                               <sup class="text-success">$</sup>{{ investment.package_bonus_amount }}</b>
                                         </td>
                                     </tr>
 
