@@ -8,6 +8,9 @@ from django.http import JsonResponse
 from utils.general_news_utils import send_notification
 from utils.send_withdrawal_email import send_withdrawal_email
 
+from django.db.models import Sum
+from investments.models import UserInvestment
+
 from .forms import WithdrawalRequestForm, AdminCreateWithdrawalForm
 from .models import WithdrawalRequest
 
@@ -115,3 +118,35 @@ def confirm_withdrawal(request, withdrawal_id):
     send_withdrawal_email(withdrawal)
 
     return JsonResponse({"success": True})
+
+
+@staff_member_required
+def admin_user_investments(request, user_id):
+    qs = UserInvestment.objects.filter(
+        user_id=user_id,
+        status=True,
+        payment_verified=True,
+    ).select_related("investment_plan")
+
+    investments = [
+        {
+            "id": inv.id,
+            "plan": inv.investment_plan.name,
+            "total_profit": f"{inv.total_profit:.2f}",
+            "profit_accumulated": f"{inv.profit_accumulated:.2f}",
+        }
+        for inv in qs
+    ]
+
+    totals = qs.aggregate(
+        total_profit_sum=Sum("total_profit"),
+        accumulated_sum=Sum("profit_accumulated"),
+    )
+
+    return JsonResponse({
+        "investments": investments,
+        "totals": {
+            "total_profit_sum": f"{(totals['total_profit_sum'] or 0):.2f}",
+            "accumulated_sum": f"{(totals['accumulated_sum'] or 0):.2f}",
+        }
+    })
