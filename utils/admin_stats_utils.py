@@ -24,6 +24,10 @@ def get_admin_dashboard_stats():
         total=Sum('amount')
     )['total'] or Decimal("0.00")
 
+    total_package_bonus = approved_investments.aggregate(
+        total=Sum('package_bonus_amount')
+    )['total'] or Decimal("0.00")
+
     return {
         'total_investments': aggregate_data['total_investments'],
         'total_amount_invested': aggregate_data['total_amount_invested'] or Decimal("0.00"),
@@ -31,6 +35,7 @@ def get_admin_dashboard_stats():
         'total_plans': total_plans,
         'total_withdrawal_requests': total_withdrawal_requests,
         'total_approved_withdrawals_amount': total_approved_withdrawals_amount,
+        'total_package_bonus': total_package_bonus,
     }
 
 
