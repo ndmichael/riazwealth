@@ -260,6 +260,15 @@
         <div class="modal-body">
           <div class="row gy-3">
               {{ admin_withdrawal_form|crispy }}
+
+              <div class="mt-2">
+                <small class="text-muted d-block">
+                    User Total Profit: $<span id="userTotalProfit">0.00</span>
+                </small>
+                <small class="text-muted d-block">
+                    User Accumulated Profit: $<span id="userAccumulatedProfit">0.00</span>
+                </small>
+             </div>
           </div>
         </div>
 
