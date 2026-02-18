@@ -89,6 +89,7 @@
                             <!-- <th scope="col">S.NO</th> -->
                             <th scope="col">Investment Name</th>
                             <th scope="col">Amount</th>
+                            <th scope="col">Bonus</th>
                             <th scope="col">Profit</th>
                             <th scope="col">Interval</th>
                             <th scope="col">Status</th>
@@ -110,6 +111,19 @@
                             </td>
                             <td>
                                 ${{investment.amount}}
+                            </td>
+                            <td>
+                                {% if investment.package_bonus_applied %}
+                                    <span class="badge bg-info">
+                                        {{ investment.package_bonus_percentage }}%
+                                    </span>
+                                    <br>
+                                    <small class="text-muted">
+                                        ${{ investment.package_bonus_amount }}
+                                    </small>
+                                {% else %}
+                                    ---
+                                {% endif %}
                             </td>
                             <td>
                                 <span>${{investment.daily_profit}}</span> 
