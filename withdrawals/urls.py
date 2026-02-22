@@ -3,12 +3,12 @@ from .views import (admin_create_withdrawal, confirm_withdrawal, admin_user_inve
 
 urlpatterns = [
     path(
-        "admin/withdrawals/create/",
+        "admin/create/",
         admin_create_withdrawal,
         name="admin_create_withdrawal"
     ),
     path(
-        "admin/withdrawals/confirm/<int:withdrawal_id>/",
+        "admin/confirm/<int:withdrawal_id>/",
         confirm_withdrawal,
         name="confirm_withdrawal"
     ),
