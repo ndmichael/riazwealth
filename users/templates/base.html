@@ -139,7 +139,16 @@
               <span class="navbar-toggler-icon"></span>
             </button> -->
             <!-- <div class="collapse navbar-collapse" id="navbarContent"> -->
-              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0 flex-row align-items-center">
+                <li class="nav-item me-2">
+                  <button 
+                    class="btn btn-outline-secondary"
+                    onclick="location.reload();"
+                    title="Refresh data"
+                  >
+                    Refresh <i class="bi bi-arrow-clockwise"></i>
+                  </button>
+                </li>
                 <li class="nav-item">
                     <div class="dropdown">
                       {% if request.user.is_staff %}
@@ -306,7 +315,7 @@
                 $('#modal-date').text(data.date);
                 $('#modal-bonus-percentage').text(data.package_bonus_percentage)
                 $('#modal-bonus-amount').text(data.package_bonus_amount)
-                
+
                 // Hide loader and show content
                 $('#modal-loader').hide();
                 $('#modal-content').show();
@@ -424,7 +433,7 @@ function toggleInvestmentStatus(investmentId, action, confirmButton) {
         confirmWithdrawalBtn.disabled = true;
         confirmWithdrawalBtn.textContent = "Processing..."
 
-        fetch(`withdrawals/confirm/${selectedWithdrawalId}/`, {
+        fetch(`/withdrawals/admin/confirm/${selectedWithdrawalId}/`, {
           method: "POST",
           headers: {
             "X-CSRFToken": getCookie("csrftoken"),
@@ -521,6 +530,27 @@ function toggleInvestmentStatus(investmentId, action, confirmButton) {
       if (userSelect.value) loadUserInvestments(userSelect.value);
     }
   </script>
+
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const FIVE_MINUTES = 5 * 60 * 1000;
+
+    setInterval(function () {
+
+        // Do not refresh if any modal is open
+        if (document.querySelector('.modal.show')) return;
+
+        // Do not refresh if user is focused on an input
+        const active = document.activeElement;
+        if (active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA")) return;
+
+        location.reload();
+
+    }, FIVE_MINUTES);
+
+});
+</script>
 
 </body>
 </html>
