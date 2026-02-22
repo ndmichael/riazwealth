@@ -131,7 +131,9 @@ def get_investment_details(request, pk):
             "payment_verified": investment.payment_verified,
             "daily_profit": investment.daily_profit,
             "accrual_date": investment.next_accrual_date,
-            "date": investment.investment_date 
+            "date": investment.investment_date,
+            "package_bonus_percentage": investment.package_bonus_percentage,
+            "package_bonus_amount": investment.package_bonus_amount 
 
         }
         return JsonResponse(data)
