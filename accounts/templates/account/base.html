@@ -133,5 +133,39 @@
       }
     
   </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        function attachLoader(formId) {
+            const form = document.getElementById(formId);
+            if (!form) return;
+
+            form.addEventListener("submit", function () {
+                const btn = form.querySelector("button[type='submit']");
+                if (!btn) return;
+
+                // Prevent double submit
+                if (btn.disabled) return;
+
+                btn.disabled = true;
+
+                // Save original text
+                const originalText = btn.innerHTML;
+
+                // Add spinner
+                btn.innerHTML = `
+                    <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                    Processing...
+                `;
+
+                // Allow normal form submission
+            });
+        }
+
+        attachLoader("login_form");
+        attachLoader("signup_form");
+    });
+</script>
 </body>
 </html>
