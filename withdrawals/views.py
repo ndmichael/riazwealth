@@ -105,6 +105,13 @@ def confirm_withdrawal(request, withdrawal_id):
 
         # Approve withdrawal
         withdrawal.status = "approved"
+        if withdrawal.status != "approved":
+            withdrawal.status = "approved"
+            withdrawal.approved_at = timezone.now()
+
+            if not withdrawal.receipt_number:
+                withdrawal.receipt_number = withdrawal.generate_receipt_number()
+                
         withdrawal.save()
 
     # Send in-app notification
