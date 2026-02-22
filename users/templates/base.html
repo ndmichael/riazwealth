@@ -304,7 +304,9 @@
                 $('#modal-status').text(data.payment_verified);
                 $('#modal-daily-profit').html('$' + data.daily_profit + '<br/><span class="text-muted">' + data.accrual_date + '</span>');
                 $('#modal-date').text(data.date);
-
+                $('#modal-bonus-percentage').text(data.package_bonus_percentage)
+                $('#modal-bonus-amount').text(data.package_bonus_amount)
+                
                 // Hide loader and show content
                 $('#modal-loader').hide();
                 $('#modal-content').show();
