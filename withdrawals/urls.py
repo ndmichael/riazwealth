@@ -1,5 +1,10 @@
 from django.urls import path
-from .views import (admin_create_withdrawal, confirm_withdrawal, admin_user_investments)
+from .views import (
+    admin_create_withdrawal, 
+    confirm_withdrawal, 
+    admin_user_investments, 
+    withdrawal_receipt
+)
 
 urlpatterns = [
     path(
@@ -16,4 +21,9 @@ urlpatterns = [
           admin_user_investments, 
           name="admin_user_investments"
     ),
+    path(
+        "receipt/<int:withdrawal_id>/",
+        withdrawal_receipt,
+        name="withdrawal_receipt"
+    )
 ]
