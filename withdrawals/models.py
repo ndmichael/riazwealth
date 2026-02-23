@@ -53,20 +53,7 @@ class WithdrawalRequest(models.Model):
 
     def generate_receipt_number(self):
         year = timezone.now().year
-
-        last_receipt = WithdrawalRequest.objects.filter(
-            receipt_number__startswith=f"WR-{year}-"
-        ).aggregate(
-            Max("receipt_number")
-        )["receipt_number__max"]
-
-        if last_receipt:
-            last_number = int(last_receipt.split("-")[-1])
-            new_number = last_number + 1
-        else:
-            new_number = 1
-
-        return f"WR-{year}-{str(new_number).zfill(6)}"
+        return f"WR-{year}-{str(self.id).zfill(6)}"
 
     def __str__(self):
         return f'{self.user.username} - {self.amount} ({self.status})'
