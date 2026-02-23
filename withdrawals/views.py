@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
 from django.http import JsonResponse
+from django.core.exceptions import PermissionDenied
 from utils.general_news_utils import send_notification
 from utils.send_withdrawal_email import send_withdrawal_email
 
@@ -111,7 +112,7 @@ def confirm_withdrawal(request, withdrawal_id):
 
             if not withdrawal.receipt_number:
                 withdrawal.receipt_number = withdrawal.generate_receipt_number()
-                
+
         withdrawal.save()
 
     # Send in-app notification
@@ -157,3 +158,30 @@ def admin_user_investments(request, user_id):
             "accumulated_sum": f"{(totals['accumulated_sum'] or 0):.2f}",
         }
     })
+
+
+@login_required
+def withdrawal_receipt(request, withdrawal_id):
+    '''Withdrawal receipt logic'''
+    withdrawal = get_object_or_404(
+        WithdrawalRequest.objects.select_related(
+            "user",
+            "investment",
+            "investment__investment_plan"
+        ),
+        id=withdrawal_id
+    )
+
+    # Must be approved
+    if withdrawal.status != "approved":
+        raise PermissionDenied("Receipt only available for approved withdrawals.")
+
+    # If not staff, user must own it
+    if not request.user.is_staff and withdrawal.user != request.user:
+        raise PermissionDenied("You do not have permission to view this receipt.")
+
+    context = {
+        "withdrawal": withdrawal,
+    }
+
+    return render(request, "withdrawals/receipt.html", context)
