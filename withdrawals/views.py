@@ -105,13 +105,14 @@ def confirm_withdrawal(request, withdrawal_id):
         investment.save(update_fields=["profit_accumulated"])
 
         # Approve withdrawal
-        withdrawal.status = "approved"
-        if withdrawal.status != "approved":
+        if withdrawal.status == "pending":
             withdrawal.status = "approved"
             withdrawal.approved_at = timezone.now()
+            withdrawal.save()  # Save first to ensure ID exists
 
             if not withdrawal.receipt_number:
                 withdrawal.receipt_number = withdrawal.generate_receipt_number()
+                withdrawal.save(update_fields=["receipt_number"])
 
         withdrawal.save()
 
