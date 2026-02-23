@@ -97,6 +97,7 @@
                             <th scope="col">PAYMENT METHOD</th>
                             <th scope="col">Status</th>
                             <th>Date Sent</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody
@@ -134,6 +135,18 @@
                             </td>
                             <td>
                                 {{withdrawal.created_at}}
+                            </td>
+
+                            <td>
+                                {% if withdrawal.status == 'approved' %}
+                                <a 
+                                    href="{% url 'withdrawal_receipt' withdrawal.id %}" 
+                                    target="_blank"
+                                    class="btn btn-outline-success btn-sm"
+                                >
+                                    View Receipt
+                                </a>
+                                {% endif %}
                             </td>
                         </tr>
                         {% empty %}
