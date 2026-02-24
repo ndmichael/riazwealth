@@ -114,13 +114,13 @@
     
     <div>
       <!--- ==== sidebar logic ===-->
-    {% if request.user.is_authenticated and request.user.is_staff %}
-        <!-- Include staff sidebar -->
-        {% include "admin_portal/admin_sidebar.html" %}
-    {% else %}
-        <!-- Include client sidebar -->
-        {% include "users/client_sidebar.html" %}
-    {% endif %}
+      {% if request.user.is_authenticated and request.user.is_staff %}
+          <!-- Include staff sidebar -->
+          {% include "admin_portal/admin_sidebar.html" %}
+      {% else %}
+          <!-- Include client sidebar -->
+          {% include "users/client_sidebar.html" %}
+      {% endif %}
     
       <!-- Main Content -->
       <div class="main-content flex-grow-1">
