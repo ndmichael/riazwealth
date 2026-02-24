@@ -17,13 +17,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = env("DEBUG")
-DEBUG = True
+DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = [
     "localhost", 
     "127.0.0.1", 
-    "riazvest-production.up.railway.app",
+    "riazvest-production-0a0f.up.railway.app"
     "riazvest.com",
     "www.riazvest.com"
 ]
@@ -187,7 +186,8 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 
 # overriden forms
 ACCOUNT_FORMS = {
-    "signup": "accounts.forms.MyCustomSignupForm"
+    "signup": "accounts.forms.MyCustomSignupForm",
+    "login": "accounts.forms.MyCustomLoginForm",
 }
 
 # auth backend allauth and django
