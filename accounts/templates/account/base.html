@@ -46,6 +46,17 @@
       background-repeat: no-repeat;
     }
 
+    /* css for password icon toggle */
+    .password-toggle-btn {
+      top: 23px; /* fixed vertical alignment for floating input */
+    }
+    .transition-icon {
+        transition: all 0.3s ease;
+    }
+    .transition-icon.rotate {
+        transform: rotate(180deg);
+    }
+
     </style>
     
 </head>
@@ -70,7 +81,7 @@
           col-12 col-md-8 m-0 p-0 
           bg-light
           d-flex flex-column align-items-center justify-content-center
-          h-100
+          vh-100
         "
       >
         <!-- Alertify JavaScript -->
@@ -167,5 +178,59 @@
         attachLoader("signup_form");
     });
 </script>
+
+
+<!-- Logic for toggling of password on and off-->
+ <script>
+document.querySelectorAll(".toggle-password").forEach(btn => {
+    btn.addEventListener("click", function () {
+        const targetId = this.getAttribute("data-target");
+        const input = document.getElementById(targetId);
+        const icon = this.querySelector("i");
+
+        const isPassword = input.type === "password";
+        input.type = isPassword ? "text" : "password";
+
+        icon.classList.toggle("bi-eye");
+        icon.classList.toggle("bi-eye-slash");
+        icon.classList.toggle("rotate");
+    });
+});
+
+const passwordInput = document.getElementById("id_password1");
+const strengthBar = document.getElementById("passwordStrengthBar");
+const strengthText = document.getElementById("passwordStrengthText");
+
+if (passwordInput) {
+    passwordInput.addEventListener("input", function () {
+        const value = passwordInput.value;
+        let strength = 0;
+
+        if (value.length >= 8) strength++;
+        if (/[A-Z]/.test(value)) strength++;
+        if (/[0-9]/.test(value)) strength++;
+        if (/[^A-Za-z0-9]/.test(value)) strength++;
+
+        const percent = (strength / 4) * 100;
+        strengthBar.style.width = percent + "%";
+        strengthBar.className = "progress-bar";
+
+        if (strength <= 1) {
+            strengthBar.classList.add("bg-danger");
+            strengthText.textContent = "Weak";
+        } else if (strength === 2) {
+            strengthBar.classList.add("bg-warning");
+            strengthText.textContent = "Moderate";
+        } else if (strength === 3) {
+            strengthBar.classList.add("bg-info");
+            strengthText.textContent = "Strong";
+        } else {
+            strengthBar.classList.add("bg-success");
+            strengthText.textContent = "Very Strong";
+        }
+    });
+}
+</script>
+
 </body>
 </html>
