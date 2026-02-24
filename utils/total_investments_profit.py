@@ -30,6 +30,6 @@ def get_total_package_bonus(user):
         status=True,
         payment_verified=True
     )
-    total_profits = sum([investment.profit_accumulated for investment in investments])
+    total_profits = sum([investment.package_bonus_amount for investment in investments])
     return total_profits
 
