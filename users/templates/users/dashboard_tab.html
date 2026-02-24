@@ -1,6 +1,56 @@
 {% load static %}
     <section class="user-notification">
         <div class="container">
+
+            <!-- === Conversion Action Strip === -->
+            <section class="row mb-4">
+                <div class="col-12">
+                    <div class="p-4 rounded-4 shadow-sm text-white d-flex flex-column flex-lg-row justify-content-between align-items-center"
+                        style="background: linear-gradient(135deg, #003366, #0f172a);">
+
+                        {% if not user_investments %}
+                            <!-- New User Conversion -->
+                            <div class="mb-3 mb-lg-0">
+                                <h4 class="fw-bold mb-1">Start Earning Today</h4>
+                                <small>Purchase your first investment package and begin generating daily profits.</small>
+                            </div>
+
+                            <div class="d-flex gap-3">
+                                <button class="btn btn-warning px-4"
+                                        onclick="switchTab('#content-investment')">
+                                    Buy More Package
+                                </button>
+
+                                <button class="btn btn-outline-light px-4"
+                                        onclick="switchTab('#content-referrals')">
+                                    Invite & Earn
+                                </button>
+                            </div>
+
+                        {% else %}
+                            <!-- Existing Investor Upsell -->
+                            <div class="mb-3 mb-lg-0">
+                                <h4 class="fw-bold mb-1">Grow Your Earnings</h4>
+                                <small>Upgrade or add a new package to increase daily returns.</small>
+                            </div>
+
+                            <div class="d-flex gap-3">
+                                <button class="btn btn-outline-light px-4"
+                                        onclick="switchTab('#content-withdrawals')">
+                                    Withdraw Profits
+                                </button>
+  
+                                <button class="btn btn-success px-4"
+                                        onclick="switchTab('#content-investment')">
+                                    Buy More Package
+                                </button>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+
+
             {% if main_notification %}
             <section class="row">
                 <div class="col-12">
@@ -202,9 +252,9 @@
 
                         {% for investment in user_investments %}
                         <div
+                            class="row my-3 border p-4 bg-light"
                             data-aos="fade-up"
                             data-aos-delay="100"
-                            class="row my-3 border p-4 bg-light"
                         >
                             <div class="col-12 col-md-5">
                                 <img 
