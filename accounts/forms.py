@@ -3,10 +3,33 @@ from django import forms
 from crispy_forms.layout import Layout, Submit, Row, Field
 from crispy_forms.helper import FormHelper
 from crispy_bootstrap5.bootstrap5 import FloatingField
+from crispy_forms.layout import HTML, Div
 from .models import  Profile
 from referrals.models import Referral
 from django.core.exceptions import ValidationError
 
+
+class MyCustomLoginForm(LoginForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.disable_csrf = True
+        self.helper.layout = Layout(
+            FloatingField("login"),
+            Div(
+                FloatingField("password"),
+                HTML("""
+                    <button type="button"
+                        class="btn btn-sm position-absolute end-0 me-3 border-0 bg-transparent toggle-password password-toggle-btn"
+                        data-target="id_password">
+                        <i class="bi bi-eye transition-icon"></i>
+                    </button>
+                """),
+                css_class="position-relative"
+            )
+        )
 
 class MyCustomSignupForm(SignupForm):
 
@@ -32,9 +55,38 @@ class MyCustomSignupForm(SignupForm):
                 FloatingField("email", wrapper_class='col-md-6', css_class="row-fluid"),
                 FloatingField("username", wrapper_class='col-md-6', css_class="row-fluid"),
             ),
+
             Row(
-                FloatingField("password1", wrapper_class='col-md-6', css_class="row-fluid"),
-                FloatingField("password2", wrapper_class='col-md-6', css_class="row-fluid"),
+                Div(
+                    FloatingField("password1"),
+                    HTML("""
+                        <button type="button"
+                            class="btn btn-sm position-absolute end-0 me-3 border-0 bg-transparent toggle-password password-toggle-btn"
+                            data-target="id_password1">
+                            <i class="bi bi-eye transition-icon"></i>
+                        </button>
+
+                        <div class="mt-2">
+                            <div class="progress" style="height:5px;">
+                                <div id="passwordStrengthBar" class="progress-bar"></div>
+                            </div>
+                            <small id="passwordStrengthText"></small>
+                        </div>
+                    """),
+                    css_class="col-md-6 position-relative"
+                ),
+
+                Div(
+                    FloatingField("password2"),
+                    HTML("""
+                        <button type="button"
+                            class="btn btn-sm position-absolute end-0 me-3 border-0 bg-transparent toggle-password password-toggle-btn"
+                            data-target="id_password2">
+                            <i class="bi bi-eye transition-icon"></i>
+                        </button>
+                    """),
+                    css_class="col-md-6 position-relative"
+                ),
             ),
             Row(
                 FloatingField("referral_code", wrapper_class='col-12', css_class="row-fluid"),
