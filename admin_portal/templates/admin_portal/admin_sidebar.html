@@ -2,14 +2,15 @@
 
 <!-- sidebar -->
 <div 
-    class="sidebar d-md-flex flex-column vh-100" 
+    class="sidebar d-md-flex flex-column" 
     id="responsiveSidebar"
+    style="height:100vh; overflow-y:auto;"
 >
 <div class="sidebar-header d-md-none">
   <i class="bi bi-x-lg" onclick="toggleSidebar()"></i>
 </div>
 
-<div class="sidebar-body">
+<div class="sidebar-body d-flex flex-column vh-100">
   <!-- Navbar Brand -->
   <a class="navbar-brand text-center" href="/">
       <img
@@ -20,7 +21,7 @@
       />
   </a>
   {% block sidebar %}
-  <ul class="nav flex-column nav-pills mt-4" id="sidebarTabs" role="tablist">
+  <ul class="nav flex-column nav-pills mt-4 flex-grow-1" id="sidebarTabs" role="tablist">
     <li class="nav-item">
       <a 
           class="nav-link active" 
@@ -121,18 +122,32 @@
             Notifications
         </a>
       </li>
-    <li class="nav-item">
-      <a 
-          class="nav-link" 
-          id="tab-profile" 
-          href="{% url 'account_logout' %}" 
-          aria-controls="content-profile" 
-          aria-selected="false"
-      >
-          Logout
-      </a>
-    </li>
   </ul>
+
+    <!-- Account Summary -->
+  <div class="account-summary mt-auto p-3 border-top">
+      <div class="d-flex align-items-center mb-3">
+          <div class="avatar-circle me-3">
+              {{ request.user.username|first|upper }}
+          </div>
+          <div>
+              <div class="fw-semibold small">
+                  {{ request.user.get_full_name|default:request.user.username }}
+              </div>
+              <div class="text-muted small">
+                  {{ request.user.email }}
+              </div>
+          </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center">
+          <span class="badge {% if request.user.is_staff %}bg-dark{% else %}bg-primary{% endif %}">
+              {% if request.user.is_staff %}Administrator{% else %}Client Account{% endif %}
+          </span>
+      </div>
+  </div>
+
+  </div>
   {% endblock %}
 </div>
 </div> <!-- end of sidebar -->
