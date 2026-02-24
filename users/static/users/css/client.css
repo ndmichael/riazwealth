@@ -53,8 +53,7 @@
     background: linear-gradient(180deg, #FAFAFA, #F5F5F5); 
     background-repeat: repeat; /* Ensures the pattern repeats */
     background-blend-mode: overlay; /* Blends the gradient and pattern */
-    min-height: 100vh;
-    overflow: auto;
+
 }
 
 .summary{
