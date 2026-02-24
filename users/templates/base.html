@@ -570,5 +570,23 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+  <!-- To handle links from content area to tab using bootstrap tabs -->
+   <script>
+function switchTab(targetId) {
+    const triggerEl = document.querySelector(
+        `.nav-link[href="${targetId}"], .nav-link[data-bs-target="${targetId}"]`
+    );
+
+    AOS.refresh();
+
+    if (triggerEl) {
+        const tab = new bootstrap.Tab(triggerEl);
+        tab.show();
+    } else {
+        console.error("Tab not found:", targetId);
+    }
+}
+</script>
+
 </body>
 </html>
