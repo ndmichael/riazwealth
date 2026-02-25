@@ -22,7 +22,7 @@ DEBUG = env("DEBUG")
 ALLOWED_HOSTS = [
     "localhost", 
     "127.0.0.1", 
-    "riazvest-production-0a0f.up.railway.app"
+    "riazvest-production-0a0f.up.railway.app",
     "riazvest.com",
     "www.riazvest.com"
 ]
